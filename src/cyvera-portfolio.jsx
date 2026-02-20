@@ -182,7 +182,31 @@ function Navbar({ isDetail = false, onHome }) {
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { background: #ffffff; overflow-x: hidden; }
+        :root {
+          --accent: #00B4D8;
+          --accent-2: #48CAE4;
+          --ink: #061629;
+          --paper: #F7FAFC;
+        }
+        .lift-card {
+          --card-border: rgba(10,37,64,0.08);
+          border: 1.5px solid var(--card-border);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .lift-card:hover {
+          --card-border: rgba(0,180,216,0.6);
+          transform: translateY(-6px);
+          box-shadow: 0 18px 50px rgba(0,180,216,0.18);
+        }
+        body {
+          background:
+            radial-gradient(1200px 600px at 20% -10%, rgba(0,180,216,0.14), transparent 60%),
+            radial-gradient(1000px 700px at 90% 10%, rgba(3,4,94,0.12), transparent 60%),
+            #F7FAFC;
+          overflow-x: hidden;
+          color: var(--ink);
+        }
+        ::selection { background: rgba(0,180,216,0.25); }
       `}</style>
     </header>
   );
@@ -193,8 +217,9 @@ function Hero() {
   return (
     <section id="home" style={{
       minHeight: "100vh", display: "flex", alignItems: "center",
-      background: "linear-gradient(160deg, #03045E 0%, #0A2540 50%, #023E8A 100%)",
-      position: "relative", overflow: "hidden", padding: "120px 5% 80px"
+      background: "radial-gradient(1200px 700px at 10% -10%, rgba(0,180,216,0.45), transparent 60%), radial-gradient(900px 600px at 90% 20%, rgba(72,202,228,0.25), transparent 55%), linear-gradient(160deg, #03045E 0%, #0A2540 48%, #023E8A 100%)",
+      position: "relative", overflow: "hidden", padding: "120px 5% 80px",
+      borderBottom: "1px solid rgba(0,180,216,0.18)"
     }}>
       {/* Animated blobs */}
       <div style={{
@@ -299,7 +324,7 @@ function Hero() {
 // ─── Services ─────────────────────────────────────────────────────────────────
 function Services({ onSelect }) {
   return (
-    <section id="services" style={{ padding: "100px 5%", background: "#F0F4F8" }}>
+    <section id="services" style={{ padding: "100px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
@@ -308,7 +333,7 @@ function Services({ onSelect }) {
           </div>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24, alignItems: "stretch" }}>
           {services.map((s, i) => (
             <Reveal key={s.name} delay={i * 0.1}>
               <ServiceCard s={s} onSelect={onSelect} />
@@ -329,20 +354,30 @@ function ServiceCard({ s, onSelect }) {
       onMouseLeave={() => setHov(false)}
       onClick={() => onSelect?.(s.id)}
       style={{
-        background: "#fff", borderRadius: 16, padding: "36px 32px",
-        border: `1.5px solid ${hov ? "#00B4D8" : "rgba(10,37,64,0.08)"}`,
-        boxShadow: hov ? "0 8px 40px rgba(0,180,216,0.18)" : "0 2px 16px rgba(10,37,64,0.06)",
+        background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(246,250,255,0.9) 100%)",
+        borderRadius: 20, padding: "36px 32px",
+        border: `1.5px solid ${hov ? "rgba(0,180,216,0.7)" : "rgba(10,37,64,0.08)"}`,
+        boxShadow: hov ? "0 22px 60px rgba(0,180,216,0.24)" : "0 8px 28px rgba(10,37,64,0.1)",
         transition: "all 0.3s ease", cursor: "pointer",
-        textAlign: "left", width: "100%", borderStyle: "solid"
+        textAlign: "left", width: "100%", borderStyle: "solid",
+        backdropFilter: "blur(6px)",
+        transform: hov ? "translateY(-6px)" : "translateY(0)",
+        display: "flex", flexDirection: "column", minHeight: 320,
+        position: "relative", overflow: "hidden"
       }}
     >
       <div style={{
-        fontSize: 36, marginBottom: 20,
-        transform: hov ? "scale(1.15) rotate(-5deg)" : "scale(1)",
-        transition: "transform 0.3s ease", display: "inline-block"
+        width: 54, height: 54, borderRadius: 16,
+        background: "linear-gradient(135deg, rgba(0,180,216,0.22), rgba(3,4,94,0.18))",
+        border: "1px solid rgba(0,180,216,0.35)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: 26, marginBottom: 18,
+        transform: hov ? "scale(1.08) rotate(-4deg)" : "scale(1)",
+        transition: "transform 0.3s ease", boxShadow: "0 10px 24px rgba(0,180,216,0.18)"
       }}>{s.icon}</div>
       <h3 style={{ fontSize: 18, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 12 }}>{s.name}</h3>
       <p style={{ fontSize: 14, color: "rgba(10,37,64,0.6)", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.7, marginBottom: 20 }}>{s.desc}</p>
+      <div style={{ flex: 1 }} />
       <span style={{
         color: hov ? "#00B4D8" : "rgba(10,37,64,0.4)", fontFamily: "'DM Sans', sans-serif",
         fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.5px",
@@ -389,7 +424,7 @@ function ServiceDetail({ serviceId, onBack }) {
 
   return (
     <div>
-      <section id="service-overview" style={{ padding: "140px 5% 80px", background: "linear-gradient(160deg, #03045E 0%, #0A2540 55%, #023E8A 100%)", color: "#fff" }}>
+      <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(1200px 700px at 10% -10%, rgba(0,180,216,0.45), transparent 60%), linear-gradient(160deg, #03045E 0%, #0A2540 55%, #023E8A 100%)", color: "#fff" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
           <h1 style={{ fontSize: "clamp(34px, 5vw, 64px)", fontFamily: "'DM Serif Display', serif", fontWeight: 400, marginBottom: 16 }}>{detail.title}</h1>
@@ -406,12 +441,16 @@ function ServiceDetail({ serviceId, onBack }) {
         </div>
       </section>
 
-      <section id="service-problem" style={{ padding: "90px 5%", background: "#F0F4F8" }}>
+      <section id="service-problem" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ fontSize: 36, fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 20 }}>Common Challenges We Solve</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
             {["Unclear priorities", "Inconsistent execution", "Lack of measurement", "Slow iteration cycles"].map(item => (
-              <div key={item} style={{ background: "#fff", borderRadius: 14, padding: 22, border: "1px solid rgba(10,37,64,0.08)" }}>
+              <div key={item} className="lift-card" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                borderRadius: 20, padding: 22,
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 8 }}>{item}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 14, lineHeight: 1.6 }}>We replace guesswork with a structured plan, clear deliverables, and measurable outcomes.</div>
               </div>
@@ -420,12 +459,16 @@ function ServiceDetail({ serviceId, onBack }) {
         </div>
       </section>
 
-      <section id="service-services" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ fontSize: 34, fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 24 }}>Core Services</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
             {detail.services.map(s => (
-              <div key={s} style={{ border: "1px solid rgba(10,37,64,0.08)", borderRadius: 14, padding: 22 }}>
+              <div key={s} className="lift-card" style={{
+                borderRadius: 20, padding: 22,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 8 }}>{s}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 14, lineHeight: 1.6 }}>Outcomes-focused execution with weekly reporting and clear next steps.</div>
               </div>
@@ -434,12 +477,16 @@ function ServiceDetail({ serviceId, onBack }) {
         </div>
       </section>
 
-      <section id="service-method" style={{ padding: "90px 5%", background: "#F7FAFC" }}>
+      <section id="service-method" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF3FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ fontSize: 34, fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 24 }}>Our Method</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
             {detail.process.map((p, i) => (
-              <div key={p} style={{ background: "#fff", borderRadius: 14, padding: 20, border: "1px solid rgba(10,37,64,0.08)" }}>
+              <div key={p} className="lift-card" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                borderRadius: 20, padding: 20,
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontSize: 12, fontFamily: "'DM Sans', sans-serif", color: "#00B4D8", fontWeight: 700, letterSpacing: "1px", marginBottom: 6 }}>STEP {String(i + 1).padStart(2, "0")}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 6 }}>{p}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 13, lineHeight: 1.6 }}>Clear deliverables and owners at every stage.</div>
@@ -449,12 +496,16 @@ function ServiceDetail({ serviceId, onBack }) {
         </div>
       </section>
 
-      <section id="service-results" style={{ padding: "90px 5%", background: "#0A2540" }}>
+      <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ fontSize: 34, fontFamily: "'DM Serif Display', serif", color: "#fff", marginBottom: 24 }}>Results Snapshot</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {detail.results.map(r => (
-              <div key={r} style={{ padding: 22, borderRadius: 14, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)" }}>
+              <div key={r} className="lift-card" style={{
+                padding: 22, borderRadius: 18,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+                boxShadow: "0 10px 28px rgba(0,0,0,0.25)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#00B4D8", fontSize: 20, marginBottom: 6 }}>{r}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13 }}>Representative outcomes from recent engagements.</div>
               </div>
@@ -463,12 +514,16 @@ function ServiceDetail({ serviceId, onBack }) {
         </div>
       </section>
 
-      <section id="service-pricing" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ fontSize: 34, fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 24 }}>Pricing</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
             {detail.pricing.map(p => (
-              <div key={p} style={{ border: "1px solid rgba(10,37,64,0.1)", borderRadius: 14, padding: 22 }}>
+              <div key={p} className="lift-card" style={{
+                borderRadius: 20, padding: 22,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{p}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 13, lineHeight: 1.6 }}>Ideal for teams that need clear scope, accountability, and measurable results.</div>
               </div>
@@ -485,7 +540,7 @@ function ServiceDetail({ serviceId, onBack }) {
 function SocialMediaMarketing({ onBack }) {
   return (
     <div>
-      <section id="service-overview" style={{ padding: "140px 5% 80px", background: "linear-gradient(155deg, #03045E 0%, #0A2540 52%, #023E8A 100%)", color: "#fff" }}>
+      <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(1200px 700px at 10% -10%, rgba(0,180,216,0.45), transparent 60%), radial-gradient(900px 600px at 90% 20%, rgba(72,202,228,0.25), transparent 55%), linear-gradient(160deg, #03045E 0%, #0A2540 48%, #023E8A 100%)", color: "#fff" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
           <h1 style={{ fontSize: "clamp(36px, 5.5vw, 70px)", fontFamily: "'DM Serif Display', serif", fontWeight: 400, marginBottom: 16 }}>Turn Attention Into Revenue</h1>
@@ -505,9 +560,9 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-problem" style={{ padding: "90px 5%", background: "#F0F4F8" }}>
+      <section id="service-problem" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ marginBottom: 40 }}>
+          <div style={{ marginBottom: 40, textAlign: "center" }}>
             <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Problem to Solution</span>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 12 }}>We Fix the Gaps That Stall Growth</h2>
           </div>
@@ -518,7 +573,11 @@ function SocialMediaMarketing({ onBack }) {
               { problem: "Poor ROAS and ad fatigue", solution: "Full-funnel Meta and TikTok ads with A/B creative testing." },
               { problem: "No clear strategy or reporting cadence", solution: "Monthly strategy, weekly reporting, and KPI dashboards." },
             ].map(item => (
-              <div key={item.problem} style={{ background: "#fff", borderRadius: 16, padding: 26, border: "1px solid rgba(10,37,64,0.08)" }}>
+              <div key={item.problem} className="lift-card" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                borderRadius: 20, padding: 26,
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 6 }}>Problem</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)", fontSize: 14, lineHeight: 1.6, marginBottom: 14 }}>{item.problem}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#00B4D8", marginBottom: 6 }}>Solution</div>
@@ -529,12 +588,13 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-services" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24, flexWrap: "wrap", marginBottom: 28 }}>
-            <div>
-              <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Services</span>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 10 }}>Structured, Tiered Services</h2>
+          <div style={{ textAlign: "center", marginBottom: 28 }}>
+            <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Services</span>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 10 }}>Structured, Tiered Services</h2>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", maxWidth: 520, margin: "12px auto 0" }}>
+              Each service lists scope, outcomes, and platforms so you know exactly what you are getting.
             </div>
           </div>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
@@ -546,7 +606,11 @@ function SocialMediaMarketing({ onBack }) {
               { name: "Community Management", inc: "Engagement workflows, moderation", out: "Higher retention and loyalty", tools: "Sprout Social" },
               { name: "Analytics & Reporting", inc: "Dashboards, KPIs, insights", out: "Transparent growth reporting", tools: "Looker Studio" },
             ].map(item => (
-              <div key={item.name} style={{ border: "1px solid rgba(10,37,64,0.08)", borderRadius: 16, padding: 22 }}>
+              <div key={item.name} className="lift-card" style={{
+                borderRadius: 20, padding: 22,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Includes: {item.inc}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Outcome: {item.out}</div>
@@ -557,9 +621,9 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-method" style={{ padding: "90px 5%", background: "#F7FAFC" }}>
+      <section id="service-method" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF3FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ marginBottom: 36 }}>
+          <div style={{ marginBottom: 36, textAlign: "center" }}>
             <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Framework</span>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 12 }}>The Momentum Framework</h2>
           </div>
@@ -572,7 +636,11 @@ function SocialMediaMarketing({ onBack }) {
               { step: "Optimize", desc: "Weekly reporting, iteration, and performance improvements." },
               { step: "Scale", desc: "Double down on what works and expand to new channels." },
             ].map(item => (
-              <div key={item.step} style={{ background: "#fff", borderRadius: 16, padding: 22, border: "1px solid rgba(10,37,64,0.08)" }}>
+              <div key={item.step} className="lift-card" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                borderRadius: 20, padding: 22,
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.step}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)", fontSize: 14, lineHeight: 1.6 }}>{item.desc}</div>
               </div>
@@ -581,12 +649,13 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFC 100%)" }}>
+      <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF5FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 20, marginBottom: 28 }}>
-            <div>
-              <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Case Studies</span>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 10 }}>Proof of Profit, Not Just Posts</h2>
+          <div style={{ textAlign: "center", marginBottom: 28 }}>
+            <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Case Studies</span>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 10 }}>Proof of Profit, Not Just Posts</h2>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)", maxWidth: 520, margin: "12px auto 0" }}>
+              We show revenue impact, not vanity metrics. Each engagement ties creative output to pipeline growth.
             </div>
           </div>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
@@ -595,9 +664,10 @@ function SocialMediaMarketing({ onBack }) {
               { name: "SaaS Waitlist Engine", tag: "B2B SaaS", uplift: "+420 leads", metric: "2.8x CTR", timeline: "60 days", problem: "Low CTR + unclear positioning", strategy: "New creative angles + offer testing + funnel rebuild" },
               { name: "Creator Flywheel", tag: "Lifestyle", uplift: "+$74k pipeline", metric: "32% lead conversion", timeline: "75 days", problem: "Weak trust signals", strategy: "Micro‑influencer rollout + UGC system" },
             ].map(item => (
-              <div key={item.name} style={{
-                border: "1px solid rgba(10,37,64,0.08)", borderRadius: 18, padding: 24,
-                background: "#fff", boxShadow: "0 10px 30px rgba(10,37,64,0.06)"
+              <div key={item.name} className="lift-card" style={{
+                borderRadius: 20, padding: 24,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 12px 32px rgba(10,37,64,0.1)"
               }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
                   <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540" }}>{item.name}</div>
@@ -624,9 +694,9 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-results" style={{ padding: "90px 5%", background: "#0A2540" }}>
+      <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#fff", marginBottom: 24 }}>Results Dashboard</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#fff", marginBottom: 24, textAlign: "center" }}>Results Dashboard</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
             {[
               { num: "+180%", label: "Engagement Growth" },
@@ -643,16 +713,20 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-pricing" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 24 }}>Transparent Pricing</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Transparent Pricing</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {[
               { name: "Starter", price: "From $1.5k/mo", who: "Early-stage brands", items: ["Strategy + content plan", "8 posts/mo", "Monthly reporting"] },
               { name: "Growth", price: "From $3.5k/mo", who: "Scaling teams", items: ["Full content production", "Paid ads management", "Weekly reporting"] },
               { name: "Scale", price: "From $7k/mo", who: "Multi-channel brands", items: ["Influencers + UGC", "Advanced testing", "Dedicated strategist"] },
             ].map(item => (
-              <div key={item.name} style={{ border: "1px solid rgba(10,37,64,0.1)", borderRadius: 18, padding: 26 }}>
+              <div key={item.name} className="lift-card" style={{
+                borderRadius: 20, padding: 26,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 10px 34px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6 }}>{item.name}</div>
                 <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 22, color: "#00B4D8", marginBottom: 10 }}>{item.price}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>Ideal for: {item.who}</div>
@@ -666,7 +740,7 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-about" style={{ padding: "90px 5%", background: "#F7FAFC" }}>
+      <section id="service-about" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #EEF4FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 40, alignItems: "center" }} className="service-cols">
           <div>
             <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Founder-Led</span>
@@ -675,7 +749,11 @@ function SocialMediaMarketing({ onBack }) {
               We are a founder-led team with a bias for strategy. Every engagement starts with positioning and ends with measurable revenue impact.
             </p>
           </div>
-          <div style={{ background: "#fff", borderRadius: 18, padding: 24, border: "1px solid rgba(10,37,64,0.08)" }}>
+          <div style={{
+            background: "linear-gradient(180deg, #FFFFFF 0%, #F6FAFF 100%)",
+            borderRadius: 20, padding: 24, border: "1px solid rgba(10,37,64,0.08)",
+            boxShadow: "0 16px 40px rgba(10,37,64,0.08)"
+          }}>
             <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>Why teams choose us</div>
             <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
               {["Clear positioning and messaging", "Documented strategy and process", "Accountability through reporting", "Fast execution cycles"].map(i => <li key={i}>{i}</li>)}
@@ -684,20 +762,20 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-tools" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-tools" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 20 }}>Tech & Tools Stack</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 20, textAlign: "center" }}>Tech & Tools Stack</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             {["Meta Business Suite", "GA4", "TikTok Ads Manager", "SEMrush", "Canva", "Adobe Suite", "HubSpot", "Sprout Social"].map(t => (
-              <span key={t} style={{ padding: "10px 16px", borderRadius: 999, background: "#F0F4F8", border: "1px solid rgba(10,37,64,0.08)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)" }}>{t}</span>
+              <span key={t} style={{ padding: "10px 16px", borderRadius: 999, background: "rgba(0,180,216,0.08)", border: "1px solid rgba(0,180,216,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)" }}>{t}</span>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="service-testimonials" style={{ padding: "90px 5%", background: "#0A2540" }}>
+      <section id="service-testimonials" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#fff", marginBottom: 24 }}>Early Client Feedback</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#fff", marginBottom: 24, textAlign: "center" }}>Early Client Feedback</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {[
               { name: "Alicia M., DTC Founder", quote: "They gave us a real strategy and execution system. Engagement jumped in weeks." },
@@ -712,16 +790,20 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section id="service-insights" style={{ padding: "90px 5%", background: "#fff" }}>
+      <section id="service-insights" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 20 }}>Insights & Education</h2>
+          <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 20, textAlign: "center" }}>Insights & Education</h2>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {[
               { title: "How to build a content system that scales", tag: "Strategy" },
               { title: "Creative testing frameworks for Meta Ads", tag: "Paid Media" },
               { title: "What to measure in the first 30 days", tag: "Analytics" },
             ].map(item => (
-              <div key={item.title} style={{ border: "1px solid rgba(10,37,64,0.08)", borderRadius: 16, padding: 22 }}>
+              <div key={item.title} className="lift-card" style={{
+                borderRadius: 20, padding: 22,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                boxShadow: "0 8px 28px rgba(10,37,64,0.1)"
+              }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "#00B4D8", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 8 }}>{item.tag}</div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", lineHeight: 1.6 }}>{item.title}</div>
               </div>
@@ -730,9 +812,9 @@ function SocialMediaMarketing({ onBack }) {
         </div>
       </section>
 
-      <section style={{ padding: "70px 5%", background: "#F0F4F8" }}>
+      <section style={{ padding: "70px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
-          <div>
+          <div style={{ textAlign: "center", flex: 1 }}>
             <h2 style={{ fontSize: 32, fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginBottom: 8 }}>Ready to build a real growth engine?</h2>
             <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)" }}>Book a consultation and we will outline a 90-day plan.</p>
           </div>
@@ -748,14 +830,15 @@ function SocialMediaMarketing({ onBack }) {
 // ─── Why Cyvera ───────────────────────────────────────────────────────────────
 function WhyCyvera() {
   return (
-    <section id="about" style={{ padding: "100px 5%", background: "#0A2540" }}>
+    <section id="about" style={{ padding: "100px 5%", background: "radial-gradient(900px 500px at 15% -10%, rgba(0,180,216,0.18), transparent 60%), radial-gradient(800px 600px at 90% 10%, rgba(3,4,94,0.35), transparent 55%), linear-gradient(180deg, #0A2540 0%, #061B3A 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Stats Strip */}
         <Reveal>
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
             gap: 0, borderRadius: 16, overflow: "hidden",
-            border: "1px solid rgba(0,180,216,0.2)", marginBottom: 80
+            border: "1px solid rgba(0,180,216,0.25)", marginBottom: 80,
+            background: "rgba(255,255,255,0.03)", backdropFilter: "blur(8px)"
           }}>
             {stats.map((s, i) => (
               <div key={i} style={{
@@ -832,7 +915,7 @@ function Portfolio() {
   const filtered = active === "All" ? projects : projects.filter(p => p.tags.includes(active));
 
   return (
-    <section id="work" style={{ padding: "100px 5%", background: "#fff" }}>
+    <section id="work" style={{ padding: "100px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F3F7FF 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -851,7 +934,8 @@ function Portfolio() {
                 background: active === t ? "linear-gradient(90deg, #00B4D8, #0077B6)" : "transparent",
                 color: active === t ? "#fff" : "#0A2540",
                 border: active === t ? "none" : "1.5px solid rgba(10,37,64,0.15)",
-                boxShadow: active === t ? "0 4px 16px rgba(0,180,216,0.35)" : "none"
+                boxShadow: active === t ? "0 10px 30px rgba(0,180,216,0.35)" : "none",
+                backdropFilter: "blur(6px)"
               }}>{t}</button>
             ))}
           </div>
@@ -873,15 +957,17 @@ function ProjectCard({ p }) {
   const [hov, setHov] = useState(false);
   return (
     <article onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={{
-      borderRadius: 16, overflow: "hidden",
-      border: `1.5px solid ${hov ? "#00B4D8" : "rgba(10,37,64,0.08)"}`,
-      boxShadow: hov ? "0 12px 48px rgba(0,180,216,0.18)" : "0 2px 16px rgba(10,37,64,0.06)",
-      transition: "all 0.3s ease", cursor: "default"
+      borderRadius: 18, overflow: "hidden",
+      border: `1.5px solid ${hov ? "rgba(0,180,216,0.6)" : "rgba(10,37,64,0.08)"}`,
+      boxShadow: hov ? "0 18px 50px rgba(0,180,216,0.2)" : "0 6px 24px rgba(10,37,64,0.08)",
+      transition: "all 0.3s ease", cursor: "default",
+      transform: hov ? "translateY(-6px)" : "translateY(0)",
+      background: "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(246,250,255,0.92) 100%)"
     }}>
       <div style={{ height: 200, background: p.gradient, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", border: "1px solid rgba(255,255,255,0.3)", padding: "6px 16px", borderRadius: 100 }}>{p.category}</span>
       </div>
-      <div style={{ padding: "24px 28px", background: "#fff" }}>
+      <div style={{ padding: "24px 28px", background: "linear-gradient(180deg, #FFFFFF 0%, #F6FAFF 100%)" }}>
         <h3 style={{ fontSize: 18, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{p.name}</h3>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(0,180,216,0.08)", padding: "6px 14px", borderRadius: 100, marginBottom: 18 }}>
           <span style={{ color: "#00B4D8", fontSize: 18 }}>↑</span>
@@ -898,7 +984,7 @@ function ProjectCard({ p }) {
 // ─── Process ──────────────────────────────────────────────────────────────────
 function Process() {
   return (
-    <section style={{ padding: "100px 5%", background: "#F0F4F8" }}>
+    <section style={{ padding: "100px 5%", background: "linear-gradient(180deg, #F5F8FF 0%, #ECF4FF 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
@@ -910,7 +996,11 @@ function Process() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24 }}>
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.1}>
-              <div style={{ background: "#fff", borderRadius: 16, padding: "36px 28px", border: "1.5px solid rgba(10,37,64,0.08)", position: "relative", overflow: "hidden" }}>
+              <div style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(246,250,255,0.92) 100%)",
+                borderRadius: 18, padding: "36px 28px", border: "1.5px solid rgba(10,37,64,0.08)",
+                position: "relative", overflow: "hidden", boxShadow: "0 10px 30px rgba(10,37,64,0.08)"
+              }}>
                 <div style={{ fontSize: 60, fontFamily: "'DM Serif Display', serif", color: "rgba(0,180,216,0.1)", position: "absolute", top: -10, right: 16, fontWeight: 700 }}>{s.n}</div>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: "linear-gradient(135deg, #00B4D8, #0077B6)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
                   <span style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: 14 }}>{s.n}</span>
@@ -929,7 +1019,7 @@ function Process() {
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 function Testimonials() {
   return (
-    <section style={{ padding: "100px 5%", background: "#0A2540" }}>
+    <section style={{ padding: "100px 5%", background: "radial-gradient(800px 500px at 10% -10%, rgba(0,180,216,0.18), transparent 60%), linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
@@ -942,8 +1032,10 @@ function Testimonials() {
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <div style={{
-                background: "rgba(255,255,255,0.04)", borderRadius: 16, padding: "36px 32px",
-                border: "1px solid rgba(0,180,216,0.15)", backdropFilter: "blur(8px)"
+                background: "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%)",
+                borderRadius: 18, padding: "36px 32px",
+                border: "1px solid rgba(0,180,216,0.2)", backdropFilter: "blur(10px)",
+                boxShadow: "0 20px 50px rgba(0,0,0,0.25)"
               }}>
                 <div style={{ fontSize: 36, color: "#00B4D8", fontFamily: "'DM Serif Display', serif", lineHeight: 1, marginBottom: 16 }}>"</div>
                 <p style={{ fontSize: 15, color: "rgba(255,255,255,0.75)", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75, marginBottom: 28, fontStyle: "italic" }}>{t.quote}</p>
@@ -987,12 +1079,13 @@ function Contact() {
     width: "100%", padding: "14px 18px", borderRadius: 10, fontSize: 14,
     fontFamily: "'DM Sans', sans-serif", outline: "none",
     border: `1.5px solid ${errors[field] ? "#ef4444" : "rgba(10,37,64,0.15)"}`,
-    background: "#fff", color: "#0A2540", marginBottom: 4,
-    transition: "border-color 0.2s"
+    background: "rgba(255,255,255,0.95)", color: "#0A2540", marginBottom: 4,
+    transition: "border-color 0.2s, box-shadow 0.2s",
+    boxShadow: "0 6px 16px rgba(10,37,64,0.06)"
   });
 
   return (
-    <section id="contact" style={{ padding: "100px 5%", background: "#fff" }}>
+    <section id="contact" style={{ padding: "100px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
@@ -1032,7 +1125,12 @@ function Contact() {
                 <p style={{ color: "rgba(10,37,64,0.6)", fontFamily: "'DM Sans', sans-serif" }}>We'll be in touch within 24 hours.</p>
               </div>
             ) : (
-              <div style={{ background: "#F0F4F8", borderRadius: 16, padding: 40 }}>
+              <div style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(240,244,248,0.9) 100%)",
+                borderRadius: 18, padding: 40,
+                border: "1px solid rgba(0,180,216,0.18)",
+                boxShadow: "0 18px 50px rgba(0,180,216,0.12)"
+              }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 0 }} className="form-grid">
                   <div>
                     <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" style={inputStyle("name")} aria-label="Full Name" />
@@ -1082,7 +1180,7 @@ function Contact() {
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer style={{ background: "#03045E", padding: "64px 5% 32px" }}>
+    <footer style={{ background: "linear-gradient(180deg, #03045E 0%, #020B2B 100%)", padding: "64px 5% 32px", borderTop: "1px solid rgba(0,180,216,0.15)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 56 }} className="footer-grid">
           {/* Brand */}
