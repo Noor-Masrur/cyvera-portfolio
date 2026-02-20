@@ -508,7 +508,7 @@ function SocialMediaMarketing({ onBack }) {
       <section id="service-problem" style={{ padding: "90px 5%", background: "#F0F4F8" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ marginBottom: 40 }}>
-            <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Problem -> Solution</span>
+            <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Problem to Solution</span>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Serif Display', serif", color: "#0A2540", marginTop: 12 }}>We Fix the Gaps That Stall Growth</h2>
           </div>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
