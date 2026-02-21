@@ -512,10 +512,37 @@ function TiltCard({ s, onSelect }) {
         <div style={{ flex: 1 }} />
 
         <span style={{
-          color: hov ? s.color : "rgba(10,37,64,0.35)", fontFamily: "'DM Sans', sans-serif",
-          fontSize: 13, fontWeight: 700, display: "inline-flex", alignItems: "center", gap: 8,
-          transition: "color 0.2s, gap 0.2s", letterSpacing: "0.3px"
-        }}>Explore service <span style={{ fontSize: 16, transform: hov ? "translateX(4px)" : "translateX(0)", transition: "transform 0.2s", display: "inline-block" }}>→</span></span>
+          color: "#0A2540",
+          fontFamily: "'DM Sans', sans-serif",
+          fontSize: 14,
+          fontWeight: 900,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 12,
+          letterSpacing: "0.6px",
+          textTransform: "uppercase",
+          padding: "12px 18px",
+          borderRadius: 999,
+          background: hov
+              ? `linear-gradient(90deg, ${s.color}55, ${s.color}25)`
+              : `linear-gradient(90deg, ${s.color}35, ${s.color}15)`,
+          border: `1px solid ${s.color}77`,
+          boxShadow: hov
+              ? `0 14px 30px ${s.color}40, 0 0 0 2px ${s.color}25`
+              : `0 10px 22px ${s.color}25`,
+          transform: hov ? "translateY(-1px)" : "translateY(0)",
+          transition: "color 0.2s, gap 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s"
+        }}>
+          Explore service
+          <span style={{
+            width: 30, height: 30, borderRadius: "50%",
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            background: hov ? s.color : "rgba(10,37,64,0.22)",
+            color: "#fff", fontSize: 14, lineHeight: 1,
+            transform: hov ? "translateX(4px) scale(1.08)" : "translateX(0) scale(1)",
+            transition: "transform 0.2s, background 0.2s"
+          }}>→</span>
+        </span>
       </button>
   );
 }
