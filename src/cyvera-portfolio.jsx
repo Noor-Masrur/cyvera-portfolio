@@ -436,7 +436,7 @@ function Services({ onSelect }) {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24, alignItems: "stretch", gridAutoRows: "1fr" }}>
             {services.map((s, i) => (
                 <Reveal key={s.name} delay={i * 0.08}>
                   <TiltCard s={s} onSelect={onSelect} />
@@ -476,7 +476,7 @@ function TiltCard({ s, onSelect }) {
             border: `1.5px solid ${hov ? s.color + "80" : "rgba(10,37,64,0.07)"}`,
             boxShadow: hov ? `0 28px 70px ${s.color}30, 0 0 0 1px ${s.color}20` : "0 8px 32px rgba(10,37,64,0.08)",
             cursor: "pointer", textAlign: "left", width: "100%",
-            display: "flex", flexDirection: "column", minHeight: 300,
+            display: "flex", flexDirection: "column", minHeight: 300, height: "100%",
             transition: "border-color 0.3s, box-shadow 0.3s",
             ...style3d,
             willChange: "transform"
