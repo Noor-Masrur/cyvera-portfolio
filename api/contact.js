@@ -5,23 +5,12 @@ const sanitize = (value) =>
     .replace(/[<>]/g, "")
     .trim();
 
-export default async function handler(request) {
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  let payload;
-  try {
-    payload = await request.json();
-  } catch {
-    return new Response(JSON.stringify({ error: "Invalid JSON" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
+  const payload = req.body || {};
 
   const name = sanitize(payload?.name);
   const email = sanitize(payload?.email);
@@ -30,17 +19,11 @@ export default async function handler(request) {
   const message = sanitize(payload?.message);
 
   if (!name || !email || !message) {
-    return new Response(JSON.stringify({ error: "Missing required fields" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD || !process.env.CONTACT_TO_EMAIL) {
-    return new Response(JSON.stringify({ error: "Server not configured" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(500).json({ error: "Server not configured" });
   }
 
   const subject = `New contact from ${name}`;
@@ -61,6 +44,9 @@ export default async function handler(request) {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
     });
 
     await transporter.sendMail({
@@ -70,14 +56,8 @@ export default async function handler(request) {
       html,
       replyTo: email,
     });
-    return new Response(JSON.stringify({ ok: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(200).json({ ok: true });
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Email send failed" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(500).json({ error: "Email send failed" });
   }
 }
