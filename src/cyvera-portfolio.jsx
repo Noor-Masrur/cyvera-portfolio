@@ -941,6 +941,8 @@ function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const validate = () => {
     const e = {};
@@ -950,10 +952,28 @@ function Contact() {
     return e;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (event) => {
+    event?.preventDefault();
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
-    setSent(true);
+    setSending(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Unable to send message. Please try again.");
+      }
+      setSent(true);
+    } catch (err) {
+      setSubmitError(err?.message || "Unable to send message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputStyle = (field) => ({
@@ -1029,7 +1049,7 @@ function Contact() {
                     <p style={{ color: "rgba(10,37,64,0.55)", fontFamily: "'DM Sans', sans-serif", fontSize: 15 }}>We'll be in touch within 24 hours.</p>
                   </div>
               ) : (
-                  <div style={{
+                  <form onSubmit={handleSubmit} style={{
                     background: "linear-gradient(180deg, #fff 0%, #f5f9ff 100%)",
                     borderRadius: 24, padding: 44,
                     border: "1px solid rgba(0,180,216,0.15)",
@@ -1062,16 +1082,22 @@ function Contact() {
                       <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your project... *" rows={5} style={{ ...inputStyle("message"), resize: "vertical" }} aria-label="Message" />
                       {errors.message && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.message}</p>}
                     </div>
-                    <button onClick={handleSubmit} aria-label="Send message" style={{
+                    {submitError && (
+                      <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginBottom: 12 }}>
+                        {submitError}
+                      </p>
+                    )}
+                    <button type="submit" disabled={sending} aria-label="Send message" style={{
                       width: "100%", padding: "17px 32px", background: "linear-gradient(90deg, #00B4D8, #0077B6)",
                       color: "#fff", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 800,
-                      fontFamily: "'DM Sans', sans-serif", cursor: "pointer",
+                      fontFamily: "'DM Sans', sans-serif", cursor: sending ? "not-allowed" : "pointer",
+                      opacity: sending ? 0.8 : 1,
                       boxShadow: "0 0 40px rgba(0,180,216,0.4)", letterSpacing: "0.3px", transition: "transform 0.2s, box-shadow 0.2s"
                     }}
                             onMouseEnter={e => { e.target.style.transform = "translateY(-1px)"; e.target.style.boxShadow = "0 0 60px rgba(0,180,216,0.6)"; }}
                             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "0 0 40px rgba(0,180,216,0.4)"; }}
-                    >Send Message</button>
-                  </div>
+                    >{sending ? "Sending..." : "Send Message"}</button>
+                  </form>
               )}
             </Reveal>
           </div>
