@@ -28,13 +28,43 @@ export default async function handler(req, res) {
 
   const subject = `New contact from ${name}`;
   const html = `
-    <h2>New Contact Request</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Company:</strong> ${company || "-"}</p>
-    <p><strong>Service:</strong> ${service || "-"}</p>
-    <p><strong>Message:</strong></p>
-    <p>${message.replace(/\n/g, "<br />")}</p>
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #111827; background: #f9fafb; padding: 24px;">
+      <div style="max-width: 640px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 20px 24px; background: #111827; color: #ffffff;">
+          <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8;">Cyvera Portfolio</p>
+          <h2 style="margin: 6px 0 0; font-size: 20px;">New Contact Request</h2>
+        </div>
+        <div style="padding: 24px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <tbody>
+              <tr>
+                <td style="padding: 10px 0; color: #6b7280; width: 140px;">Name</td>
+                <td style="padding: 10px 0; font-weight: 600;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #6b7280;">Email</td>
+                <td style="padding: 10px 0; font-weight: 600;">${email}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #6b7280;">Company</td>
+                <td style="padding: 10px 0; font-weight: 600;">${company || "-"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #6b7280;">Service</td>
+                <td style="padding: 10px 0; font-weight: 600;">${service || "-"}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+            <p style="margin: 0 0 8px; color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">Message</p>
+            <p style="margin: 0; line-height: 1.6;">${message.replace(/\n/g, "<br />")}</p>
+          </div>
+        </div>
+        <div style="padding: 16px 24px; background: #f3f4f6; color: #6b7280; font-size: 12px;">
+          Received on ${new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}
+        </div>
+      </div>
+    </div>
   `;
 
   try {
