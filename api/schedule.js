@@ -71,6 +71,7 @@ export default async function handler(req, res) {
   const name = sanitize(payload?.name);
   const email = sanitize(payload?.email);
   const company = sanitize(payload?.company);
+  const phone = sanitize(payload?.phone);
   const message = sanitize(payload?.message);
   const preferredDate = sanitize(payload?.preferredDate);
   const preferredTime = sanitize(payload?.preferredTime);
@@ -138,6 +139,10 @@ export default async function handler(req, res) {
               <tr>
                 <td style="padding: 10px 0; color: #6b7280;">Company</td>
                 <td style="padding: 10px 0; font-weight: 600;">${company || "-"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #6b7280;">Contact Number</td>
+                <td style="padding: 10px 0; font-weight: 600;">${phone || "-"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; color: #6b7280;">Requested Time</td>

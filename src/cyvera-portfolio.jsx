@@ -1119,6 +1119,7 @@ function SchedulerModal({ open, onClose }) {
     name: "",
     email: "",
     company: "",
+    phone: "",
     dateTime: null,
     timezone: "Australia/Brisbane",
     message: "",
@@ -1208,15 +1209,16 @@ function SchedulerModal({ open, onClose }) {
       const res = await fetch("/api/schedule", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          company: form.company,
-          message: form.message,
-          preferredDate: form.dateTime ? toDateString(dayjs(form.dateTime)) : "",
-          preferredTime: form.dateTime ? toTimeString(dayjs(form.dateTime)) : "",
-          timezone: form.timezone || "Australia/Brisbane",
-        }),
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            company: form.company,
+            phone: form.phone,
+            message: form.message,
+            preferredDate: form.dateTime ? toDateString(dayjs(form.dateTime)) : "",
+            preferredTime: form.dateTime ? toTimeString(dayjs(form.dateTime)) : "",
+            timezone: form.timezone || "Australia/Brisbane",
+          }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -1266,10 +1268,10 @@ function SchedulerModal({ open, onClose }) {
           </div>
 
           {sent ? (
-              <div style={{ textAlign: "center", padding: "40px 20px", background: "rgba(0,180,216,0.04)", borderRadius: 18, border: "1.5px solid rgba(0,180,216,0.15)" }}>
-                <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 22, color: "#0A2540", marginBottom: 8 }}>Request Sent</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "rgba(10,37,64,0.55)" }}>We will confirm your time by email.</div>
+              <div style={{ textAlign: "center", padding: "80px 40px", background: "rgba(0,180,216,0.04)", borderRadius: 24, border: "1.5px solid rgba(0,180,216,0.15)" }}>
+                <div style={{ fontSize: 56, marginBottom: 20 }}>🎉</div>
+                <h3 style={{ fontSize: 28, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 12 }}>Request Sent!</h3>
+                <p style={{ color: "rgba(10,37,64,0.55)", fontFamily: "'DM Sans', sans-serif", fontSize: 15 }}>We will confirm your time by email.</p>
               </div>
           ) : (
               <form onSubmit={handleSubmit}>
@@ -1285,6 +1287,9 @@ function SchedulerModal({ open, onClose }) {
                 </div>
                 <div style={{ marginTop: 14 }}>
                   <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" style={inputStyle()} aria-label="Company" />
+                </div>
+                <div style={{ marginTop: 14 }}>
+                  <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Contact Number (Optional)" style={inputStyle()} aria-label="Contact Number" />
                 </div>
                 <div style={{ marginTop: 14 }}>
                   <button
