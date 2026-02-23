@@ -4,6 +4,7 @@ import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { Megaphone, Search, ShieldCheck, Code2, MonitorSmartphone, Cpu } from "lucide-react";
 
 // ─── Intersection Observer Hook ───────────────────────────────────────────────
 function useInView(threshold = 0.15) {
@@ -54,10 +55,11 @@ function AnimatedNumber({ target, suffix = "" }) {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const services = [
-  { id: "social-media", icon: "📱", name: "Social Media & Branding", desc: "Positioning, content, and performance systems that turn attention into revenue.", color: "#00B4D8", accent: "rgba(0,180,216,0.15)" },
-  { id: "seo", icon: "🔍", name: "SEO", desc: "Technical and content SEO that compounds visibility and pipeline.", color: "#0096C7", accent: "rgba(0,150,199,0.15)" },
-  { id: "cybersecurity", icon: "🔐", name: "Cybersecurity", desc: "Risk assessments, hardening, and monitoring for resilient operations.", color: "#0077B6", accent: "rgba(0,119,182,0.15)" },
-  { id: "software", icon: "💻", name: "Software Development", desc: "Ship reliable products fast with senior engineering and QA.", color: "#023E8A", accent: "rgba(2,62,138,0.15)" },
+  { id: "social-media", icon: <Megaphone size={26} strokeWidth={1.6} color="#00B4D8" />, name: "Social Media Marketing & Branding", desc: "Positioning, content, and performance systems that turn attention into revenue.", color: "#00B4D8", accent: "rgba(0,180,216,0.15)" },
+  { id: "seo", icon: <Search size={26} strokeWidth={1.6} color="#0096C7" />, name: "Search Engine Optimization", desc: "Technical and content SEO that compounds visibility and pipeline.", color: "#0096C7", accent: "rgba(0,150,199,0.15)" },
+  { id: "cybersecurity", icon: <ShieldCheck size={26} strokeWidth={1.6} color="#0077B6" />, name: "Cybersecurity & Digital Forensics", desc: "Risk assessments, hardening, and monitoring for resilient operations.", color: "#0077B6", accent: "rgba(0,119,182,0.15)" },
+  { id: "website-dev", icon: <MonitorSmartphone size={26} strokeWidth={1.6} color="#1769FF" />, name: "Website Development", desc: "High-performance marketing sites that convert, load fast, and scale with your brand.", color: "#1769FF", accent: "rgba(23,105,255,0.15)" },
+  { id: "custom-software", icon: <Cpu size={26} strokeWidth={1.6} color="#023E8A" />, name: "Custom Software", desc: "Custom apps and distributed systems engineered for reliability and growth.", color: "#023E8A", accent: "rgba(2,62,138,0.15)" },
 ];
 
 const stats = [
@@ -438,18 +440,23 @@ function Services({ onSelect }) {
                 <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "3px", textTransform: "uppercase" }}>What We Do</span>
               </div>
               <h2 style={{ fontSize: "clamp(34px, 4.5vw, 60px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", letterSpacing: "-2px", lineHeight: 1.1 }}>
-                Four disciplines.<br /><span style={{ color: "#00B4D8" }}>One team.</span>
+                Five disciplines.<br /><span style={{ color: "#00B4D8" }}>One team.</span>
               </h2>
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24, alignItems: "stretch", gridAutoRows: "1fr" }}>
+          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, alignItems: "stretch", gridAutoRows: "1fr" }}>
             {services.map((s, i) => (
                 <Reveal key={s.name} delay={i * 0.08}>
                   <TiltCard s={s} onSelect={onSelect} />
                 </Reveal>
             ))}
           </div>
+          <style>{`
+            @media (min-width: 1200px) {
+              .services-grid { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+            }
+          `}</style>
         </div>
       </section>
   );
@@ -1081,7 +1088,8 @@ function Contact() {
                         <option>Social Media & Branding</option>
                         <option>SEO</option>
                         <option>Cybersecurity</option>
-                        <option>Software Development</option>
+                        <option>Website Development</option>
+                        <option>Custom Software</option>
                         <option>Other</option>
                       </select>
                     </div>
@@ -1473,7 +1481,7 @@ function Footer() {
 
             {[
               { title: "Company", links: ["Home", "About", "Work", "Contact"] },
-              { title: "Services", links: ["Social Media & Branding", "SEO", "Cybersecurity", "Software Dev"] },
+              { title: "Services", links: ["Social Media & Branding", "SEO", "Cybersecurity", "Website Development", "Custom Software"] },
             ].map(col => (
                 <div key={col.title}>
                   <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>{col.title}</h4>
@@ -1531,9 +1539,18 @@ function ServiceDetail({ serviceId, onBack, onSchedule }) {
       results: ["0 critical findings post-remediation", "42% reduction in attack surface", "24/7 monitoring setup"],
       pricing: ["Audit $4k", "Protect $2.5k/mo", "Enterprise custom"],
     },
-    software: {
-      title: "Software Built to Scale",
-      subtitle: "Senior engineering, modern stacks, and QA to ship reliable products fast.",
+    "website-dev": {
+      title: "Websites That Convert",
+      subtitle: "Performance-first marketing sites built for speed, SEO, and measurable growth.",
+      outcomes: ["Higher conversion rates", "Faster page speed", "Modern, scalable design system"],
+      services: ["UX + content architecture", "Design + development", "SEO + performance tuning", "Analytics + A/B testing"],
+      process: ["Discover", "Design", "Build", "Launch", "Optimize"],
+      results: ["2.6x conversion lift", "90+ Lighthouse scores", "42% lower bounce rate"],
+      pricing: ["Launch $8k", "Growth $15k", "Scale custom"],
+    },
+    "custom-software": {
+      title: "Custom Software Systems",
+      subtitle: "Distributed systems, apps, and platforms engineered for reliability and growth.",
       outcomes: ["Faster release cycles", "Lower defect rates", "Scalable architecture"],
       services: ["Product discovery", "Design + build", "QA automation", "DevOps + monitoring"],
       process: ["Discover", "Design", "Build", "Launch", "Optimize"],
