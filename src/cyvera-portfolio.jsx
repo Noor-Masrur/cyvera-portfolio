@@ -1577,7 +1577,21 @@ function SchedulerModal({ open, onClose }) {
 }
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
+function Footer({ onNavigate, onSelectService }) {
+  const companyLinks = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Work", href: "#work" },
+    { label: "Contact", href: "#contact" },
+  ];
+  const serviceLinks = [
+    { id: "social-media", label: "Social Media & Branding" },
+    { id: "seo", label: "Search Engine Optimization" },
+    { id: "cybersecurity", label: "Cybersecurity & Digital Forensics" },
+    { id: "website-dev", label: "Website Development" },
+    { id: "custom-software", label: "Custom Software" },
+  ];
+
   return (
       <footer style={{ background: "linear-gradient(180deg, #03045E 0%, #020B2B 100%)", padding: "72px 5% 36px", borderTop: "1px solid rgba(0,180,216,0.12)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -1611,19 +1625,61 @@ function Footer() {
               </div>
             </div>
 
-            {[
-              { title: "Company", links: ["Home", "About", "Work", "Contact"] },
-              { title: "Services", links: ["Social Media & Branding", "SEO", "Cybersecurity", "Website Development", "Custom Software"] },
-            ].map(col => (
-                <div key={col.title}>
-                  <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>{col.title}</h4>
-                  {col.links.map(l => (
-                      <a key={l} href="#" style={{ display: "block", color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, textDecoration: "none", marginBottom: 14, transition: "color 0.2s" }}
-                         onMouseEnter={e => e.target.style.color = "#00B4D8"} onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.35)"}
-                      >{l}</a>
-                  ))}
-                </div>
-            ))}
+            <div>
+              <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>Company</h4>
+              {companyLinks.map((l) => (
+                  <button
+                    key={l.label}
+                    type="button"
+                    onClick={() => onNavigate?.(l.href)}
+                    style={{
+                      display: "block",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      marginBottom: 14,
+                      color: "rgba(255,255,255,0.35)",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 14,
+                      cursor: "pointer",
+                      textAlign: "left",
+                      transition: "color 0.2s"
+                    }}
+                    onMouseEnter={e => e.target.style.color = "#00B4D8"}
+                    onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.35)"}
+                  >
+                    {l.label}
+                  </button>
+              ))}
+            </div>
+
+            <div>
+              <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>Services</h4>
+              {serviceLinks.map((l) => (
+                  <button
+                    key={l.id}
+                    type="button"
+                    onClick={() => onSelectService?.(l.id)}
+                    style={{
+                      display: "block",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      marginBottom: 14,
+                      color: "rgba(255,255,255,0.35)",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 14,
+                      cursor: "pointer",
+                      textAlign: "left",
+                      transition: "color 0.2s"
+                    }}
+                    onMouseEnter={e => e.target.style.color = "#00B4D8"}
+                    onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.35)"}
+                  >
+                    {l.label}
+                  </button>
+              ))}
+            </div>
 
             <div>
               <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>Contact</h4>
@@ -2974,7 +3030,13 @@ export default function CyveraPortfolio() {
   }, [view]);
 
   useEffect(() => {
-    if (view !== "home") { window.scrollTo(0, 0); return; }
+    if (view !== "home") {
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+      window.scrollTo(0, 0);
+      return;
+    }
     if (pendingHash.current) {
       const nextHash = pendingHash.current;
       pendingHash.current = "";
@@ -2991,6 +3053,17 @@ export default function CyveraPortfolio() {
 
   const openScheduler = () => setSchedulerOpen(true);
   const closeScheduler = () => setSchedulerOpen(false);
+  const goService = (serviceId) => {
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    setView(serviceId);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  };
 
   return (
       <div>
@@ -2998,7 +3071,7 @@ export default function CyveraPortfolio() {
           isDetail={isDetail}
           onHome={goHome}
           onSchedule={openScheduler}
-          onSelectService={(serviceId) => setView(serviceId)}
+          onSelectService={goService}
         />
         <main>
           {view === "home" ? (
@@ -3019,7 +3092,7 @@ export default function CyveraPortfolio() {
           )}
         </main>
         <SchedulerModal open={schedulerOpen} onClose={closeScheduler} />
-        <Footer />
+        <Footer onNavigate={goHome} onSelectService={goService} />
       </div>
   );
 }
