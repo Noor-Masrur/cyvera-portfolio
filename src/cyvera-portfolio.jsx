@@ -1197,8 +1197,8 @@ function Contact() {
                       <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} style={{ ...inputStyle(), cursor: "pointer" }} aria-label="Service">
                         <option value="">Select a Service...</option>
                         <option>Social Media & Branding</option>
-                        <option>SEO</option>
-                        <option>Cybersecurity</option>
+                        <option>Search Engine Optimization</option>
+                        <option>Cybersecurity & Digital Forensics</option>
                         <option>Website Development</option>
                         <option>Custom Software</option>
                         <option>Other</option>
@@ -1239,6 +1239,7 @@ function SchedulerModal({ open, onClose }) {
     email: "",
     company: "",
     phone: "",
+    service: "",
     dateTime: null,
     timezone: "Australia/Brisbane",
     message: "",
@@ -1333,6 +1334,7 @@ function SchedulerModal({ open, onClose }) {
             email: form.email,
             company: form.company,
             phone: form.phone,
+            service: form.service,
             message: form.message,
             preferredDate: form.dateTime ? toDateString(dayjs(form.dateTime)) : "",
             preferredTime: form.dateTime ? toTimeString(dayjs(form.dateTime)) : "",
@@ -1406,6 +1408,17 @@ function SchedulerModal({ open, onClose }) {
                 </div>
                 <div style={{ marginTop: 14 }}>
                   <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" style={inputStyle()} aria-label="Company" />
+                </div>
+                <div style={{ marginTop: 14 }}>
+                  <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} style={{ ...inputStyle(), cursor: "pointer" }} aria-label="Service">
+                    <option value="">Select a Service...</option>
+                    <option>Social Media & Branding</option>
+                    <option>Search Engine Optimization</option>
+                    <option>Cybersecurity & Digital Forensics</option>
+                    <option>Website Development</option>
+                    <option>Custom Software</option>
+                    <option>Other</option>
+                  </select>
                 </div>
                 <div style={{ marginTop: 14 }}>
                   <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Contact Number (Optional)" style={inputStyle()} aria-label="Contact Number" />
