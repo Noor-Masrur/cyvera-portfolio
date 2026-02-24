@@ -1022,8 +1022,8 @@ function Contact() {
               <div>
                 <h3 style={{ fontSize: 24, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 36 }}>Contact Information</h3>
                 {[
-                  { icon: "✉️", label: "Email", val: "hello@cyvera.com.au" },
-                  { icon: "📍", label: "Location", val: "San Francisco, CA (Remote-First)" },
+                  { icon: "✉️", label: "Email", val: "info@cyvera.com.au" },
+                  { icon: "📍", label: "Location", val: "G3/62 Didsbury St, East Brisbane, QLD 4169" },
                   { icon: "⚡", label: "Response Time", val: "Within 24 hours" },
                 ].map(item => (
                     <div key={item.label} style={{ display: "flex", gap: 16, marginBottom: 28, alignItems: "flex-start" }}>
@@ -1496,13 +1496,13 @@ function Footer() {
 
             <div>
               <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>Contact</h4>
-              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75 }}>hello@cyvera.com.au</p>
-              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, marginTop: 8 }}>San Francisco, CA</p>
+              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75 }}>info@cyvera.com.au</p>
+              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, marginTop: 8 }}>G3/62 Didsbury St, East Brisbane, QLD 4169</p>
             </div>
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-            <p style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>© 2025 Cyvera. All rights reserved.</p>
+            <p style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>© 2026 Cyvera. All rights reserved.</p>
             <div style={{ display: "flex", gap: 24 }}>
               {["Privacy Policy", "Terms of Service"].map(l => (
                   <a key={l} href="#" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}

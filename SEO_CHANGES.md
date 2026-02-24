@@ -40,7 +40,7 @@
 
 3. **Update twitter:site**: Replace `@cyvera` with your real Twitter/X handle.
 
-4. **Update contact email**: Replace `hello@cyvera.com.au` in the JSON-LD with your real email.
+4. **Update contact email**: Replace `info@cyvera.com.au` in the JSON-LD with your real email.
 
 5. **Submit sitemap to Google Search Console**:
    Go to https://search.google.com/search-console → Sitemaps → add `https://cyvera.com.au/sitemap.xml`
