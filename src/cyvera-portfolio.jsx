@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSEO, SEO_CONFIGS } from "./seo/useSEO";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -1021,7 +1022,7 @@ function Contact() {
               <div>
                 <h3 style={{ fontSize: 24, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 36 }}>Contact Information</h3>
                 {[
-                  { icon: "✉️", label: "Email", val: "hello@cyvera.agency" },
+                  { icon: "✉️", label: "Email", val: "hello@cyvera.com.au" },
                   { icon: "📍", label: "Location", val: "San Francisco, CA (Remote-First)" },
                   { icon: "⚡", label: "Response Time", val: "Within 24 hours" },
                 ].map(item => (
@@ -1495,7 +1496,7 @@ function Footer() {
 
             <div>
               <h4 style={{ color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 24 }}>Contact</h4>
-              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75 }}>hello@cyvera.agency</p>
+              <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75 }}>hello@cyvera.com.au</p>
               <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, marginTop: 8 }}>San Francisco, CA</p>
             </div>
           </div>
@@ -2012,6 +2013,12 @@ export default function CyveraPortfolio() {
   const isDetail = view !== "home";
   const pendingHash = useRef("");
   const [schedulerOpen, setSchedulerOpen] = useState(false);
+
+  // ── Dynamic SEO: update <head> meta whenever the view changes ──
+  useEffect(() => {
+    const config = SEO_CONFIGS[view] || SEO_CONFIGS.home;
+    useSEO(config);
+  }, [view]);
 
   useEffect(() => {
     if (view !== "home") { window.scrollTo(0, 0); return; }
