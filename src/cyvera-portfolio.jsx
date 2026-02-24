@@ -1529,179 +1529,15 @@ function Footer() {
 
 // ─── ServiceDetail ────────────────────────────────────────────────────────────
 function ServiceDetail({ serviceId, onBack, onSchedule }) {
-  if (serviceId === "social-media") return <SocialMediaMarketing onBack={onBack} />;
-
-  const detail = {
-    seo: {
-      title: "SEO That Compounds",
-      subtitle: "Technical excellence plus content strategy for durable, intent-driven growth.",
-      outcomes: ["Higher rankings on revenue keywords", "Clean technical foundation", "Content system that scales"],
-      services: ["Technical SEO audit + fixes", "Content strategy + briefs", "On-page optimization", "Link building roadmap"],
-      process: ["Audit", "Prioritize", "Execute", "Measure", "Iterate"],
-      results: ["+132% organic sessions", "2.4x demo requests", "38% faster crawl efficiency"],
-      pricing: ["Starter $1.5k/mo", "Growth $3k/mo", "Scale $6k/mo"],
-    },
-    cybersecurity: {
-      title: "Security That Builds Trust",
-      subtitle: "Reduce risk with proactive assessments, hardening, and continuous monitoring.",
-      outcomes: ["Fewer critical vulnerabilities", "Actionable remediation plan", "Compliance-ready documentation"],
-      services: ["Risk assessment", "Pen testing", "Hardening + patching", "Monitoring + incident response"],
-      process: ["Assess", "Remediate", "Validate", "Monitor"],
-      results: ["0 critical findings post-remediation", "42% reduction in attack surface", "24/7 monitoring setup"],
-      pricing: ["Audit $4k", "Protect $2.5k/mo", "Enterprise custom"],
-    },
-    "website-dev": {
-      title: "Websites That Convert",
-      subtitle: "Performance-first marketing sites built for speed, SEO, and measurable growth.",
-      outcomes: ["Higher conversion rates", "Faster page speed", "Modern, scalable design system"],
-      services: ["UX + content architecture", "Design + development", "SEO + performance tuning", "Analytics + A/B testing"],
-      process: ["Discover", "Design", "Build", "Launch", "Optimize"],
-      results: ["2.6x conversion lift", "90+ Lighthouse scores", "42% lower bounce rate"],
-      pricing: ["Launch $8k", "Growth $15k", "Scale custom"],
-    },
-    "custom-software": {
-      title: "Custom Software Systems",
-      subtitle: "Distributed systems, apps, and platforms engineered for reliability and growth.",
-      outcomes: ["Faster release cycles", "Lower defect rates", "Scalable architecture"],
-      services: ["Product discovery", "Design + build", "QA automation", "DevOps + monitoring"],
-      process: ["Discover", "Design", "Build", "Launch", "Optimize"],
-      results: ["3x faster load times", "40% fewer bugs", "2-week release cadence"],
-      pricing: ["MVP $18k", "Growth $35k", "Scale custom"],
-    },
-  }[serviceId];
-
-  if (!detail) return null;
-
-  return (
-      <div>
-        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(1200px 700px at 10% -10%, rgba(0,180,216,0.45), transparent 60%), linear-gradient(160deg, #03045E 0%, #0A2540 55%, #023E8A 100%)", color: "#fff" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
-            <h1 style={{ fontSize: "clamp(34px, 5vw, 64px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>{detail.title}</h1>
-            <p style={{ fontSize: 18, fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.6 }}>{detail.subtitle}</p>
-            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 28 }}>
-              <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #00B4D8, #0077B6)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(0,180,216,0.5)", border: "none", cursor: "pointer" }}>Schedule a Meeting</button>
-              <a href="#service-services" style={{ border: "1px solid rgba(255,255,255,0.35)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>Explore Services</a>
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 28 }}>
-              {detail.outcomes.map(o => (
-                  <span key={o} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{o}</span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-problem" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 36, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 20 }}>Common Challenges We Solve</h2>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-              {["Unclear priorities", "Inconsistent execution", "Lack of measurement", "Slow iteration cycles"].map(item => (
-                  <div key={item} style={{
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
-                    borderRadius: 20, padding: 22, border: "1.5px solid rgba(10,37,64,0.07)",
-                    boxShadow: "0 8px 28px rgba(10,37,64,0.08)", transition: "transform 0.25s, box-shadow 0.25s, border-color 0.25s"
-                  }}
-                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 18px 44px rgba(0,180,216,0.18)"; e.currentTarget.style.borderColor = "rgba(0,180,216,0.5)"; }}
-                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(10,37,64,0.08)"; e.currentTarget.style.borderColor = "rgba(10,37,64,0.07)"; }}
-                  >
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 8 }}>{item}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 14, lineHeight: 1.6 }}>We replace guesswork with a structured plan, clear deliverables, and measurable outcomes.</div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 34, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24 }}>Core Services</h2>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
-              {detail.services.map(s => (
-                  <div key={s} style={{
-                    borderRadius: 20, padding: 22,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
-                    border: "1.5px solid rgba(10,37,64,0.07)",
-                    boxShadow: "0 8px 28px rgba(10,37,64,0.08)", transition: "transform 0.25s, box-shadow 0.25s, border-color 0.25s"
-                  }}
-                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 18px 44px rgba(0,180,216,0.18)"; e.currentTarget.style.borderColor = "rgba(0,180,216,0.5)"; }}
-                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(10,37,64,0.08)"; e.currentTarget.style.borderColor = "rgba(10,37,64,0.07)"; }}
-                  >
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 8 }}>{s}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 14, lineHeight: 1.6 }}>Outcomes-focused execution with weekly reporting and clear next steps.</div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-method" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF3FF 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 34, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24 }}>Our Method</h2>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-              {detail.process.map((p, i) => (
-                  <div key={p} style={{
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
-                    borderRadius: 20, padding: 20, border: "1.5px solid rgba(10,37,64,0.07)",
-                    boxShadow: "0 8px 28px rgba(10,37,64,0.08)", transition: "transform 0.25s, box-shadow 0.25s, border-color 0.25s"
-                  }}
-                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 18px 44px rgba(0,180,216,0.18)"; e.currentTarget.style.borderColor = "rgba(0,180,216,0.5)"; }}
-                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(10,37,64,0.08)"; e.currentTarget.style.borderColor = "rgba(10,37,64,0.07)"; }}
-                  >
-                    <div style={{ fontSize: 12, fontFamily: "'DM Sans', sans-serif", color: "#00B4D8", fontWeight: 700, letterSpacing: "1px", marginBottom: 6 }}>STEP {String(i + 1).padStart(2, "0")}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 6 }}>{p}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 13, lineHeight: 1.6 }}>Clear deliverables and owners at every stage.</div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 34, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24 }}>Results Snapshot</h2>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-              {detail.results.map(r => (
-                  <div key={r} style={{
-                    padding: 22, borderRadius: 18,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
-                    border: "1px solid rgba(0,180,216,0.2)", boxShadow: "0 10px 28px rgba(0,0,0,0.25)"
-                  }}>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#00B4D8", fontSize: 20, marginBottom: 6 }}>{r}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13 }}>Representative outcomes from recent engagements.</div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 34, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24 }}>Pricing</h2>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
-              {detail.pricing.map(p => (
-                  <div key={p} style={{
-                    borderRadius: 20, padding: 22,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
-                    border: "1.5px solid rgba(10,37,64,0.07)",
-                    boxShadow: "0 8px 28px rgba(10,37,64,0.08)", transition: "transform 0.25s, box-shadow 0.25s, border-color 0.25s"
-                  }}
-                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 18px 44px rgba(0,180,216,0.18)"; e.currentTarget.style.borderColor = "rgba(0,180,216,0.5)"; }}
-                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(10,37,64,0.08)"; e.currentTarget.style.borderColor = "rgba(10,37,64,0.07)"; }}
-                  >
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{p}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.55)", fontSize: 13, lineHeight: 1.6 }}>Ideal for teams that need clear scope, accountability, and measurable results.</div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Contact />
-      </div>
-  );
+  if (serviceId === "social-media") return <SocialMediaMarketing onBack={onBack} onSchedule={onSchedule} />;
+  if (serviceId === "seo") return <SEOService onBack={onBack} onSchedule={onSchedule} />;
+  if (serviceId === "cybersecurity") return <CybersecurityService onBack={onBack} onSchedule={onSchedule} />;
+  if (serviceId === "website-dev") return <WebsiteDevService onBack={onBack} onSchedule={onSchedule} />;
+  if (serviceId === "custom-software") return <CustomSoftwareService onBack={onBack} onSchedule={onSchedule} />;
+  return null;
 }
 
-function SocialMediaMarketing({ onBack }) {
+function SocialMediaMarketing({ onBack, onSchedule }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -1979,7 +1815,7 @@ function SocialMediaMarketing({ onBack }) {
             <Reveal>
               <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Results Dashboard</h2>
             </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
               {[
                 { num: "+180%", label: "Engagement Growth" },
                 { num: "2.6x", label: "CTR Improvement" },
@@ -2141,6 +1977,864 @@ function SocialMediaMarketing({ onBack }) {
         </section>
 
         <Contact />
+      </div>
+  );
+}
+
+function SEOService({ onBack, onSchedule }) {
+  return (
+      <div>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(34,197,94,0.35), transparent 60%), radial-gradient(900px 600px at 88% 10%, rgba(14,165,233,0.2), transparent 55%), linear-gradient(150deg, #06283D 0%, #0B1F2E 50%, #0A2F4A 100%)", color: "#fff" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 style={{ fontSize: "clamp(36px, 5.5vw, 68px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>SEO That Compounds</h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.7 }}>
+                Technical excellence, content systems, and authority building that turn rankings into revenue.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 28 }}>
+                <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #22C55E, #0EA5E9)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(34,197,94,0.35)", border: "none", cursor: "pointer" }}>Schedule a Meeting</button>
+                <a href="#service-pillars" style={{ border: "1px solid rgba(255,255,255,0.35)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>See the pillars</a>
+                <a href="#service-process" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>View process</a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 28 }}>
+                {["Technical audit", "Content roadmap", "Authority growth", "Transparent reporting"].map(item => (
+                    <span key={item} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{item}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-pillars" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6FBFF 0%, #ECF6F1 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#22C55E", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Pillars</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>A Full-Stack SEO System</h2>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)", maxWidth: 560, margin: "12px auto 0" }}>
+                  We align technical foundations, content production, and authority signals to create long-term growth.
+                </div>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+              {[
+                { title: "Technical SEO", desc: "Crawlability, indexation, Core Web Vitals, and structured data fixes." },
+                { title: "Content & Topics", desc: "Keyword research, content clusters, briefs, and on-page optimization." },
+                { title: "Authority Building", desc: "Digital PR, link reclamation, and editorial outreach." },
+                { title: "Local + Global", desc: "Local SEO, international targeting, and multi-region performance." },
+              ].map((item, i) => (
+                  <Reveal key={item.title} delay={i * 0.08}>
+                    <div style={{
+                      borderRadius: 18, padding: 22,
+                      background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                      border: "1.5px solid rgba(10,37,64,0.07)",
+                      boxShadow: "0 8px 28px rgba(10,37,64,0.08)"
+                    }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{item.title}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.6 }}>{item.desc}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F1F7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Core SEO Services</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Technical Audit + Fixes", inc: "Crawl diagnostics, CWV, schema, index control", out: "Healthy, crawlable site" },
+                { name: "Content Strategy", inc: "Topic modeling, briefs, on-page optimization", out: "Ranked content that converts" },
+                { name: "Authority Growth", inc: "Digital PR, link outreach, reclaim", out: "Stronger domain authority" },
+                { name: "Local SEO", inc: "GBP optimization, citations, reviews", out: "Local visibility lift" },
+                { name: "International SEO", inc: "Hreflang, regional architecture", out: "Global reach without cannibalization" },
+                { name: "Analytics + Reporting", inc: "GA4, GSC, KPI dashboards", out: "Clear growth visibility" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{
+                      borderRadius: 20, padding: 22,
+                      background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                      border: "1.5px solid rgba(10,37,64,0.07)",
+                      boxShadow: "0 8px 28px rgba(10,37,64,0.08)"
+                    }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Includes: {item.inc}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>Outcome: {item.out}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-process" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF7F1 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#22C55E", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Process</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>From Audit to Compounding Growth</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
+              {["Audit", "Prioritize", "Implement", "Measure", "Iterate"].map((step, i) => (
+                  <Reveal key={step} delay={i * 0.08}>
+                    <div style={{
+                      borderRadius: 16, padding: 20,
+                      background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)",
+                      border: "1.5px solid rgba(10,37,64,0.07)",
+                      boxShadow: "0 8px 24px rgba(10,37,64,0.08)"
+                    }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#22C55E", marginBottom: 8 }}>0{i + 1}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540" }}>{step}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>SEO Wins That Compound</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Fintech Platform", lift: "+162% organic sessions", metric: "2.1x demo requests", focus: "Technical cleanup + content cluster build" },
+                { name: "Healthcare Network", lift: "+94% local visibility", metric: "38% call increase", focus: "Local SEO + GBP management" },
+                { name: "B2B SaaS", lift: "+128% keyword rankings", metric: "3.4x pipeline", focus: "Topical authority + link outreach" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 24, background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 12px 32px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>{item.focus}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#22C55E", marginBottom: 6 }}>{item.lift}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>{item.metric}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Performance Snapshot</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+              {[
+                { num: "+132%", label: "Organic Traffic" },
+                { num: "+48%", label: "CTR Lift" },
+                { num: "3.2x", label: "Keyword Growth" },
+                { num: "+64%", label: "Pipeline Impact" },
+              ].map((item, i) => (
+                  <Reveal key={item.label} delay={i * 0.08}>
+                    <div style={{ padding: 22, borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 28, color: "#22C55E", marginBottom: 8 }}>{item.num}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase" }}>{item.label}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-tools" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 20, textAlign: "center" }}>SEO Tool Stack</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                {["Google Search Console", "GA4", "Screaming Frog", "Ahrefs", "SEMrush", "Looker Studio", "SurferSEO", "PageSpeed Insights"].map(t => (
+                    <span key={t} style={{ padding: "10px 18px", borderRadius: 999, background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)", fontWeight: 500 }}>{t}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>SEO Engagements</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+              {[
+                { name: "Foundation", price: "From $1.5k/mo", who: "Technical + content fixes", items: ["Audit and backlog", "Quick wins", "Monthly report"] },
+                { name: "Growth", price: "From $3.5k/mo", who: "Content and authority", items: ["Content production", "Digital PR", "Bi-weekly reporting"] },
+                { name: "Scale", price: "Custom", who: "Enterprise search growth", items: ["Multi-region SEO", "Dedicated strategist", "Weekly syncs"] },
+              ].map((item, idx) => (
+                  <Reveal key={item.name} delay={idx * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 26, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 10px 34px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6, fontSize: 18 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 22, fontWeight: 800, color: "#22C55E", marginBottom: 10 }}>{item.price}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>{item.who}</div>
+                      <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
+                        {item.items.map(i => <li key={i}>{i}</li>)}
+                      </ul>
+                      <button type="button" onClick={() => onSchedule?.()} style={{ display: "inline-block", marginTop: 16, color: "#0A2540", textDecoration: "none", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, background: "none", border: "none", cursor: "pointer", padding: 0 }}>Schedule a Meeting →</button>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section style={{ padding: "70px 5%", background: "linear-gradient(90deg, #0B1F2E, #0A2F4A)" }}>
+          <Reveal>
+            <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 8, letterSpacing: "-0.5px" }}>Ready to turn rankings into revenue?</h2>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 15 }}>Get a technical audit and growth roadmap within two weeks.</p>
+              </div>
+              <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #22C55E, #0EA5E9)", color: "#fff", textDecoration: "none", padding: "16px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(34,197,94,0.4)", flexShrink: 0, border: "none", cursor: "pointer" }}>Schedule a Meeting →</button>
+            </div>
+          </Reveal>
+        </section>
+      </div>
+  );
+}
+
+function CybersecurityService({ onBack, onSchedule }) {
+  return (
+      <div>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 15% -20%, rgba(45,212,191,0.25), transparent 60%), radial-gradient(900px 600px at 85% 0%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #071724 0%, #0B2238 55%, #0B2D4B 100%)", color: "#fff" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 style={{ fontSize: "clamp(36px, 5.5vw, 68px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>Security That Builds Trust</h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.7 }}>
+                Risk assessments, hardening, and monitoring that reduce exposure without slowing the business.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 28 }}>
+                <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #2DD4BF, #3B82F6)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(45,212,191,0.35)", border: "none", cursor: "pointer" }}>Schedule a Meeting</button>
+                <a href="#service-defend" style={{ border: "1px solid rgba(255,255,255,0.35)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>See the defenses</a>
+                <a href="#service-process" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>View process</a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 28 }}>
+                {["Risk assessment", "24/7 monitoring", "Incident response", "Compliance support"].map(item => (
+                    <span key={item} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{item}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-defend" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F5FAFF 0%, #ECF7F5 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Coverage</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Layered Defenses That Work Together</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+              {[
+                { title: "Assess", desc: "Vulnerability scans, penetration testing, and risk scoring." },
+                { title: "Harden", desc: "Configuration fixes, patching, and policy enforcement." },
+                { title: "Detect", desc: "SIEM, SOC monitoring, and threat hunting." },
+                { title: "Respond", desc: "Incident response playbooks and recovery." },
+              ].map((item, i) => (
+                  <Reveal key={item.title} delay={i * 0.08}>
+                    <div style={{ borderRadius: 18, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{item.title}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.6 }}>{item.desc}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F1F7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Core Security Services</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Risk Assessment", inc: "Asset inventory, threat modeling, gap analysis", out: "Prioritized remediation plan" },
+                { name: "Vulnerability Management", inc: "Scanning, patch planning, validation", out: "Reduced attack surface" },
+                { name: "Managed Detection + Response", inc: "SOC monitoring, alert triage, hunting", out: "24/7 visibility" },
+                { name: "Incident Response", inc: "Playbooks, containment, recovery", out: "Faster MTTR" },
+                { name: "Compliance Support", inc: "Policy mapping, evidence, readiness", out: "Audit-ready posture" },
+                { name: "Security Training", inc: "Phishing simulations, awareness", out: "Lower human risk" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Includes: {item.inc}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>Outcome: {item.out}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-process" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF7F1 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Process</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Assess, Secure, Monitor</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
+              {["Discover", "Harden", "Monitor", "Respond", "Improve"].map((step, i) => (
+                  <Reveal key={step} delay={i * 0.08}>
+                    <div style={{ borderRadius: 16, padding: 20, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 24px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#2DD4BF", marginBottom: 8 }}>0{i + 1}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540" }}>{step}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Risk Reduced, Trust Increased</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Fintech Compliance", lift: "0 critical gaps", metric: "ISO readiness in 8 weeks", focus: "Policy mapping + remediation" },
+                { name: "Healthcare Network", lift: "58% risk reduction", metric: "24/7 monitoring", focus: "SOC + endpoint hardening" },
+                { name: "SaaS Platform", lift: "3.1x faster response", metric: "IR playbooks", focus: "Incident response overhaul" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 24, background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 12px 32px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>{item.focus}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#2DD4BF", marginBottom: 6 }}>{item.lift}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>{item.metric}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Security KPIs</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+              {[
+                { num: "60%", label: "Attack Surface Reduction" },
+                { num: "24/7", label: "Monitoring Coverage" },
+                { num: "3x", label: "Faster MTTR" },
+                { num: "0", label: "Critical Findings" },
+              ].map((item, i) => (
+                  <Reveal key={item.label} delay={i * 0.08}>
+                    <div style={{ padding: 22, borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 28, color: "#2DD4BF", marginBottom: 8 }}>{item.num}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase" }}>{item.label}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-tools" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 20, textAlign: "center" }}>Security Tooling</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                {["CrowdStrike", "SentinelOne", "Splunk", "Microsoft Defender", "AWS Security Hub", "Okta", "Wazuh", "Tenable"].map(t => (
+                    <span key={t} style={{ padding: "10px 18px", borderRadius: 999, background: "rgba(45,212,191,0.08)", border: "1px solid rgba(45,212,191,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)", fontWeight: 500 }}>{t}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Security Engagements</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+              {[
+                { name: "Assessment", price: "From $4k", who: "Risk baseline", items: ["Vulnerability scan", "Risk report", "90-day plan"] },
+                { name: "Protect", price: "From $2.5k/mo", who: "Monitoring + hardening", items: ["Endpoint protection", "SOC alerts", "Monthly review"] },
+                { name: "Enterprise", price: "Custom", who: "High compliance needs", items: ["IR retainers", "Compliance support", "24/7 SOC"] },
+              ].map((item, idx) => (
+                  <Reveal key={item.name} delay={idx * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 26, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 10px 34px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6, fontSize: 18 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 22, fontWeight: 800, color: "#2DD4BF", marginBottom: 10 }}>{item.price}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>{item.who}</div>
+                      <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
+                        {item.items.map(i => <li key={i}>{i}</li>)}
+                      </ul>
+                      <button type="button" onClick={() => onSchedule?.()} style={{ display: "inline-block", marginTop: 16, color: "#0A2540", textDecoration: "none", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, background: "none", border: "none", cursor: "pointer", padding: 0 }}>Schedule a Meeting →</button>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section style={{ padding: "70px 5%", background: "linear-gradient(90deg, #0B2238, #0B2D4B)" }}>
+          <Reveal>
+            <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 8, letterSpacing: "-0.5px" }}>Ready to reduce risk fast?</h2>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 15 }}>Get a security posture review and a prioritized remediation plan.</p>
+              </div>
+              <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #2DD4BF, #3B82F6)", color: "#fff", textDecoration: "none", padding: "16px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(45,212,191,0.4)", flexShrink: 0, border: "none", cursor: "pointer" }}>Schedule a Meeting →</button>
+            </div>
+          </Reveal>
+        </section>
+      </div>
+  );
+}
+
+function WebsiteDevService({ onBack, onSchedule }) {
+  return (
+      <div>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 10% -20%, rgba(251,146,60,0.3), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #2A103B 0%, #1E1B4B 52%, #1E293B 100%)", color: "#fff" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 style={{ fontSize: "clamp(36px, 5.5vw, 68px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>Websites That Convert</h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.7 }}>
+                High-performance marketing sites that pair brand storytelling with conversion-focused UX.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 28 }}>
+                <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #FB923C, #3B82F6)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(251,146,60,0.35)", border: "none", cursor: "pointer" }}>Schedule a Meeting</button>
+                <a href="#service-offer" style={{ border: "1px solid rgba(255,255,255,0.35)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>See what we build</a>
+                <a href="#service-process" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>View process</a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 28 }}>
+                {["UX strategy", "Brand design", "Performance engineering", "SEO ready"].map(item => (
+                    <span key={item} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{item}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-offer" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FDF7F0 0%, #EEF4FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#FB923C", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Offer</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Strategy, Design, Build, Optimize</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+              {[
+                { title: "UX + CRO", desc: "Journey mapping, wireframes, conversion testing." },
+                { title: "Visual Design", desc: "Brand system, UI kit, storytelling." },
+                { title: "Development", desc: "Modern stacks, CMS builds, integrations." },
+                { title: "Performance", desc: "Core Web Vitals, SEO, analytics." },
+              ].map((item, i) => (
+                  <Reveal key={item.title} delay={i * 0.08}>
+                    <div style={{ borderRadius: 18, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{item.title}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.6 }}>{item.desc}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F1F7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Web Development Services</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Marketing Websites", inc: "Copy, design, build", out: "Launch-ready site" },
+                { name: "Ecommerce", inc: "Storefronts, checkout, integrations", out: "Higher conversion rate" },
+                { name: "CMS Builds", inc: "Custom CMS, content workflows", out: "Fast content updates" },
+                { name: "Landing Pages", inc: "Campaign pages, A/B testing", out: "Better ROAS" },
+                { name: "Performance Tune-ups", inc: "CWV, accessibility, SEO", out: "Improved rankings" },
+                { name: "Analytics Setup", inc: "GA4, tag manager, dashboards", out: "Measurable growth" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Includes: {item.inc}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>Outcome: {item.out}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-process" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF7F1 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#FB923C", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Process</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>From Strategy to Launch</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
+              {["Discover", "Design", "Build", "Launch", "Optimize"].map((step, i) => (
+                  <Reveal key={step} delay={i * 0.08}>
+                    <div style={{ borderRadius: 16, padding: 20, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 24px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#FB923C", marginBottom: 8 }}>0{i + 1}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540" }}>{step}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Launches That Convert</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "SaaS Rebrand", lift: "2.4x conversion rate", metric: "35% faster load", focus: "UX overhaul + performance" },
+                { name: "B2B Services", lift: "+48% form fills", metric: "A/B landing pages", focus: "CRO + messaging" },
+                { name: "Ecommerce", lift: "+28% AOV", metric: "Checkout redesign", focus: "UX + analytics" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 24, background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 12px 32px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>{item.focus}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#FB923C", marginBottom: 6 }}>{item.lift}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>{item.metric}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Performance Metrics</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+              {[
+                { num: "90+", label: "Lighthouse Scores" },
+                { num: "2.1x", label: "Conversion Lift" },
+                { num: "-40%", label: "Bounce Rate" },
+                { num: "1.8s", label: "Load Time" },
+              ].map((item, i) => (
+                  <Reveal key={item.label} delay={i * 0.08}>
+                    <div style={{ padding: 22, borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 28, color: "#FB923C", marginBottom: 8 }}>{item.num}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase" }}>{item.label}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-tools" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 20, textAlign: "center" }}>Web Stack</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                {["React", "Vite", "Next.js", "Webflow", "Storyblok", "Sanity", "GA4", "Hotjar"].map(t => (
+                    <span key={t} style={{ padding: "10px 18px", borderRadius: 999, background: "rgba(251,146,60,0.08)", border: "1px solid rgba(251,146,60,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)", fontWeight: 500 }}>{t}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Website Engagements</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+              {[
+                { name: "Launch", price: "From $8k", who: "New site build", items: ["Strategy + design", "Development", "Launch support"] },
+                { name: "Growth", price: "From $15k", who: "Conversion optimization", items: ["CRO testing", "Performance fixes", "Analytics"] },
+                { name: "Scale", price: "Custom", who: "Multi-site programs", items: ["Global rollouts", "Design system", "Ongoing optimization"] },
+              ].map((item, idx) => (
+                  <Reveal key={item.name} delay={idx * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 26, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 10px 34px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6, fontSize: 18 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 22, fontWeight: 800, color: "#FB923C", marginBottom: 10 }}>{item.price}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>{item.who}</div>
+                      <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
+                        {item.items.map(i => <li key={i}>{i}</li>)}
+                      </ul>
+                      <button type="button" onClick={() => onSchedule?.()} style={{ display: "inline-block", marginTop: 16, color: "#0A2540", textDecoration: "none", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, background: "none", border: "none", cursor: "pointer", padding: 0 }}>Schedule a Meeting →</button>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section style={{ padding: "70px 5%", background: "linear-gradient(90deg, #1E1B4B, #1E293B)" }}>
+          <Reveal>
+            <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 8, letterSpacing: "-0.5px" }}>Ready to ship a site that sells?</h2>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 15 }}>We can deliver a launch plan and timeline in under a week.</p>
+              </div>
+              <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #FB923C, #3B82F6)", color: "#fff", textDecoration: "none", padding: "16px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(251,146,60,0.4)", flexShrink: 0, border: "none", cursor: "pointer" }}>Schedule a Meeting →</button>
+            </div>
+          </Reveal>
+        </section>
+      </div>
+  );
+}
+
+function CustomSoftwareService({ onBack, onSchedule }) {
+  return (
+      <div>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(245,158,11,0.28), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(16,185,129,0.2), transparent 55%), linear-gradient(150deg, #111827 0%, #0F172A 50%, #1F2937 100%)", color: "#fff" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 style={{ fontSize: "clamp(36px, 5.5vw, 68px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>Custom Software Systems</h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.7 }}>
+                Build reliable platforms, internal tools, and apps that scale with your growth.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 28 }}>
+                <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #F59E0B, #10B981)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(245,158,11,0.35)", border: "none", cursor: "pointer" }}>Schedule a Meeting</button>
+                <a href="#service-offer" style={{ border: "1px solid rgba(255,255,255,0.35)", color: "#fff", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>See what we build</a>
+                <a href="#service-process" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none", padding: "14px 26px", borderRadius: 10, fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>View process</a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 28 }}>
+                {["Product discovery", "Scalable architecture", "DevOps", "Continuous delivery"].map(item => (
+                    <span key={item} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{item}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-offer" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFBF2 0%, #ECFDF5 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#F59E0B", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Capability</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>End-to-End Product Delivery</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+              {[
+                { title: "Discovery", desc: "Workshops, user research, roadmap." },
+                { title: "Design", desc: "UX flows, UI systems, prototypes." },
+                { title: "Build", desc: "Full-stack development, QA." },
+                { title: "Scale", desc: "DevOps, monitoring, optimization." },
+              ].map((item, i) => (
+                  <Reveal key={item.title} delay={i * 0.08}>
+                    <div style={{ borderRadius: 18, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{item.title}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.6 }}>{item.desc}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F1F7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Custom Software Services</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Product Discovery", inc: "Workshops, PRDs, roadmap", out: "Aligned product scope" },
+                { name: "MVP Builds", inc: "Design, development, QA", out: "Launch-ready MVP" },
+                { name: "Platform Engineering", inc: "APIs, microservices, infra", out: "Scalable architecture" },
+                { name: "Data + Automation", inc: "Pipelines, integrations", out: "Operational efficiency" },
+                { name: "DevOps + SRE", inc: "CI/CD, monitoring", out: "Reliable deployments" },
+                { name: "Ongoing Support", inc: "Maintenance, improvements", out: "Stable product growth" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>Includes: {item.inc}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>Outcome: {item.out}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-process" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #F6F9FF 0%, #EDF7F1 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <span style={{ color: "#F59E0B", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Process</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Discovery to Delivery</h2>
+              </div>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
+              {["Discover", "Design", "Build", "Ship", "Scale"].map((step, i) => (
+                  <Reveal key={step} delay={i * 0.08}>
+                    <div style={{ borderRadius: 16, padding: 20, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 24px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#F59E0B", marginBottom: 8 }}>0{i + 1}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540" }}>{step}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF7FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Software That Moves the Needle</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+              {[
+                { name: "Logistics Platform", lift: "42% faster dispatch", metric: "Realtime routing", focus: "System re-architecture" },
+                { name: "Fintech Workflow", lift: "3x faster onboarding", metric: "Automated KYC", focus: "Process automation" },
+                { name: "SaaS Modernization", lift: "2x release speed", metric: "CI/CD overhaul", focus: "DevOps and QA" },
+              ].map((item, i) => (
+                  <Reveal key={item.name} delay={i * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 24, background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 12px 32px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>{item.focus}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#F59E0B", marginBottom: 6 }}>{item.lift}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>{item.metric}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Delivery Metrics</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+              {[
+                { num: "2x", label: "Release Velocity" },
+                { num: "-35%", label: "Operational Cost" },
+                { num: "99.9%", label: "Uptime" },
+                { num: "6-12", label: "Week MVP" },
+              ].map((item, i) => (
+                  <Reveal key={item.label} delay={i * 0.08}>
+                    <div style={{ padding: 22, borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 28, color: "#F59E0B", marginBottom: 8 }}>{item.num}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase" }}>{item.label}</div>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="service-tools" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 20, textAlign: "center" }}>Engineering Stack</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                {["Node.js", "TypeScript", "PostgreSQL", "Redis", "AWS", "Docker", "Kubernetes", "GitHub Actions"].map(t => (
+                    <span key={t} style={{ padding: "10px 18px", borderRadius: 999, background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)", fontWeight: 500 }}>{t}</span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <Reveal>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Software Engagements</h2>
+            </Reveal>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+              {[
+                { name: "MVP", price: "From $18k", who: "Validate fast", items: ["Discovery sprint", "MVP build", "Launch support"] },
+                { name: "Growth", price: "From $35k", who: "Scale features", items: ["Dedicated squad", "QA automation", "Monthly releases"] },
+                { name: "Scale", price: "Custom", who: "Enterprise buildouts", items: ["Architecture overhaul", "Security reviews", "24/7 support"] },
+              ].map((item, idx) => (
+                  <Reveal key={item.name} delay={idx * 0.08}>
+                    <div style={{ borderRadius: 20, padding: 26, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 10px 34px rgba(10,37,64,0.08)" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6, fontSize: 18 }}>{item.name}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 22, fontWeight: 800, color: "#F59E0B", marginBottom: 10 }}>{item.price}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>{item.who}</div>
+                      <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
+                        {item.items.map(i => <li key={i}>{i}</li>)}
+                      </ul>
+                      <button type="button" onClick={() => onSchedule?.()} style={{ display: "inline-block", marginTop: 16, color: "#0A2540", textDecoration: "none", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, background: "none", border: "none", cursor: "pointer", padding: 0 }}>Schedule a Meeting →</button>
+                    </div>
+                  </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section style={{ padding: "70px 5%", background: "linear-gradient(90deg, #0F172A, #1F2937)" }}>
+          <Reveal>
+            <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 8, letterSpacing: "-0.5px" }}>Ready to build with confidence?</h2>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 15 }}>We can scope your product and propose a roadmap in 10 days.</p>
+              </div>
+              <button type="button" onClick={() => onSchedule?.()} style={{ background: "linear-gradient(90deg, #F59E0B, #10B981)", color: "#fff", textDecoration: "none", padding: "16px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 32px rgba(245,158,11,0.4)", flexShrink: 0, border: "none", cursor: "pointer" }}>Schedule a Meeting →</button>
+            </div>
+          </Reveal>
+        </section>
       </div>
   );
 }
