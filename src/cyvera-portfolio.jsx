@@ -103,9 +103,11 @@ const testimonials = [
 const clients = ["NovaPay", "ShieldNet", "Orion Labs", "Zenith Digital", "Bloom Brands", "Apex Tech", "NovaFlow", "Stratos IO", "Pulsar Media"];
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
-function Navbar({ isDetail = false, onHome, onSchedule }) {
+function Navbar({ isDetail = false, onHome, onSchedule, onSelectService }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesCloseTimer = useRef(null);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", h);
@@ -120,10 +122,34 @@ function Navbar({ isDetail = false, onHome, onSchedule }) {
     { label: "Contact", href: "#contact" },
   ];
 
+  const serviceLinks = [
+    { id: "social-media", label: "Social Media & Branding" },
+    { id: "seo", label: "Search Engine Optimization" },
+    { id: "cybersecurity", label: "Cybersecurity & Digital Forensics" },
+    { id: "website-dev", label: "Website Development" },
+    { id: "custom-software", label: "Custom Software" },
+  ];
+
   const handleNavClick = (e, href) => {
     if (!isDetail) return;
     e.preventDefault();
     onHome?.(href);
+  };
+
+  const openServicesMenu = () => {
+    if (servicesCloseTimer.current) {
+      clearTimeout(servicesCloseTimer.current);
+      servicesCloseTimer.current = null;
+    }
+    setServicesOpen(true);
+  };
+
+  const closeServicesMenu = () => {
+    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    servicesCloseTimer.current = setTimeout(() => {
+      setServicesOpen(false);
+      servicesCloseTimer.current = null;
+    }, 160);
   };
 
   return (
@@ -149,16 +175,77 @@ function Navbar({ isDetail = false, onHome, onSchedule }) {
           </a>
 
           <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="desktop-nav">
-            {navLinks.map(l => (
-                <a key={l.label} href={l.href} onClick={(e) => handleNavClick(e, l.href)} style={{
-                  color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: 14,
-                  fontWeight: 500, fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.3px",
-                  transition: "color 0.2s"
-                }}
-                   onMouseEnter={e => e.target.style.color = "#00B4D8"}
-                   onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.7)"}
-                >{l.label}</a>
-            ))}
+            {navLinks.map(l => {
+              if (l.label !== "Services") {
+                return (
+                    <a key={l.label} href={l.href} onClick={(e) => handleNavClick(e, l.href)} style={{
+                      color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: 14,
+                      fontWeight: 500, fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.3px",
+                      transition: "color 0.2s"
+                    }}
+                       onMouseEnter={e => e.target.style.color = "#00B4D8"}
+                       onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.7)"}
+                    >{l.label}</a>
+                );
+              }
+
+              return (
+                  <div key={l.label} style={{ position: "relative" }}
+                       onMouseEnter={openServicesMenu}
+                       onMouseLeave={closeServicesMenu}
+                  >
+                    <a href={l.href} onClick={(e) => handleNavClick(e, l.href)} style={{
+                      color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: 14,
+                      fontWeight: 500, fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.3px",
+                      transition: "color 0.2s"
+                    }}
+                       onMouseEnter={e => e.target.style.color = "#00B4D8"}
+                       onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.7)"}
+                    >Services</a>
+                    <div style={{
+                      position: "absolute",
+                      top: "calc(100% + 14px)",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      minWidth: 240,
+                      padding: 12,
+                      borderRadius: 16,
+                      background: "rgba(6,22,41,0.95)",
+                      border: "1px solid rgba(0,180,216,0.2)",
+                      boxShadow: "0 18px 45px rgba(0,0,0,0.35)",
+                      display: servicesOpen ? "grid" : "none",
+                      gap: 6
+                    }}
+                    onMouseEnter={openServicesMenu}
+                    onMouseLeave={closeServicesMenu}
+                    >
+                      {serviceLinks.map((service) => (
+                          <button key={service.id} type="button"
+                                  onClick={() => {
+                                    setServicesOpen(false);
+                                    onSelectService?.(service.id);
+                                  }}
+                                  style={{
+                                    textAlign: "left",
+                                    background: "transparent",
+                                    border: "none",
+                                    color: "rgba(255,255,255,0.8)",
+                                    padding: "10px 12px",
+                                    borderRadius: 10,
+                                    fontFamily: "'DM Sans', sans-serif",
+                                    fontSize: 13,
+                                    cursor: "pointer"
+                                  }}
+                                  onMouseEnter={e => e.currentTarget.style.background = "rgba(0,180,216,0.18)"}
+                                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                          >
+                            {service.label}
+                          </button>
+                      ))}
+                    </div>
+                  </div>
+              );
+            })}
             <button type="button" onClick={() => onSchedule?.()} style={{
               background: "linear-gradient(90deg, #00B4D8, #0077B6)",
               color: "#fff", textDecoration: "none", padding: "10px 22px",
@@ -185,6 +272,27 @@ function Navbar({ isDetail = false, onHome, onSchedule }) {
                      style={{ display: "block", color: "rgba(255,255,255,0.85)", textDecoration: "none", padding: "12px 0", fontSize: 16, fontFamily: "'DM Sans', sans-serif", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
                   >{l.label}</a>
               ))}
+              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, letterSpacing: "1px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", marginBottom: 8 }}>Services</div>
+                {serviceLinks.map((service) => (
+                    <button key={service.id} type="button"
+                            onClick={() => { setMenuOpen(false); onSelectService?.(service.id); }}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              background: "transparent",
+                              border: "none",
+                              color: "rgba(255,255,255,0.85)",
+                              padding: "10px 0",
+                              fontSize: 15,
+                              fontFamily: "'DM Sans', sans-serif",
+                              cursor: "pointer"
+                            }}
+                    >
+                      {service.label}
+                    </button>
+                ))}
+              </div>
             </div>
         )}
 
@@ -2873,7 +2981,12 @@ export default function CyveraPortfolio() {
 
   return (
       <div>
-        <Navbar isDetail={isDetail} onHome={goHome} onSchedule={openScheduler} />
+        <Navbar
+          isDetail={isDetail}
+          onHome={goHome}
+          onSchedule={openScheduler}
+          onSelectService={(serviceId) => setView(serviceId)}
+        />
         <main>
           {view === "home" ? (
               <>
