@@ -136,13 +136,7 @@ function Navbar({ isDetail = false, onHome, onSchedule }) {
       }}>
         <nav style={{ maxWidth: 1200, margin: "0 auto", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <a href="#home" onClick={(e) => handleNavClick(e, "#home")} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <div style={{
-              width: 38, height: 38, borderRadius: 10,
-              background: "linear-gradient(135deg, #00B4D8, #0077B6)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 19, fontWeight: 900, color: "#fff", fontFamily: "'DM Sans', sans-serif",
-              boxShadow: "0 0 20px rgba(0,180,216,0.4)"
-            }}>C</div>
+            <img src="/logo-without-name.png" alt="Cyvera" style={{ width: 38, height: 38, display: "block" }} />
             <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif", letterSpacing: "-0.5px" }}>Cyvera</span>
           </a>
 
@@ -1461,7 +1455,7 @@ function Footer() {
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }} className="footer-grid">
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 9, background: "linear-gradient(135deg, #00B4D8, #0077B6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 17, fontWeight: 900, color: "#fff", fontFamily: "'DM Sans', sans-serif", boxShadow: "0 0 18px rgba(0,180,216,0.4)" }}>C</div>
+                <img src="/logo-without-name.png" alt="Cyvera" style={{ width: 36, height: 36, display: "block" }} />
                 <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>Cyvera</span>
               </div>
               <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, maxWidth: 260 }}>Your end-to-end digital partner — from identity to infrastructure.</p>
