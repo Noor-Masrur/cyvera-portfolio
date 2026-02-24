@@ -136,7 +136,15 @@ function Navbar({ isDetail = false, onHome, onSchedule }) {
       }}>
         <nav style={{ maxWidth: 1200, margin: "0 auto", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <a href="#home" onClick={(e) => handleNavClick(e, "#home")} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <img src="/logo-without-name.png" alt="Cyvera" style={{ width: 38, height: 38, display: "block" }} />
+            <span style={{
+              width: 38, height: 38, borderRadius: 10,
+              background: "linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.78))",
+              border: "1px solid rgba(255,255,255,0.35)",
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              boxShadow: "0 6px 18px rgba(0,0,0,0.25)"
+            }}>
+              <img src="/logo-without-name.png" alt="Cyvera" style={{ height: 26, width: "auto", display: "block" }} />
+            </span>
             <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif", letterSpacing: "-0.5px" }}>Cyvera</span>
           </a>
 
@@ -1455,7 +1463,15 @@ function Footer() {
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }} className="footer-grid">
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <img src="/logo-without-name.png" alt="Cyvera" style={{ width: 36, height: 36, display: "block" }} />
+                <span style={{
+                  width: 36, height: 36, borderRadius: 9,
+                  background: "linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.78))",
+                  border: "1px solid rgba(255,255,255,0.35)",
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 6px 18px rgba(0,0,0,0.25)"
+                }}>
+                  <img src="/logo-without-name.png" alt="Cyvera" style={{ height: 24, width: "auto", display: "block" }} />
+                </span>
                 <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>Cyvera</span>
               </div>
               <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, maxWidth: 260 }}>Your end-to-end digital partner — from identity to infrastructure.</p>
