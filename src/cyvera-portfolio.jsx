@@ -2202,7 +2202,7 @@ function SEOService({ onBack, onSchedule }) {
                 </div>
               </div>
             </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
               {[
                 { title: "Technical SEO", desc: "Crawlability, indexation, Core Web Vitals, and structured data fixes." },
                 { title: "Content & Topics", desc: "Keyword research, content clusters, briefs, and on-page optimization." },
@@ -2398,8 +2398,8 @@ function CybersecurityService({ onBack, onSchedule }) {
               <h1 style={{ fontSize: "clamp(36px, 5.5vw, 68px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, marginBottom: 16, letterSpacing: "-1px" }}>Security That Builds Trust</h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.7 }}>
-                Risk assessments, hardening, and monitoring that reduce exposure without slowing the business.
+              <p style={{ fontSize: "clamp(16px, 2vw, 20px)", fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.7)", maxWidth: 680, lineHeight: 1.7 }}>
+                Zero-trust security programs that combine offensive testing, resilient architecture, and 24/7 monitoring.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -2411,7 +2411,7 @@ function CybersecurityService({ onBack, onSchedule }) {
             </Reveal>
             <Reveal delay={0.2}>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 28 }}>
-                {["Risk assessment", "24/7 monitoring", "Incident response", "Compliance support"].map(item => (
+                {["Penetration testing", "Incident response", "DevSecOps", "24/7 SOC", "Zero Trust"].map(item => (
                     <span key={item} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{item}</span>
                 ))}
               </div>
@@ -2423,41 +2423,49 @@ function CybersecurityService({ onBack, onSchedule }) {
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 28 }}>
-                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Coverage</span>
-                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Layered Defenses That Work Together</h2>
+                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Capabilities</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Core Cybersecurity Capabilities</h2>
               </div>
             </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+            <div className="service-grid cyber-cap-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18, alignItems: "stretch" }}>
               {[
-                { title: "Assess", desc: "Vulnerability scans, penetration testing, and risk scoring." },
-                { title: "Harden", desc: "Configuration fixes, patching, and policy enforcement." },
-                { title: "Detect", desc: "SIEM, SOC monitoring, and threat hunting." },
-                { title: "Respond", desc: "Incident response playbooks and recovery." },
+                { title: "Advanced Penetration Testing", desc: "Real-world attack simulations and exploit validation." },
+                { title: "Incident Response & Breach Recovery", desc: "Containment, forensics, and rapid restoration." },
+                { title: "Secure Software Development", desc: "Zero-vulnerability approach from design to release." },
+                { title: "DevSecOps Implementation", desc: "Security embedded into CI/CD and delivery workflows." },
+                { title: "Managed SOC (24/7 Monitoring)", desc: "Continuous detection, triage, and threat hunting." },
+                { title: "Continuous Vulnerability & Patch Mgmt", desc: "Prioritized remediation and verification cycles." },
+                { title: "Dependency & Patch Management", desc: "Supply chain hardening and library hygiene." },
+                { title: "Risk Management & Governance", desc: "Policies, controls, and compliance readiness." },
+                { title: "Security Awareness & Training", desc: "Role-based training and phishing resilience." },
               ].map((item, i) => (
                   <Reveal key={item.title} delay={i * 0.08}>
-                    <div style={{ borderRadius: 18, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
+                    <div style={{ borderRadius: 18, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)", height: "100%", minHeight: 168, display: "flex", flexDirection: "column" }}>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 10 }}>{item.title}</div>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.6 }}>{item.desc}</div>
                     </div>
                   </Reveal>
               ))}
             </div>
+            <style>{`
+              .cyber-cap-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+              @media (max-width: 900px) { .cyber-cap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+              @media (max-width: 600px) { .cyber-cap-grid { grid-template-columns: 1fr !important; } }
+            `}</style>
           </div>
         </section>
 
         <section id="service-services" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F1F7FF 100%)" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Core Security Services</h2>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Security Architecture</h2>
             </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 18 }}>
               {[
-                { name: "Risk Assessment", inc: "Asset inventory, threat modeling, gap analysis", out: "Prioritized remediation plan" },
-                { name: "Vulnerability Management", inc: "Scanning, patch planning, validation", out: "Reduced attack surface" },
-                { name: "Managed Detection + Response", inc: "SOC monitoring, alert triage, hunting", out: "24/7 visibility" },
-                { name: "Incident Response", inc: "Playbooks, containment, recovery", out: "Faster MTTR" },
-                { name: "Compliance Support", inc: "Policy mapping, evidence, readiness", out: "Audit-ready posture" },
-                { name: "Security Training", inc: "Phishing simulations, awareness", out: "Lower human risk" },
+                { name: "Zero Trust Architecture (ZTA)", inc: "Identity-first access, continuous verification", out: "Reduced lateral movement" },
+                { name: "Defense-in-Depth Architecture", inc: "Layered controls across network, app, and data", out: "Resilient security posture" },
+                { name: "Secure Cloud Architecture", inc: "Hardened cloud baselines and monitoring", out: "Confident cloud operations" },
+                { name: "DevSecOps Architecture", inc: "Security gates and policy-as-code", out: "Faster, safer releases" },
               ].map((item, i) => (
                   <Reveal key={item.name} delay={i * 0.08}>
                     <div style={{ borderRadius: 20, padding: 22, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 28px rgba(10,37,64,0.08)" }}>
@@ -2475,63 +2483,21 @@ function CybersecurityService({ onBack, onSchedule }) {
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 28 }}>
-                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Process</span>
-                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Assess, Secure, Monitor</h2>
+                <span style={{ color: "#2DD4BF", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "2px", textTransform: "uppercase" }}>Team</span>
+                <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginTop: 10 }}>Core Team Structure</h2>
               </div>
             </Reveal>
             <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
-              {["Discover", "Harden", "Monitor", "Respond", "Improve"].map((step, i) => (
-                  <Reveal key={step} delay={i * 0.08}>
+              {[
+                { title: "Offensive Security", desc: "Red Team testing and adversary emulation." },
+                { title: "Defensive Security", desc: "Blue Team / SOC detection and response." },
+                { title: "DevSecOps & Secure Engineering", desc: "Secure build pipelines and code hardening." },
+              ].map((step, i) => (
+                  <Reveal key={step.title} delay={i * 0.08}>
                     <div style={{ borderRadius: 16, padding: 20, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 8px 24px rgba(10,37,64,0.08)" }}>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#2DD4BF", marginBottom: 8 }}>0{i + 1}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540" }}>{step}</div>
-                    </div>
-                  </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-cases" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #EFF7FF 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <Reveal>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Risk Reduced, Trust Increased</h2>
-            </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
-              {[
-                { name: "Fintech Compliance", lift: "0 critical gaps", metric: "ISO readiness in 8 weeks", focus: "Policy mapping + remediation" },
-                { name: "Healthcare Network", lift: "58% risk reduction", metric: "24/7 monitoring", focus: "SOC + endpoint hardening" },
-                { name: "SaaS Platform", lift: "3.1x faster response", metric: "IR playbooks", focus: "Incident response overhaul" },
-              ].map((item, i) => (
-                  <Reveal key={item.name} delay={i * 0.08}>
-                    <div style={{ borderRadius: 20, padding: 24, background: "linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 12px 32px rgba(10,37,64,0.08)" }}>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 8 }}>{item.name}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 10 }}>{item.focus}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#2DD4BF", marginBottom: 6 }}>{item.lift}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)" }}>{item.metric}</div>
-                    </div>
-                  </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-results" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #0A2540 0%, #071B39 100%)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <Reveal>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#fff", marginBottom: 24, textAlign: "center" }}>Security KPIs</h2>
-            </Reveal>
-            <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-              {[
-                { num: "60%", label: "Attack Surface Reduction" },
-                { num: "24/7", label: "Monitoring Coverage" },
-                { num: "3x", label: "Faster MTTR" },
-                { num: "0", label: "Critical Findings" },
-              ].map((item, i) => (
-                  <Reveal key={item.label} delay={i * 0.08}>
-                    <div style={{ padding: 22, borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 28, color: "#2DD4BF", marginBottom: 8 }}>{item.num}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase" }}>{item.label}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, color: "#0A2540", marginBottom: 6 }}>{step.title}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(10,37,64,0.6)" }}>{step.desc}</div>
                     </div>
                   </Reveal>
               ))}
@@ -2546,7 +2512,7 @@ function CybersecurityService({ onBack, onSchedule }) {
             </Reveal>
             <Reveal delay={0.1}>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
-                {["CrowdStrike", "SentinelOne", "Splunk", "Microsoft Defender", "AWS Security Hub", "Okta", "Wazuh", "Tenable"].map(t => (
+                {["Burp Suite", "Metasploit", "Nessus", "OWASP ZAP", "Nmap", "Wireshark"].map(t => (
                     <span key={t} style={{ padding: "10px 18px", borderRadius: 999, background: "rgba(45,212,191,0.08)", border: "1px solid rgba(45,212,191,0.2)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.7)", fontWeight: 500 }}>{t}</span>
                 ))}
               </div>
@@ -2557,18 +2523,50 @@ function CybersecurityService({ onBack, onSchedule }) {
         <section id="service-pricing" style={{ padding: "90px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F4F8FF 100%)" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
-              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 24, textAlign: "center" }}>Security Engagements</h2>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 12, textAlign: "center" }}>Recent Work</h2>
+              <p style={{ textAlign: "center", fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.6)", marginBottom: 28 }}>
+                Anti-Cloneable NFC/RFID Technology (USPTO, 63/792,437)
+              </p>
             </Reveal>
             <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
               {[
-                { name: "Assessment", price: "From $4k", who: "Risk baseline", items: ["Vulnerability scan", "Risk report", "90-day plan"] },
-                { name: "Protect", price: "From $2.5k/mo", who: "Monitoring + hardening", items: ["Endpoint protection", "SOC alerts", "Monthly review"] },
-                { name: "Enterprise", price: "Custom", who: "High compliance needs", items: ["IR retainers", "Compliance support", "24/7 SOC"] },
+                {
+                  name: "Hardware Security",
+                  price: "Built from the chip level",
+                  who: "Secure identity by design",
+                  items: [
+                    "Secure chip embedded in both card & reader",
+                    "Hardware-based unique identity",
+                    "Tamper-resistant architecture",
+                    "No static UID dependency",
+                  ]
+                },
+                {
+                  name: "Smart Authentication",
+                  price: "Verified before any access",
+                  who: "Mutual trust handshake",
+                  items: [
+                    "Mutual chip-to-chip authentication",
+                    "Encrypted challenge–response protocol",
+                    "Dynamic session key on every tap",
+                    "Blocks replay & fake reader attacks",
+                  ]
+                },
+                {
+                  name: "Cloning Protection",
+                  price: "Patented security model",
+                  who: "Device-level enforcement",
+                  items: [
+                    "Communication only with authorized devices",
+                    "Instant rejection of unknown readers",
+                    "Impossible to duplicate without matching hardware",
+                  ]
+                },
               ].map((item, idx) => (
                   <Reveal key={item.name} delay={idx * 0.08}>
                     <div style={{ borderRadius: 20, padding: 26, background: "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,255,0.92) 100%)", border: "1.5px solid rgba(10,37,64,0.07)", boxShadow: "0 10px 34px rgba(10,37,64,0.08)" }}>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 6, fontSize: 18 }}>{item.name}</div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 22, fontWeight: 800, color: "#2DD4BF", marginBottom: 10 }}>{item.price}</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 800, color: "#2DD4BF", marginBottom: 10 }}>{item.price}</div>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", marginBottom: 12 }}>{item.who}</div>
                       <ul style={{ margin: 0, paddingLeft: 16, fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(10,37,64,0.6)", lineHeight: 1.7 }}>
                         {item.items.map(i => <li key={i}>{i}</li>)}
