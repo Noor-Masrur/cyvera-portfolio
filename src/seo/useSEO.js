@@ -53,30 +53,36 @@ export const SEO_CONFIGS = {
     title: "Social Media Marketing & Branding | Cyvera",
     description:
       "Positioning, content strategy, and performance systems that turn social attention into real revenue. Cyvera's social media experts deliver measurable growth.",
-    canonical: "https://cyvera.com.au/#social-media",
+    canonical: "https://cyvera.com.au/services/social-media",
   },
   seo: {
     title: "Search Engine Optimisation (SEO) Services | Cyvera",
     description:
       "Technical and content SEO that compounds your organic visibility and fills your pipeline. Data-driven strategies from Cyvera's SEO specialists.",
-    canonical: "https://cyvera.com.au/#seo",
+    canonical: "https://cyvera.com.au/services/seo",
   },
   cybersecurity: {
     title: "Cybersecurity & Digital Forensics | Cyvera",
     description:
       "Risk assessments, infrastructure hardening, and 24/7 monitoring for resilient business operations. Protect your digital assets with Cyvera.",
-    canonical: "https://cyvera.com.au/#cybersecurity",
+    canonical: "https://cyvera.com.au/services/cybersecurity",
   },
   "website-dev": {
     title: "Website Development | Cyvera",
     description:
       "High-performance marketing websites that convert visitors, load fast, and scale with your brand. Built by Cyvera's expert development team.",
-    canonical: "https://cyvera.com.au/#website-dev",
+    canonical: "https://cyvera.com.au/services/website-dev",
   },
   "custom-software": {
     title: "Custom Software Development | Cyvera",
     description:
       "Custom applications and distributed systems engineered for reliability and growth. From MVP to enterprise — Cyvera builds software that scales.",
-    canonical: "https://cyvera.com.au/#custom-software",
+    canonical: "https://cyvera.com.au/services/custom-software",
+  },
+  faq: {
+    title: "FAQ | Cyvera",
+    description:
+      "Answers to common questions about Cyvera's services, timelines, and engagement process.",
+    canonical: "https://cyvera.com.au/faq",
   },
 };
