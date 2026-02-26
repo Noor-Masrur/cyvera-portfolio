@@ -1941,7 +1941,7 @@ function ServiceDetail({ serviceId, onBack, onSchedule }) {
   return null;
 }
 
-function SocialMediaMarketing({ onBack, onSchedule }) {
+function HeroBackdrop({ scheme }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -1978,7 +1978,7 @@ function SocialMediaMarketing({ onBack, onSchedule }) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,180,216,${p.opacity})`;
+        ctx.fillStyle = `rgba(${scheme.particleRGB},${p.opacity})`;
         ctx.fill();
       });
 
@@ -1991,7 +1991,7 @@ function SocialMediaMarketing({ onBack, onSchedule }) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,180,216,${0.08 * (1 - d / 95)})`;
+            ctx.strokeStyle = `rgba(${scheme.particleRGB},${0.08 * (1 - d / 95)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -2002,25 +2002,38 @@ function SocialMediaMarketing({ onBack, onSchedule }) {
     };
     draw();
     return () => { cancelAnimationFrame(raf); window.removeEventListener("mousemove", handleMouse); window.removeEventListener("resize", handleResize); };
-  }, []);
+  }, [scheme.particleRGB]);
+
+  return (
+      <>
+        <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1 }} />
+        {scheme.blobs.map((b, i) => (
+            <div key={i} style={{
+              position: "absolute", width: b.w, height: b.h, borderRadius: "50%",
+              background: `radial-gradient(circle, ${b.c}, transparent 70%)`,
+              top: b.top, left: b.left, zIndex: 1,
+              animation: `blob${i} ${b.a}s ease-in-out infinite alternate`,
+            }} />
+        ))}
+      </>
+  );
+}
+
+function SocialMediaMarketing({ onBack, onSchedule }) {
+  const heroScheme = {
+    particleRGB: "0,180,216",
+    blobs: [
+      { w: 650, h: 650, top: "-28%", left: "-8%", c: "rgba(0,180,216,0.14)", a: 10 },
+      { w: 460, h: 460, top: "58%", left: "62%", c: "rgba(0,119,182,0.18)", a: 13 },
+      { w: 320, h: 320, top: "22%", left: "42%", c: "rgba(72,202,228,0.1)", a: 8 },
+      { w: 240, h: 240, top: "72%", left: "12%", c: "rgba(0,180,216,0.08)", a: 11 },
+    ],
+  };
 
   return (
       <div>
         <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(1200px 700px at 10% -10%, rgba(0,180,216,0.45), transparent 60%), radial-gradient(900px 600px at 90% 20%, rgba(72,202,228,0.25), transparent 55%), linear-gradient(160deg, #03045E 0%, #0A2540 48%, #023E8A 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
-          <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1 }} />
-          {[
-            { w: 650, h: 650, top: "-28%", left: "-8%", c: "rgba(0,180,216,0.14)", a: 10 },
-            { w: 460, h: 460, top: "58%", left: "62%", c: "rgba(0,119,182,0.18)", a: 13 },
-            { w: 320, h: 320, top: "22%", left: "42%", c: "rgba(72,202,228,0.1)", a: 8 },
-            { w: 240, h: 240, top: "72%", left: "12%", c: "rgba(0,180,216,0.08)", a: 11 },
-          ].map((b, i) => (
-              <div key={i} style={{
-                position: "absolute", width: b.w, height: b.h, borderRadius: "50%",
-                background: `radial-gradient(circle, ${b.c}, transparent 70%)`,
-                top: b.top, left: b.left, zIndex: 1,
-                animation: `blob${i} ${b.a}s ease-in-out infinite alternate`,
-              }} />
-          ))}
+          <HeroBackdrop scheme={heroScheme} />
           <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 3 }}>
             <Reveal>
               <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
@@ -2394,9 +2407,20 @@ function SocialMediaMarketing({ onBack, onSchedule }) {
 }
 
 function SEOService({ onBack, onSchedule }) {
+  const heroScheme = {
+    particleRGB: "34,197,94",
+    blobs: [
+      { w: 620, h: 620, top: "-26%", left: "-10%", c: "rgba(34,197,94,0.14)", a: 10 },
+      { w: 420, h: 420, top: "56%", left: "62%", c: "rgba(14,165,233,0.18)", a: 13 },
+      { w: 300, h: 300, top: "24%", left: "44%", c: "rgba(34,197,94,0.1)", a: 8 },
+      { w: 220, h: 220, top: "70%", left: "12%", c: "rgba(14,165,233,0.08)", a: 11 },
+    ],
+  };
+
   return (
       <div>
-        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(34,197,94,0.35), transparent 60%), radial-gradient(900px 600px at 88% 10%, rgba(14,165,233,0.2), transparent 55%), linear-gradient(150deg, #06283D 0%, #0B1F2E 50%, #0A2F4A 100%)", color: "#fff" }}>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(34,197,94,0.35), transparent 60%), radial-gradient(900px 600px at 88% 10%, rgba(14,165,233,0.2), transparent 55%), linear-gradient(150deg, #06283D 0%, #0B1F2E 50%, #0A2F4A 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
+          <HeroBackdrop scheme={heroScheme} />
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
@@ -2631,9 +2655,20 @@ function SEOService({ onBack, onSchedule }) {
 }
 
 function CybersecurityService({ onBack, onSchedule }) {
+  const heroScheme = {
+    particleRGB: "45,212,191",
+    blobs: [
+      { w: 620, h: 620, top: "-26%", left: "-10%", c: "rgba(45,212,191,0.14)", a: 10 },
+      { w: 420, h: 420, top: "56%", left: "62%", c: "rgba(59,130,246,0.18)", a: 13 },
+      { w: 300, h: 300, top: "24%", left: "44%", c: "rgba(45,212,191,0.1)", a: 8 },
+      { w: 220, h: 220, top: "70%", left: "12%", c: "rgba(59,130,246,0.08)", a: 11 },
+    ],
+  };
+
   return (
       <div>
-        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 15% -20%, rgba(45,212,191,0.25), transparent 60%), radial-gradient(900px 600px at 85% 0%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #071724 0%, #0B2238 55%, #0B2D4B 100%)", color: "#fff" }}>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 15% -20%, rgba(45,212,191,0.25), transparent 60%), radial-gradient(900px 600px at 85% 0%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #071724 0%, #0B2238 55%, #0B2D4B 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
+          <HeroBackdrop scheme={heroScheme} />
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
@@ -2848,9 +2883,20 @@ function CybersecurityService({ onBack, onSchedule }) {
 }
 
 function WebsiteDevService({ onBack, onSchedule }) {
+  const heroScheme = {
+    particleRGB: "251,146,60",
+    blobs: [
+      { w: 620, h: 620, top: "-26%", left: "-10%", c: "rgba(251,146,60,0.18)", a: 10 },
+      { w: 420, h: 420, top: "56%", left: "62%", c: "rgba(59,130,246,0.2)", a: 13 },
+      { w: 300, h: 300, top: "24%", left: "44%", c: "rgba(251,146,60,0.12)", a: 8 },
+      { w: 220, h: 220, top: "70%", left: "12%", c: "rgba(59,130,246,0.1)", a: 11 },
+    ],
+  };
+
   return (
       <div>
-        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 10% -20%, rgba(251,146,60,0.3), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #2A103B 0%, #1E1B4B 52%, #1E293B 100%)", color: "#fff" }}>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 10% -20%, rgba(251,146,60,0.3), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(59,130,246,0.2), transparent 55%), linear-gradient(150deg, #2A103B 0%, #1E1B4B 52%, #1E293B 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
+          <HeroBackdrop scheme={heroScheme} />
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
@@ -3067,9 +3113,20 @@ function WebsiteDevService({ onBack, onSchedule }) {
 }
 
 function CustomSoftwareService({ onBack, onSchedule }) {
+  const heroScheme = {
+    particleRGB: "245,158,11",
+    blobs: [
+      { w: 620, h: 620, top: "-26%", left: "-10%", c: "rgba(245,158,11,0.18)", a: 10 },
+      { w: 420, h: 420, top: "56%", left: "62%", c: "rgba(16,185,129,0.2)", a: 13 },
+      { w: 300, h: 300, top: "24%", left: "44%", c: "rgba(245,158,11,0.12)", a: 8 },
+      { w: 220, h: 220, top: "70%", left: "12%", c: "rgba(16,185,129,0.1)", a: 11 },
+    ],
+  };
+
   return (
       <div>
-        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(245,158,11,0.28), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(16,185,129,0.2), transparent 55%), linear-gradient(150deg, #111827 0%, #0F172A 50%, #1F2937 100%)", color: "#fff" }}>
+        <section id="service-overview" style={{ padding: "140px 5% 80px", background: "radial-gradient(900px 600px at 12% -20%, rgba(245,158,11,0.28), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(16,185,129,0.2), transparent 55%), linear-gradient(150deg, #111827 0%, #0F172A 50%, #1F2937 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
+          <HeroBackdrop scheme={heroScheme} />
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <Reveal>
               <button type="button" onClick={onBack} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.7)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 20 }}>← Back to Home</button>
