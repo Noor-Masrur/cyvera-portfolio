@@ -1,0 +1,129 @@
+.footer {
+  background: linear-gradient(180deg, #03045e 0%, #020b2b 100%);
+  padding: 72px 5% 36px;
+  border-top: 1px solid rgba(0, 180, 216, 0.12);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.logoMark {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.78));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.logoImg {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+}
+
+.brandDesc {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 260px;
+}
+
+.sectionTitle {
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.linkButton {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.linkButton:hover {
+  color: #00b4d8;
+}
+
+.contactText {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.contactText + .contactText {
+  margin-top: 8px;
+}
+
+.bottomRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+}
+
+.policyLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.policyLink {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.policyLink:hover {
+  color: #00b4d8;
+}
