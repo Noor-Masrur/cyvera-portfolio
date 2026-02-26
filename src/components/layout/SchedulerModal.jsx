@@ -4,6 +4,7 @@ import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import styles from "./SchedulerModal.module.css";
 
 function SchedulerModal({ open, onClose }) {
   const [form, setForm] = useState({
@@ -125,64 +126,44 @@ function SchedulerModal({ open, onClose }) {
     }
   };
 
-  const inputStyle = (field) => ({
-    width: "100%", padding: "14px 16px", borderRadius: 12, fontSize: 14,
-    fontFamily: "'DM Sans', sans-serif", outline: "none",
-    border: `1.5px solid ${errors[field] ? "#ef4444" : "rgba(10,37,64,0.12)"}`,
-    background: "rgba(255,255,255,0.96)", color: "#0A2540",
-    transition: "border-color 0.2s, box-shadow 0.2s",
-    boxShadow: "0 4px 16px rgba(10,37,64,0.05)"
-  });
-
   return (
-      <div style={{
-        position: "fixed", inset: 0, zIndex: 200,
-        background: "rgba(3, 8, 20, 0.6)", backdropFilter: "blur(6px)",
-        display: "flex", alignItems: "center", justifyContent: "center", padding: 20
-      }}
-           onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}
+      <div
+        className={styles.overlay}
+        onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}
       >
-        <div style={{
-          width: "100%", maxWidth: 720, background: "linear-gradient(180deg, #fff 0%, #f5f9ff 100%)",
-          borderRadius: 24, padding: 36, border: "1px solid rgba(0,180,216,0.18)",
-          boxShadow: "0 30px 80px rgba(10,37,64,0.25)", position: "relative"
-        }}>
-          <button type="button" onClick={() => onClose?.()} aria-label="Close scheduler" style={{
-            position: "absolute", top: 16, right: 16, width: 36, height: 36, borderRadius: 10,
-            border: "1px solid rgba(10,37,64,0.1)", background: "#fff", color: "#0A2540",
-            cursor: "pointer", fontSize: 18, lineHeight: 1
-          }}>×</button>
+        <div className={styles.modal}>
+          <button type="button" onClick={() => onClose?.()} aria-label="Close scheduler" className={styles.closeBtn}>×</button>
 
-          <div style={{ marginBottom: 24 }}>
-            <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: 26, color: "#0A2540" }}>Schedule a Meeting</div>
-            <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "rgba(10,37,64,0.55)", marginTop: 6 }}>
+          <div className={styles.header}>
+            <div className={styles.title}>Schedule a Meeting</div>
+            <div className={styles.subtitle}>
               Availability: 9:00 AM to 11:00 PM AEST (Australia/Brisbane).
             </div>
           </div>
 
           {sent ? (
-              <div style={{ textAlign: "center", padding: "80px 40px", background: "rgba(0,180,216,0.04)", borderRadius: 24, border: "1.5px solid rgba(0,180,216,0.15)" }}>
-                <div style={{ fontSize: 56, marginBottom: 20 }}>🎉</div>
-                <h3 style={{ fontSize: 28, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 12 }}>Request Sent!</h3>
-                <p style={{ color: "rgba(10,37,64,0.55)", fontFamily: "'DM Sans', sans-serif", fontSize: 15 }}>We will confirm your time by email.</p>
+              <div className={styles.sentCard}>
+                <div className={styles.sentEmoji}>🎉</div>
+                <h3 className={styles.sentTitle}>Request Sent!</h3>
+                <p className={styles.sentText}>We will confirm your time by email.</p>
               </div>
           ) : (
               <form onSubmit={handleSubmit}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="scheduler-grid">
+                <div className={styles.grid}>
                   <div>
-                    <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" style={inputStyle("name")} aria-label="Full Name" />
-                    {errors.name && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.name}</p>}
+                    <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" className={`${styles.field} ${errors.name ? styles.fieldError : ""}`} aria-label="Full Name" />
+                    {errors.name && <p className={styles.error}>{errors.name}</p>}
                   </div>
                   <div>
-                    <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="Email Address *" style={inputStyle("email")} aria-label="Email Address" />
-                    {errors.email && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.email}</p>}
+                    <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="Email Address *" className={`${styles.field} ${errors.email ? styles.fieldError : ""}`} aria-label="Email Address" />
+                    {errors.email && <p className={styles.error}>{errors.email}</p>}
                   </div>
                 </div>
-                <div style={{ marginTop: 14 }}>
-                  <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" style={inputStyle()} aria-label="Company" />
+                <div className={styles.fieldWrap}>
+                  <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" className={styles.field} aria-label="Company" />
                 </div>
-                <div style={{ marginTop: 14 }}>
-                  <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} style={{ ...inputStyle(), cursor: "pointer" }} aria-label="Service">
+                <div className={styles.fieldWrap}>
+                  <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} className={styles.field} aria-label="Service">
                     <option value="">Select a Service...</option>
                     <option>Social Media & Branding</option>
                     <option>Search Engine Optimization</option>
@@ -192,28 +173,14 @@ function SchedulerModal({ open, onClose }) {
                     <option>Other</option>
                   </select>
                 </div>
-                <div style={{ marginTop: 14 }}>
-                  <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Contact Number (Optional)" style={inputStyle()} aria-label="Contact Number" />
+                <div className={styles.fieldWrap}>
+                  <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Contact Number (Optional)" className={styles.field} aria-label="Contact Number" />
                 </div>
-                <div style={{ marginTop: 14 }}>
+                <div className={styles.fieldWrap}>
                   <button
                     type="button"
                     onClick={openPicker}
-                    className="scheduler-datetime-input"
-                    style={{
-                      borderRadius: 12,
-                      border: `1.5px solid ${errors.dateTime ? "#ef4444" : "rgba(10,37,64,0.12)"}`,
-                      background: "rgba(255,255,255,0.96)",
-                      boxShadow: "0 4px 16px rgba(10,37,64,0.05)",
-                      padding: "12px 16px",
-                      width: "100%",
-                      textAlign: "left",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: 12,
-                      cursor: "pointer"
-                    }}
+                    className={`${styles.datetimeBtn} ${errors.dateTime ? styles.datetimeBtnError : ""}`}
                   >
                     <span>
                       {form.dateTime
@@ -222,33 +189,17 @@ function SchedulerModal({ open, onClose }) {
                     </span>
                     <span style={{ color: "rgba(10,37,64,0.45)" }}>📅</span>
                   </button>
-                  <div style={{ marginTop: 6, fontSize: 12, fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.45)" }}>
+                  <div className={styles.hint}>
                     Times are interpreted in the selected timezone.
                   </div>
-                {errors.dateTime && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.dateTime}</p>}
+                {errors.dateTime && <p className={styles.error}>{errors.dateTime}</p>}
               </div>
               {pickerOpen && (
-                <div style={{
-                  position: "fixed",
-                  inset: 0,
-                  zIndex: 260,
-                  background: "rgba(3, 8, 20, 0.65)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: 20
-                }}
-                     onClick={(e) => { if (e.target === e.currentTarget) setPickerOpen(false); }}
+                <div
+                  className={styles.pickerOverlay}
+                  onClick={(e) => { if (e.target === e.currentTarget) setPickerOpen(false); }}
                 >
-                  <div style={{
-                    width: "100%",
-                    maxWidth: 520,
-                    background: "linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%)",
-                    borderRadius: 20,
-                    border: "1px solid rgba(0,180,216,0.2)",
-                    boxShadow: "0 30px 80px rgba(10,37,64,0.35)",
-                    padding: 18
-                  }}>
+                  <div className={styles.pickerCard}>
                     <ThemeProvider theme={theme}>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <StaticDateTimePicker
@@ -276,32 +227,15 @@ function SchedulerModal({ open, onClose }) {
                         />
                       </LocalizationProvider>
                     </ThemeProvider>
-                    <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 10 }}>
-                      <button type="button" onClick={() => setPickerOpen(false)} style={{
-                        padding: "10px 16px",
-                        borderRadius: 10,
-                        border: "1px solid rgba(10,37,64,0.15)",
-                        background: "#fff",
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontWeight: 700,
-                        cursor: "pointer"
-                      }}>Cancel</button>
-                      <button type="button" onClick={applyPicker} style={{
-                        padding: "10px 18px",
-                        borderRadius: 10,
-                        border: "none",
-                        background: "linear-gradient(90deg, #00B4D8, #0077B6)",
-                        color: "#fff",
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontWeight: 700,
-                        cursor: "pointer"
-                      }}>Apply</button>
+                    <div className={styles.pickerActions}>
+                      <button type="button" onClick={() => setPickerOpen(false)} className={styles.btnSecondary}>Cancel</button>
+                      <button type="button" onClick={applyPicker} className={styles.btnPrimary}>Apply</button>
                     </div>
                   </div>
                 </div>
               )}
-                <div style={{ marginTop: 14 }}>
-                  <select value={form.timezone} onChange={e => setForm({ ...form, timezone: e.target.value })} style={{ ...inputStyle(), cursor: "pointer" }} aria-label="Timezone">
+                <div className={styles.fieldWrap}>
+                  <select value={form.timezone} onChange={e => setForm({ ...form, timezone: e.target.value })} className={styles.field} aria-label="Timezone">
                     {[
                       { value: "Australia/Brisbane", label: "Australia/Brisbane (AEST)" },
                       { value: "Australia/Sydney", label: "Australia/Sydney (AEDT/AEST)" },
@@ -314,36 +248,18 @@ function SchedulerModal({ open, onClose }) {
                     ].map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
                 </div>
-                <div style={{ marginTop: 14 }}>
-                  <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Notes (Optional)" rows={4} style={{ ...inputStyle(), resize: "vertical" }} aria-label="Notes" />
+                <div className={styles.fieldWrap}>
+                  <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Notes (Optional)" rows={4} className={styles.field} aria-label="Notes" style={{ resize: "vertical" }} />
                 </div>
                 {submitError && (
-                  <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 10 }}>
-                    {submitError}
-                  </p>
+                  <p className={styles.submitError}>{submitError}</p>
                 )}
-                <button type="submit" disabled={sending} aria-label="Schedule meeting" style={{
-                  width: "100%", padding: "16px 26px", background: "linear-gradient(90deg, #00B4D8, #0077B6)",
-                  color: "#fff", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 800,
-                  fontFamily: "'DM Sans', sans-serif", cursor: sending ? "not-allowed" : "pointer",
-                  opacity: sending ? 0.8 : 1,
-                  boxShadow: "0 0 40px rgba(0,180,216,0.4)", letterSpacing: "0.3px", transition: "transform 0.2s, box-shadow 0.2s",
-                  marginTop: 16
-                }}
-                        onMouseEnter={e => { e.target.style.transform = "translateY(-1px)"; e.target.style.boxShadow = "0 0 60px rgba(0,180,216,0.6)"; }}
-                        onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "0 0 40px rgba(0,180,216,0.4)"; }}
-                >{sending ? "Sending..." : "Send Request"}</button>
+                <button type="submit" disabled={sending} aria-label="Schedule meeting" className={styles.submitBtn}>
+                  {sending ? "Sending..." : "Send Request"}
+                </button>
               </form>
           )}
         </div>
-        <style>{`
-          @media (max-width: 680px) { .scheduler-grid { grid-template-columns: 1fr !important; } }
-          .scheduler-datetime-input {
-            font-size: 14px;
-            font-family: 'DM Sans', sans-serif;
-            color: #0A2540;
-          }
-        `}</style>
       </div>
   );
 }

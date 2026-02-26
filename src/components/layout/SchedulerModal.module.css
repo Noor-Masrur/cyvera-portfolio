@@ -1,0 +1,236 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(3, 8, 20, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  background: linear-gradient(180deg, #fff 0%, #f5f9ff 100%);
+  border-radius: 24px;
+  padding: 36px;
+  border: 1px solid rgba(0, 180, 216, 0.18);
+  box-shadow: 0 30px 80px rgba(10, 37, 64, 0.25);
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(10, 37, 64, 0.1);
+  background: #fff;
+  color: #0a2540;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  color: #0a2540;
+}
+
+.subtitle {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: rgba(10, 37, 64, 0.55);
+  margin-top: 6px;
+}
+
+.sentCard {
+  text-align: center;
+  padding: 80px 40px;
+  background: rgba(0, 180, 216, 0.04);
+  border-radius: 24px;
+  border: 1.5px solid rgba(0, 180, 216, 0.15);
+}
+
+.sentEmoji {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.sentTitle {
+  font-size: 28px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  color: #0a2540;
+  margin-bottom: 12px;
+}
+
+.sentText {
+  color: rgba(10, 37, 64, 0.55);
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  border: 1.5px solid rgba(10, 37, 64, 0.12);
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a2540;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(10, 37, 64, 0.05);
+}
+
+.fieldError {
+  border-color: #ef4444;
+}
+
+.fieldWrap {
+  margin-top: 14px;
+}
+
+.hint {
+  margin-top: 6px;
+  font-size: 12px;
+  font-family: "DM Sans", sans-serif;
+  color: rgba(10, 37, 64, 0.45);
+}
+
+.error {
+  color: #ef4444;
+  font-size: 12px;
+  font-family: "DM Sans", sans-serif;
+  margin-top: 4px;
+}
+
+.submitError {
+  color: #ef4444;
+  font-size: 12px;
+  font-family: "DM Sans", sans-serif;
+  margin-top: 10px;
+}
+
+.datetimeBtn {
+  border-radius: 12px;
+  border: 1.5px solid rgba(10, 37, 64, 0.12);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 16px rgba(10, 37, 64, 0.05);
+  padding: 12px 16px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+  color: #0a2540;
+}
+
+.datetimeBtnError {
+  border-color: #ef4444;
+}
+
+.pickerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  background: rgba(3, 8, 20, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pickerCard {
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 180, 216, 0.2);
+  box-shadow: 0 30px 80px rgba(10, 37, 64, 0.35);
+  padding: 18px;
+}
+
+.pickerActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btnSecondary {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(10, 37, 64, 0.15);
+  background: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btnPrimary {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px 26px;
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.4);
+  letter-spacing: 0.3px;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  margin-top: 16px;
+}
+
+.submitBtn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 0 60px rgba(0, 180, 216, 0.6);
+}
+
+@media (max-width: 680px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

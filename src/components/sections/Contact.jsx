@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Reveal from "../common/Reveal";
+import styles from "./Contact.module.css";
 
 function Contact({ theme }) {
   const resolvedTheme = {
@@ -50,65 +51,91 @@ function Contact({ theme }) {
     }
   };
 
-  const inputStyle = (field) => ({
-    width: "100%", padding: "15px 18px", borderRadius: 12, fontSize: 14,
-    fontFamily: "'DM Sans', sans-serif", outline: "none",
-    border: `1.5px solid ${errors[field] ? "#ef4444" : "rgba(10,37,64,0.12)"}`,
-    background: "rgba(255,255,255,0.96)", color: "#0A2540",
-    transition: "border-color 0.2s, box-shadow 0.2s",
-    boxShadow: "0 4px 16px rgba(10,37,64,0.05)"
-  });
-
   return (
-      <section id="contact" style={{ padding: "120px 5%", background: resolvedTheme.sectionBg, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${resolvedTheme.accent}, transparent)` }} />
+      <section
+        id="contact"
+        className={styles.section}
+        style={{
+          background: resolvedTheme.sectionBg,
+        }}
+      >
+        <div
+          className={styles.divider}
+          style={{
+            background: `linear-gradient(90deg, transparent, ${resolvedTheme.accent}, transparent)`,
+          }}
+        />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div className={styles.container}>
           <Reveal>
-            <div style={{ textAlign: "center", marginBottom: 72 }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 16, justifyContent: "center" }}>
-                <div style={{ width: 40, height: 2, background: "linear-gradient(90deg, transparent, #00B4D8)" }} />
-                <span style={{ color: resolvedTheme.accent, fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "3px", textTransform: "uppercase" }}>Get Started</span>
-                <div style={{ width: 40, height: 2, background: `linear-gradient(90deg, ${resolvedTheme.accent}, transparent)` }} />
+            <div className={styles.heading}>
+              <div className={styles.eyebrow}>
+                <div className={styles.eyebrowLine} />
+                <span className={styles.eyebrowText} style={{ color: resolvedTheme.accent }}>Get Started</span>
+                <div
+                  className={styles.eyebrowLineReverse}
+                  style={{ background: `linear-gradient(90deg, ${resolvedTheme.accent}, transparent)` }}
+                />
               </div>
-              <h2 style={{ fontSize: "clamp(34px, 4.5vw, 60px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: resolvedTheme.heading, letterSpacing: "-2px" }}>Let's Work Together</h2>
-              <p style={{ color: resolvedTheme.text, fontFamily: "'DM Sans', sans-serif", fontSize: 16, marginTop: 16, maxWidth: 480, margin: "16px auto 0", lineHeight: 1.7 }}>Have a project in mind? Drop us a message and we'll get back within 24 hours.</p>
+              <h2 className={styles.title} style={{ color: resolvedTheme.heading }}>Let's Work Together</h2>
+              <p className={styles.subtitle} style={{ color: resolvedTheme.text }}>
+                Have a project in mind? Drop us a message and we'll get back within 24 hours.
+              </p>
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.7fr", gap: 72, alignItems: "start" }} className="two-col">
+          <div className={styles.grid}>
             <Reveal>
               <div>
-                <h3 style={{ fontSize: 24, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: resolvedTheme.heading, marginBottom: 36 }}>Contact Information</h3>
+                <h3 className={styles.infoTitle} style={{ color: resolvedTheme.heading }}>Contact Information</h3>
                 {[
                   { icon: "✉️", label: "Email", val: "info@cyvera.com.au" },
                   { icon: "📍", label: "Location", val: "G3/62 Didsbury St, East Brisbane, QLD 4169" },
                   { icon: "⚡", label: "Response Time", val: "Within 24 hours" },
                 ].map(item => (
-                    <div key={item.label} style={{ display: "flex", gap: 16, marginBottom: 28, alignItems: "flex-start" }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 14, background: resolvedTheme.accentSoft, border: `1px solid ${resolvedTheme.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>{item.icon}</div>
+                    <div key={item.label} className={styles.infoItem}>
+                      <div
+                        className={styles.infoIcon}
+                        style={{
+                          background: resolvedTheme.accentSoft,
+                          borderColor: resolvedTheme.accentBorder,
+                        }}
+                      >
+                        {item.icon}
+                      </div>
                       <div>
-                        <div style={{ fontSize: 11, color: "rgba(10,37,64,0.4)", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 4 }}>{item.label}</div>
-                        <div style={{ fontSize: 15, color: resolvedTheme.heading, fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>{item.val}</div>
+                        <div className={styles.infoLabel}>{item.label}</div>
+                        <div className={styles.infoValue} style={{ color: resolvedTheme.heading }}>{item.val}</div>
                       </div>
                     </div>
                 ))}
 
-                {/* Social links */}
-                <div style={{ marginTop: 40 }}>
-                  <div style={{ fontSize: 11, color: "rgba(10,37,64,0.4)", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 16 }}>Follow Us</div>
-                  <div style={{ display: "flex", gap: 10 }}>
+                <div className={styles.socialWrap}>
+                  <div className={styles.socialTitle}>Follow Us</div>
+                  <div className={styles.socialRow}>
                     {["in", "ig", "𝕏", "gh"].map(s => (
-                        <a key={s} href="#" style={{
-                          width: 40, height: 40, borderRadius: 10, background: resolvedTheme.accentSoft,
-                          border: `1px solid ${resolvedTheme.accentBorder}`,
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          color: "rgba(10,37,64,0.5)", fontSize: 12, fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                          textDecoration: "none", transition: "all 0.2s"
-                        }}
-                           onMouseEnter={e => { e.currentTarget.style.background = resolvedTheme.accent; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = resolvedTheme.accent; }}
-                           onMouseLeave={e => { e.currentTarget.style.background = resolvedTheme.accentSoft; e.currentTarget.style.color = "rgba(10,37,64,0.5)"; e.currentTarget.style.borderColor = resolvedTheme.accentBorder; }}
-                        >{s}</a>
+                        <a
+                          key={s}
+                          href="#"
+                          className={styles.socialLink}
+                          style={{
+                            background: resolvedTheme.accentSoft,
+                            borderColor: resolvedTheme.accentBorder,
+                            color: "rgba(10,37,64,0.5)",
+                          }}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.background = resolvedTheme.accent;
+                            e.currentTarget.style.color = "#fff";
+                            e.currentTarget.style.borderColor = resolvedTheme.accent;
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.background = resolvedTheme.accentSoft;
+                            e.currentTarget.style.color = "rgba(10,37,64,0.5)";
+                            e.currentTarget.style.borderColor = resolvedTheme.accentBorder;
+                          }}
+                        >
+                          {s}
+                        </a>
                     ))}
                   </div>
                 </div>
@@ -117,33 +144,55 @@ function Contact({ theme }) {
 
             <Reveal delay={0.1}>
               {sent ? (
-                  <div style={{ textAlign: "center", padding: "80px 40px", background: "rgba(0,180,216,0.04)", borderRadius: 24, border: "1.5px solid rgba(0,180,216,0.15)" }}>
-                    <div style={{ fontSize: 56, marginBottom: 20 }}>🎉</div>
-                    <h3 style={{ fontSize: 28, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 12 }}>Message Sent!</h3>
-                    <p style={{ color: "rgba(10,37,64,0.55)", fontFamily: "'DM Sans', sans-serif", fontSize: 15 }}>We'll be in touch within 24 hours.</p>
+                  <div className={styles.sentCard}>
+                    <div className={styles.sentEmoji}>🎉</div>
+                    <h3 className={styles.sentTitle}>Message Sent!</h3>
+                    <p className={styles.sentText}>We'll be in touch within 24 hours.</p>
                   </div>
               ) : (
-                  <form onSubmit={handleSubmit} style={{
-                    background: "linear-gradient(180deg, #fff 0%, #f5f9ff 100%)",
-                    borderRadius: 24, padding: 44,
-                    border: `1px solid ${resolvedTheme.accentBorder}`,
-                    boxShadow: "0 24px 60px rgba(10,37,64,0.1)"
-                  }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="form-grid">
+                  <form
+                    onSubmit={handleSubmit}
+                    className={styles.form}
+                    style={{ borderColor: resolvedTheme.accentBorder }}
+                  >
+                    <div className={styles.formGrid}>
                       <div>
-                        <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" style={inputStyle("name")} aria-label="Full Name" />
-                        {errors.name && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.name}</p>}
+                        <input
+                          value={form.name}
+                          onChange={e => setForm({ ...form, name: e.target.value })}
+                          placeholder="Full Name *"
+                          className={`${styles.field} ${errors.name ? styles.fieldError : ""}`}
+                          aria-label="Full Name"
+                        />
+                        {errors.name && <p className={styles.error}>{errors.name}</p>}
                       </div>
                       <div>
-                        <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="Email Address *" style={inputStyle("email")} aria-label="Email Address" />
-                        {errors.email && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.email}</p>}
+                        <input
+                          value={form.email}
+                          onChange={e => setForm({ ...form, email: e.target.value })}
+                          placeholder="Email Address *"
+                          className={`${styles.field} ${errors.email ? styles.fieldError : ""}`}
+                          aria-label="Email Address"
+                        />
+                        {errors.email && <p className={styles.error}>{errors.email}</p>}
                       </div>
                     </div>
-                    <div style={{ marginBottom: 16 }}>
-                      <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" style={inputStyle()} aria-label="Company" />
+                    <div className={styles.fieldWrap}>
+                      <input
+                        value={form.company}
+                        onChange={e => setForm({ ...form, company: e.target.value })}
+                        placeholder="Company (Optional)"
+                        className={styles.field}
+                        aria-label="Company"
+                      />
                     </div>
-                    <div style={{ marginBottom: 16 }}>
-                      <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} style={{ ...inputStyle(), cursor: "pointer" }} aria-label="Service">
+                    <div className={styles.fieldWrap}>
+                      <select
+                        value={form.service}
+                        onChange={e => setForm({ ...form, service: e.target.value })}
+                        className={styles.field}
+                        aria-label="Service"
+                      >
                         <option value="">Select a Service...</option>
                         <option>Social Media & Branding</option>
                         <option>Search Engine Optimization</option>
@@ -153,31 +202,37 @@ function Contact({ theme }) {
                         <option>Other</option>
                       </select>
                     </div>
-                    <div style={{ marginBottom: 28 }}>
-                      <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your project... *" rows={5} style={{ ...inputStyle("message"), resize: "vertical" }} aria-label="Message" />
-                      {errors.message && <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>{errors.message}</p>}
+                    <div className={styles.fieldWrapLg}>
+                      <textarea
+                        value={form.message}
+                        onChange={e => setForm({ ...form, message: e.target.value })}
+                        placeholder="Tell us about your project... *"
+                        rows={5}
+                        className={`${styles.field} ${errors.message ? styles.fieldError : ""}`}
+                        aria-label="Message"
+                        style={{ resize: "vertical" }}
+                      />
+                      {errors.message && <p className={styles.error}>{errors.message}</p>}
                     </div>
                     {submitError && (
-                      <p style={{ color: "#ef4444", fontSize: 12, fontFamily: "'DM Sans', sans-serif", marginBottom: 12 }}>
-                        {submitError}
-                      </p>
+                      <p className={styles.submitError}>{submitError}</p>
                     )}
-                    <button type="submit" disabled={sending} aria-label="Send message" style={{
-                      width: "100%", padding: "17px 32px", background: `linear-gradient(90deg, ${resolvedTheme.accent}, ${resolvedTheme.accentStrong})`,
-                      color: "#fff", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 800,
-                      fontFamily: "'DM Sans', sans-serif", cursor: sending ? "not-allowed" : "pointer",
-                      opacity: sending ? 0.8 : 1,
-                      boxShadow: "0 0 40px rgba(0,180,216,0.4)", letterSpacing: "0.3px", transition: "transform 0.2s, box-shadow 0.2s"
-                    }}
-                            onMouseEnter={e => { e.target.style.transform = "translateY(-1px)"; e.target.style.boxShadow = "0 0 60px rgba(0,180,216,0.6)"; }}
-                            onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "0 0 40px rgba(0,180,216,0.4)"; }}
-                    >{sending ? "Sending..." : "Send Message"}</button>
+                    <button
+                      type="submit"
+                      disabled={sending}
+                      aria-label="Send message"
+                      className={styles.submitBtn}
+                      style={{
+                        background: `linear-gradient(90deg, ${resolvedTheme.accent}, ${resolvedTheme.accentStrong})`,
+                      }}
+                    >
+                      {sending ? "Sending..." : "Send Message"}
+                    </button>
                   </form>
               )}
             </Reveal>
           </div>
         </div>
-        <style>{`@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
   );
 }

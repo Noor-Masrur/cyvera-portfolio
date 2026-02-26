@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import styles from "./HeroBackdrop.module.css";
 
 function HeroBackdrop({ scheme }) {
   const canvasRef = useRef(null);
@@ -65,14 +66,20 @@ function HeroBackdrop({ scheme }) {
 
   return (
       <>
-        <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1 }} />
+        <canvas ref={canvasRef} className={styles.canvas} />
         {scheme.blobs.map((b, i) => (
-            <div key={i} style={{
-              position: "absolute", width: b.w, height: b.h, borderRadius: "50%",
-              background: `radial-gradient(circle, ${b.c}, transparent 70%)`,
-              top: b.top, left: b.left, zIndex: 1,
-              animation: `blob${i} ${b.a}s ease-in-out infinite alternate`,
-            }} />
+            <div
+              key={i}
+              className={styles.blob}
+              style={{
+                width: b.w,
+                height: b.h,
+                background: `radial-gradient(circle, ${b.c}, transparent 70%)`,
+                top: b.top,
+                left: b.left,
+                animation: `blob${i} ${b.a}s ease-in-out infinite alternate`,
+              }}
+            />
         ))}
       </>
   );

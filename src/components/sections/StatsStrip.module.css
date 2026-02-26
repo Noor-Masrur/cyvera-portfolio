@@ -1,0 +1,67 @@
+.strip {
+  background: linear-gradient(90deg, #03045e 0%, #0a2540 50%, #023e8a 100%);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0, 180, 216, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 216, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  z-index: 2;
+}
+
+.statCard {
+  padding: 56px 32px;
+  text-align: center;
+  border-right: 1px solid rgba(0, 180, 216, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard:last-child {
+  border-right: none;
+}
+
+.statBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 180, 216, 0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.statValue {
+  font-size: clamp(36px, 4vw, 60px);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  color: #00b4d8;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
