@@ -1239,6 +1239,15 @@ function FAQPage({ onBack, onSchedule }) {
             }
           `}</style>
         </section>
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)",
+          accent: "#00B4D8",
+          accentStrong: "#0077B6",
+          accentSoft: "rgba(0,180,216,0.08)",
+          accentBorder: "rgba(0,180,216,0.2)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
@@ -1282,7 +1291,17 @@ function CTABanner({ onSchedule }) {
 }
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
-function Contact() {
+function Contact({ theme }) {
+  const resolvedTheme = {
+    sectionBg: "linear-gradient(180deg, #FFFFFF 0%, #F2F7FF 100%)",
+    accent: "#00B4D8",
+    accentStrong: "#0077B6",
+    accentSoft: "rgba(0,180,216,0.07)",
+    accentBorder: "rgba(0,180,216,0.18)",
+    heading: "#0A2540",
+    text: "rgba(10,37,64,0.5)",
+    ...theme,
+  };
   const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
@@ -1331,36 +1350,36 @@ function Contact() {
   });
 
   return (
-      <section id="contact" style={{ padding: "120px 5%", background: "linear-gradient(180deg, #FFFFFF 0%, #F2F7FF 100%)", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(0,180,216,0.3), transparent)" }} />
+      <section id="contact" style={{ padding: "120px 5%", background: resolvedTheme.sectionBg, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${resolvedTheme.accent}, transparent)` }} />
 
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 72 }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 16, justifyContent: "center" }}>
                 <div style={{ width: 40, height: 2, background: "linear-gradient(90deg, transparent, #00B4D8)" }} />
-                <span style={{ color: "#00B4D8", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "3px", textTransform: "uppercase" }}>Get Started</span>
-                <div style={{ width: 40, height: 2, background: "linear-gradient(90deg, #00B4D8, transparent)" }} />
+                <span style={{ color: resolvedTheme.accent, fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "3px", textTransform: "uppercase" }}>Get Started</span>
+                <div style={{ width: 40, height: 2, background: `linear-gradient(90deg, ${resolvedTheme.accent}, transparent)` }} />
               </div>
-              <h2 style={{ fontSize: "clamp(34px, 4.5vw, 60px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", letterSpacing: "-2px" }}>Let's Work Together</h2>
-              <p style={{ color: "rgba(10,37,64,0.5)", fontFamily: "'DM Sans', sans-serif", fontSize: 16, marginTop: 16, maxWidth: 480, margin: "16px auto 0", lineHeight: 1.7 }}>Have a project in mind? Drop us a message and we'll get back within 24 hours.</p>
+              <h2 style={{ fontSize: "clamp(34px, 4.5vw, 60px)", fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: resolvedTheme.heading, letterSpacing: "-2px" }}>Let's Work Together</h2>
+              <p style={{ color: resolvedTheme.text, fontFamily: "'DM Sans', sans-serif", fontSize: 16, marginTop: 16, maxWidth: 480, margin: "16px auto 0", lineHeight: 1.7 }}>Have a project in mind? Drop us a message and we'll get back within 24 hours.</p>
             </div>
           </Reveal>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.7fr", gap: 72, alignItems: "start" }} className="two-col">
             <Reveal>
               <div>
-                <h3 style={{ fontSize: 24, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: "#0A2540", marginBottom: 36 }}>Contact Information</h3>
+                <h3 style={{ fontSize: 24, fontFamily: "'DM Sans', sans-serif", fontWeight: 800, color: resolvedTheme.heading, marginBottom: 36 }}>Contact Information</h3>
                 {[
                   { icon: "✉️", label: "Email", val: "info@cyvera.com.au" },
                   { icon: "📍", label: "Location", val: "G3/62 Didsbury St, East Brisbane, QLD 4169" },
                   { icon: "⚡", label: "Response Time", val: "Within 24 hours" },
                 ].map(item => (
                     <div key={item.label} style={{ display: "flex", gap: 16, marginBottom: 28, alignItems: "flex-start" }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 14, background: "rgba(0,180,216,0.07)", border: "1px solid rgba(0,180,216,0.18)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>{item.icon}</div>
+                      <div style={{ width: 48, height: 48, borderRadius: 14, background: resolvedTheme.accentSoft, border: `1px solid ${resolvedTheme.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>{item.icon}</div>
                       <div>
                         <div style={{ fontSize: 11, color: "rgba(10,37,64,0.4)", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 4 }}>{item.label}</div>
-                        <div style={{ fontSize: 15, color: "#0A2540", fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>{item.val}</div>
+                        <div style={{ fontSize: 15, color: resolvedTheme.heading, fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>{item.val}</div>
                       </div>
                     </div>
                 ))}
@@ -1371,14 +1390,14 @@ function Contact() {
                   <div style={{ display: "flex", gap: 10 }}>
                     {["in", "ig", "𝕏", "gh"].map(s => (
                         <a key={s} href="#" style={{
-                          width: 40, height: 40, borderRadius: 10, background: "rgba(0,180,216,0.06)",
-                          border: "1px solid rgba(0,180,216,0.15)",
+                          width: 40, height: 40, borderRadius: 10, background: resolvedTheme.accentSoft,
+                          border: `1px solid ${resolvedTheme.accentBorder}`,
                           display: "flex", alignItems: "center", justifyContent: "center",
                           color: "rgba(10,37,64,0.5)", fontSize: 12, fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
                           textDecoration: "none", transition: "all 0.2s"
                         }}
-                           onMouseEnter={e => { e.currentTarget.style.background = "#00B4D8"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#00B4D8"; }}
-                           onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,180,216,0.06)"; e.currentTarget.style.color = "rgba(10,37,64,0.5)"; e.currentTarget.style.borderColor = "rgba(0,180,216,0.15)"; }}
+                           onMouseEnter={e => { e.currentTarget.style.background = resolvedTheme.accent; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = resolvedTheme.accent; }}
+                           onMouseLeave={e => { e.currentTarget.style.background = resolvedTheme.accentSoft; e.currentTarget.style.color = "rgba(10,37,64,0.5)"; e.currentTarget.style.borderColor = resolvedTheme.accentBorder; }}
                         >{s}</a>
                     ))}
                   </div>
@@ -1397,8 +1416,8 @@ function Contact() {
                   <form onSubmit={handleSubmit} style={{
                     background: "linear-gradient(180deg, #fff 0%, #f5f9ff 100%)",
                     borderRadius: 24, padding: 44,
-                    border: "1px solid rgba(0,180,216,0.15)",
-                    boxShadow: "0 24px 60px rgba(0,180,216,0.1)"
+                    border: `1px solid ${resolvedTheme.accentBorder}`,
+                    boxShadow: "0 24px 60px rgba(10,37,64,0.1)"
                   }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="form-grid">
                       <div>
@@ -1434,7 +1453,7 @@ function Contact() {
                       </p>
                     )}
                     <button type="submit" disabled={sending} aria-label="Send message" style={{
-                      width: "100%", padding: "17px 32px", background: "linear-gradient(90deg, #00B4D8, #0077B6)",
+                      width: "100%", padding: "17px 32px", background: `linear-gradient(90deg, ${resolvedTheme.accent}, ${resolvedTheme.accentStrong})`,
                       color: "#fff", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 800,
                       fontFamily: "'DM Sans', sans-serif", cursor: sending ? "not-allowed" : "pointer",
                       opacity: sending ? 0.8 : 1,
@@ -1831,19 +1850,6 @@ function Footer({ onNavigate, onSelectService, onFAQ }) {
                 <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>Cyvera</span>
               </div>
               <p style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.75, maxWidth: 260 }}>Your end-to-end digital partner — from identity to infrastructure.</p>
-              <div style={{ display: "flex", gap: 10, marginTop: 24 }}>
-                {["in", "ig", "𝕏", "gh"].map(s => (
-                    <a key={s} href="#" aria-label={`Social ${s}`} style={{
-                      width: 38, height: 38, borderRadius: 9, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      color: "rgba(255,255,255,0.5)", fontSize: 12, fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
-                      textDecoration: "none", transition: "all 0.2s"
-                    }}
-                       onMouseEnter={e => { e.currentTarget.style.background = "#00B4D8"; e.currentTarget.style.color = "#fff"; }}
-                       onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "rgba(255,255,255,0.5)"; }}
-                    >{s}</a>
-                ))}
-              </div>
             </div>
 
             <div>
@@ -2374,7 +2380,15 @@ function SocialMediaMarketing({ onBack, onSchedule }) {
           </Reveal>
         </section>
 
-        <Contact />
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)",
+          accent: "#00B4D8",
+          accentStrong: "#0077B6",
+          accentSoft: "rgba(0,180,216,0.08)",
+          accentBorder: "rgba(0,180,216,0.2)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
@@ -2603,6 +2617,15 @@ function SEOService({ onBack, onSchedule }) {
             </div>
           </Reveal>
         </section>
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #F6FBFF 0%, #ECF6F1 100%)",
+          accent: "#22C55E",
+          accentStrong: "#0EA5E9",
+          accentSoft: "rgba(34,197,94,0.1)",
+          accentBorder: "rgba(34,197,94,0.25)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
@@ -2811,6 +2834,15 @@ function CybersecurityService({ onBack, onSchedule }) {
             </div>
           </Reveal>
         </section>
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #F5FAFF 0%, #ECF7F5 100%)",
+          accent: "#2DD4BF",
+          accentStrong: "#3B82F6",
+          accentSoft: "rgba(45,212,191,0.12)",
+          accentBorder: "rgba(45,212,191,0.28)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
@@ -3021,6 +3053,15 @@ function WebsiteDevService({ onBack, onSchedule }) {
             </div>
           </Reveal>
         </section>
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #FDF7F0 0%, #EEF4FF 100%)",
+          accent: "#FB923C",
+          accentStrong: "#3B82F6",
+          accentSoft: "rgba(251,146,60,0.12)",
+          accentBorder: "rgba(251,146,60,0.28)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
@@ -3231,6 +3272,15 @@ function CustomSoftwareService({ onBack, onSchedule }) {
             </div>
           </Reveal>
         </section>
+        <Contact theme={{
+          sectionBg: "linear-gradient(180deg, #FFFBF2 0%, #ECFDF5 100%)",
+          accent: "#F59E0B",
+          accentStrong: "#10B981",
+          accentSoft: "rgba(245,158,11,0.12)",
+          accentBorder: "rgba(245,158,11,0.28)",
+          heading: "#0A2540",
+          text: "rgba(10,37,64,0.55)"
+        }} />
       </div>
   );
 }
