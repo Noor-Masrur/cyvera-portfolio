@@ -3,7 +3,6 @@ import styles from "./Footer.module.css";
 function Footer({ onNavigate, onSelectService, onFAQ }) {
   const companyLinks = [
     { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
     { label: "Work", href: "#work" },
     { label: "Contact", href: "#contact" },
     { label: "FAQ", href: "#faq", action: "faq" },

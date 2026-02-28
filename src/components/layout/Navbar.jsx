@@ -16,7 +16,6 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
     { label: "FAQ", href: "#faq", action: "faq" },
   ];
