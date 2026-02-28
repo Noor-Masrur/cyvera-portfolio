@@ -116,6 +116,13 @@ export const SEO_CONFIGS = {
     canonical: "https://cyvera.com.au/privacy-policy",
     robots: "index, follow",
   },
+  "terms-of-service": {
+    title: "Terms of Service | Cyvera",
+    description:
+      "Read the terms and conditions governing your use of Cyvera's website and services.",
+    canonical: "https://cyvera.com.au/terms-of-service",
+    robots: "index, follow",
+  },
   notfound: {
     title: "Page Not Found | Cyvera",
     description: "The requested page could not be found.",
@@ -126,7 +133,7 @@ export const SEO_CONFIGS = {
 const ORG_ID = "https://cyvera.com.au/#organization";
 const SITE_URL = "https://cyvera.com.au";
 const SERVICE_VIEW_KEYS = ["social-media", "seo", "cybersecurity", "website-dev", "custom-software"];
-const STANDARD_PAGE_VIEW_KEYS = ["privacy-policy"];
+const STANDARD_PAGE_VIEW_KEYS = ["privacy-policy", "terms-of-service"];
 
 const buildBreadcrumb = (name, url) => ({
   "@type": "BreadcrumbList",
@@ -167,12 +174,13 @@ export function getRouteJsonLd(viewKey) {
 function buildStandardPageJsonLd(viewKey) {
   const config = SEO_CONFIGS[viewKey];
   if (!config?.canonical) return null;
+  const pageName = getServiceName(config.title);
   const webPage = buildWebPageJsonLd(config);
   return {
     "@context": "https://schema.org",
     "@graph": [
       ...(webPage ? [webPage] : []),
-      buildBreadcrumb("Privacy Policy", config.canonical),
+      buildBreadcrumb(pageName, config.canonical),
     ],
   };
 }

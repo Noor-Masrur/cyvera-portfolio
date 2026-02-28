@@ -14,6 +14,7 @@ import Process from "./components/sections/Process";
 import Testimonials from "./components/sections/Testimonials";
 import FAQPage from "./components/sections/FAQPage";
 import PrivacyPolicyPage from "./components/sections/PrivacyPolicyPage";
+import TermsOfServicePage from "./components/sections/TermsOfServicePage";
 import CTABanner from "./components/sections/CTABanner";
 import Contact from "./components/sections/Contact";
 import ServiceDetail from "./components/service-pages/ServiceDetail";
@@ -39,6 +40,8 @@ export default function CyveraPortfolio() {
       viewKey = "faq";
     } else if (path === "/privacy-policy") {
       viewKey = "privacy-policy";
+    } else if (path === "/terms-of-service") {
+      viewKey = "terms-of-service";
     } else if (path.startsWith("/services/")) {
       viewKey = SERVICE_IDS.has(serviceId) ? serviceId : "notfound";
     } else if (path !== "/") {
@@ -117,6 +120,10 @@ export default function CyveraPortfolio() {
           <Route
             path="/privacy-policy"
             element={<PrivacyPolicyPage onBack={() => navigate("/")} />}
+          />
+          <Route
+            path="/terms-of-service"
+            element={<TermsOfServicePage onBack={() => navigate("/")} />}
           />
           <Route
             path="/services/:serviceId"
