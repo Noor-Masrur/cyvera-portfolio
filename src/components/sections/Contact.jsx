@@ -13,7 +13,7 @@ function Contact({ theme }) {
     text: "rgba(10,37,64,0.5)",
     ...theme,
   };
-  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "", website: "" });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -155,6 +155,15 @@ function Contact({ theme }) {
                     className={styles.form}
                     style={{ borderColor: resolvedTheme.accentBorder }}
                   >
+                    <input
+                      type="text"
+                      value={form.website}
+                      onChange={(e) => setForm({ ...form, website: e.target.value })}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{ position: "absolute", left: "-10000px", opacity: 0, pointerEvents: "none" }}
+                    />
                     <div className={styles.formGrid}>
                       <div>
                         <input

@@ -17,6 +17,12 @@ export default async function handler(req, res) {
   const company = sanitize(payload?.company);
   const service = sanitize(payload?.service);
   const message = sanitize(payload?.message);
+  const website = sanitize(payload?.website);
+
+  // Honeypot field: bots often fill hidden fields.
+  if (website) {
+    return res.status(200).json({ ok: true });
+  }
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Missing required fields" });

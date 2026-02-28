@@ -74,9 +74,15 @@ export default async function handler(req, res) {
   const phone = sanitize(payload?.phone);
   const service = sanitize(payload?.service);
   const message = sanitize(payload?.message);
+  const website = sanitize(payload?.website);
   const preferredDate = sanitize(payload?.preferredDate);
   const preferredTime = sanitize(payload?.preferredTime);
   const timezone = sanitize(payload?.timezone) || "Australia/Brisbane";
+
+  // Honeypot field: bots often fill hidden fields.
+  if (website) {
+    return res.status(200).json({ ok: true });
+  }
 
   if (!name || !email || !preferredDate || !preferredTime) {
     return res.status(400).json({ error: "Missing required fields" });

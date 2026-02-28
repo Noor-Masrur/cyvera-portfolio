@@ -49,6 +49,7 @@ function SchedulerModal({ open, onClose }) {
     dateTime: null,
     timezone: "Australia/Brisbane",
     message: "",
+    website: "",
   });
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
@@ -155,6 +156,7 @@ function SchedulerModal({ open, onClose }) {
             phone: form.phone,
             service: form.service,
             message: form.message,
+            website: form.website,
             preferredDate: form.dateTime ? toDateString(dayjs(form.dateTime)) : "",
             preferredTime: form.dateTime ? toTimeString(dayjs(form.dateTime)) : "",
             timezone: form.timezone || "Australia/Brisbane",
@@ -195,6 +197,15 @@ function SchedulerModal({ open, onClose }) {
               </div>
           ) : (
               <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={form.website}
+                  onChange={(e) => setForm({ ...form, website: e.target.value })}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-10000px", opacity: 0, pointerEvents: "none" }}
+                />
                 <div className={styles.grid}>
                   <div>
                     <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" className={`${styles.field} ${errors.name ? styles.fieldError : ""}`} aria-label="Full Name" />
