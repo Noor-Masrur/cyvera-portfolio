@@ -149,3 +149,12 @@
   font-family: "DM Sans", sans-serif;
   line-height: 1.75;
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

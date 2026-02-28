@@ -33,3 +33,12 @@
   background: rgba(0, 180, 216, 0.5);
   display: inline-block;
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
