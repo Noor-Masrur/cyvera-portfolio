@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useSEO, SEO_CONFIGS } from "./seo/useSEO";
+import { useSEO as applySEO, SEO_CONFIGS } from "./seo/useSEO";
 import Navbar from "./components/layout/Navbar";
 import SchedulerModal from "./components/layout/SchedulerModal";
 import Footer from "./components/layout/Footer";
@@ -29,7 +29,7 @@ export default function CyveraPortfolio() {
     const serviceId = path.startsWith("/services/") ? path.split("/")[2] : null;
     const viewKey = serviceId || (path === "/faq" ? "faq" : "home");
     const config = SEO_CONFIGS[viewKey] || SEO_CONFIGS.home;
-    useSEO(config);
+    applySEO(config);
   }, [location.pathname]);
 
   useEffect(() => {
