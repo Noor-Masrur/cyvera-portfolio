@@ -5,7 +5,7 @@ const sanitize = (value) =>
     .replace(/[<>]/g, "")
     .trim();
 
-const TRUSTED_HOSTS = ["cyvera.com.au", "www.cyvera.com.au", "localhost", "127.0.0.1", "www.cyvera-portfolio.vercel.app"];
+const TRUSTED_HOSTS = ["cyvera.com.au", "www.cyvera.com.au", "localhost", "127.0.0.1", "www.cyvera-portfolio.vercel.app", "cyvera-portfolio.vercel.app"];
 
 const getHostname = (value) => {
   try {
@@ -17,8 +17,8 @@ const getHostname = (value) => {
 
 const isAllowedHost = (host) => {
   if (!host) return false;
-  if (TRUSTED_HOSTS.includes(host)) return true;
-  return false;
+  return TRUSTED_HOSTS.includes(host);
+
 };
 
 export default async function handler(req, res) {

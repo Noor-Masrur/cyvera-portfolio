@@ -23,7 +23,7 @@ function Contact({ theme }) {
   const socialLinks = [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/cyvera0/", Icon: Linkedin },
     { label: "Instagram", href: "https://www.instagram.com/cyvera0/", Icon: Instagram },
-    { label: "X", href: "https://x.com/cyvera0", Icon: Twitter },
+    { label: "X", href: "https://x.com/cyvera00", Icon: Twitter },
     { label: "Facebook", href: "https://www.facebook.com/cyvera0/", Icon: Facebook },
   ];
 
