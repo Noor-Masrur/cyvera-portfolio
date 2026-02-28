@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useSEO as applySEO, SEO_CONFIGS } from "./seo/useSEO";
+import { applySEO, SEO_CONFIGS, applyRouteJsonLd } from "./seo/useSEO";
 import Navbar from "./components/layout/Navbar";
 import SchedulerModal from "./components/layout/SchedulerModal";
 import Footer from "./components/layout/Footer";
@@ -17,19 +17,39 @@ import CTABanner from "./components/sections/CTABanner";
 import Contact from "./components/sections/Contact";
 import ServiceDetail from "./components/service-pages/ServiceDetail";
 
+const SERVICE_IDS = new Set([
+  "social-media",
+  "seo",
+  "cybersecurity",
+  "website-dev",
+  "custom-software",
+]);
+
 export default function CyveraPortfolio() {
   const location = useLocation();
   const navigate = useNavigate();
   const [schedulerOpen, setSchedulerOpen] = useState(false);
 
-  const isDetail = location.pathname !== "/";
-
   useEffect(() => {
     const path = location.pathname;
-    const serviceId = path.startsWith("/services/") ? path.split("/")[2] : null;
-    const viewKey = serviceId || (path === "/faq" ? "faq" : "home");
-    const config = SEO_CONFIGS[viewKey] || SEO_CONFIGS.home;
+    const serviceId = path.startsWith("/services/") ? path.split("/")[2] : "";
+    let viewKey = "home";
+    if (path === "/faq") {
+      viewKey = "faq";
+    } else if (path.startsWith("/services/")) {
+      viewKey = SERVICE_IDS.has(serviceId) ? serviceId : "notfound";
+    } else if (path !== "/") {
+      viewKey = "notfound";
+    }
+    const baseConfig = SEO_CONFIGS[viewKey] || SEO_CONFIGS.notfound || SEO_CONFIGS.home;
+    const config = viewKey === "notfound"
+      ? {
+        ...baseConfig,
+        canonical: `${window.location.origin}${location.pathname}`,
+      }
+      : baseConfig;
     applySEO(config);
+    applyRouteJsonLd(viewKey);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -63,7 +83,6 @@ export default function CyveraPortfolio() {
   return (
     <div>
       <Navbar
-        isDetail={isDetail}
         onHome={goHome}
         onSchedule={openScheduler}
         onSelectService={goService}
@@ -96,6 +115,7 @@ export default function CyveraPortfolio() {
             path="/services/:serviceId"
             element={<ServiceDetailRoute onBack={() => navigate("/")} onSchedule={openScheduler} />}
           />
+          <Route path="*" element={<NotFoundRoute onHome={() => navigate("/")} />} />
         </Routes>
       </main>
       <SchedulerModal open={schedulerOpen} onClose={closeScheduler} />
@@ -109,4 +129,35 @@ function ServiceDetailRoute({ onBack, onSchedule }) {
   const serviceId = location.pathname.split("/")[2];
   if (!serviceId) return null;
   return <ServiceDetail serviceId={serviceId} onBack={onBack} onSchedule={onSchedule} />;
+}
+
+function NotFoundRoute({ onHome }) {
+  return (
+    <section style={{ padding: "140px 5% 100px", background: "linear-gradient(180deg, #F7FAFC 0%, #ECF4FF 100%)" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center" }}>
+        <h1 style={{ fontFamily: "'DM Sans', sans-serif", color: "#0A2540", fontSize: "clamp(30px, 5vw, 48px)", marginBottom: 14 }}>
+          Page Not Found
+        </h1>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(10,37,64,0.62)", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
+          The page you requested does not exist.
+        </p>
+        <button
+          type="button"
+          onClick={onHome}
+          style={{
+            background: "linear-gradient(90deg, #00B4D8, #0077B6)",
+            color: "#fff",
+            border: "none",
+            borderRadius: 10,
+            padding: "14px 22px",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            cursor: "pointer",
+          }}
+        >
+          Back to Home
+        </button>
+      </div>
+    </section>
+  );
 }

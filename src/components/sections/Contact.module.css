@@ -152,10 +152,12 @@
   align-items: center;
   justify-content: center;
   color: rgba(10, 37, 64, 0.5);
+  text-decoration: none;
   font-size: 12px;
   font-family: "DM Sans", sans-serif;
   font-weight: 700;
-  text-decoration: none;
+  padding: 0;
+  cursor: pointer;
   transition: all 0.2s;
 }
 

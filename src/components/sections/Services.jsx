@@ -55,10 +55,15 @@ function TiltCard({ s, onSelect }) {
     : "0 8px 32px rgba(10,37,64,0.08)";
 
   return (
-      <button
-          ref={cardRef} type="button"
+      <a
+          ref={cardRef}
+          href={`/services/${s.id}`}
           onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}
-          onClick={() => onSelect?.(s.id)}
+          onClick={(e) => {
+            if (!onSelect) return;
+            e.preventDefault();
+            onSelect(s.id);
+          }}
           className={`${styles.card} ${hov ? styles.cardHover : ""}`}
           style={{
             ...style3d,
@@ -111,7 +116,7 @@ function TiltCard({ s, onSelect }) {
             →
           </span>
         </span>
-      </button>
+      </a>
   );
 }
 

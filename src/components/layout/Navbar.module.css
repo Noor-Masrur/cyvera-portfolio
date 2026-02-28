@@ -110,10 +110,12 @@
 }
 
 .serviceItem {
+  display: block;
   text-align: left;
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
   padding: 10px 12px;
   border-radius: 10px;
   font-family: "DM Sans", sans-serif;
@@ -192,11 +194,13 @@
 }
 
 .mobileServiceItem {
+  display: block;
   width: 100%;
   text-align: left;
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
   padding: 10px 0;
   font-size: 15px;
   font-family: "DM Sans", sans-serif;

@@ -73,6 +73,7 @@
   padding: 0;
   margin-bottom: 14px;
   color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
   font-family: "DM Sans", sans-serif;
   font-size: 14px;
   cursor: pointer;
@@ -121,6 +122,10 @@
   font-family: "DM Sans", sans-serif;
   font-size: 13px;
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   transition: color 0.2s;
 }
 

@@ -2,10 +2,10 @@ import styles from "./Footer.module.css";
 
 function Footer({ onNavigate, onSelectService, onFAQ }) {
   const companyLinks = [
-    { label: "Home", href: "#home" },
-    { label: "Work", href: "#work" },
-    { label: "Contact", href: "#contact" },
-    { label: "FAQ", href: "#faq", action: "faq" },
+    { label: "Home", href: "/#home" },
+    { label: "Work", href: "/#work" },
+    { label: "Contact", href: "/#contact" },
+    { label: "FAQ", href: "/faq", action: "faq" },
   ];
   const serviceLinks = [
     { id: "social-media", label: "Social Media & Branding" },
@@ -13,6 +13,10 @@ function Footer({ onNavigate, onSelectService, onFAQ }) {
     { id: "cybersecurity", label: "Cybersecurity & Digital Forensics" },
     { id: "website-dev", label: "Website Development" },
     { id: "custom-software", label: "Custom Software" },
+  ];
+  const policyLinks = [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
   ];
 
   return (
@@ -32,28 +36,43 @@ function Footer({ onNavigate, onSelectService, onFAQ }) {
             <div>
               <h4 className={styles.sectionTitle}>Company</h4>
               {companyLinks.map((l) => (
-                  <button
+                  <a
                     key={l.label}
-                    type="button"
-                    onClick={() => (l.action === "faq" ? onFAQ?.() : onNavigate?.(l.href))}
+                    href={l.href}
+                    onClick={(e) => {
+                      if (l.action === "faq" && onFAQ) {
+                        e.preventDefault();
+                        onFAQ();
+                        return;
+                      }
+                      const hash = l.href.includes("#") ? l.href.slice(l.href.indexOf("#")) : "";
+                      if (hash && onNavigate) {
+                        e.preventDefault();
+                        onNavigate(hash);
+                      }
+                    }}
                     className={styles.linkButton}
                   >
                     {l.label}
-                  </button>
+                  </a>
               ))}
             </div>
 
             <div>
               <h4 className={styles.sectionTitle}>Services</h4>
               {serviceLinks.map((l) => (
-                  <button
+                  <a
                     key={l.id}
-                    type="button"
-                    onClick={() => onSelectService?.(l.id)}
+                    href={`/services/${l.id}`}
+                    onClick={(e) => {
+                      if (!onSelectService) return;
+                      e.preventDefault();
+                      onSelectService(l.id);
+                    }}
                     className={styles.linkButton}
                   >
                     {l.label}
-                  </button>
+                  </a>
               ))}
             </div>
 
@@ -67,8 +86,10 @@ function Footer({ onNavigate, onSelectService, onFAQ }) {
           <div className={styles.bottomRow}>
             <p className={styles.copyright}>© 2026 Cyvera. All rights reserved.</p>
             <div className={styles.policyLinks}>
-              {["Privacy Policy", "Terms of Service"].map(l => (
-                  <a key={l} href="#" className={styles.policyLink}>{l}</a>
+              {policyLinks.map((link) => (
+                  <a key={link.label} href={link.href} className={styles.policyLink}>
+                    {link.label}
+                  </a>
               ))}
             </div>
           </div>

@@ -19,6 +19,12 @@ function Contact({ theme }) {
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [firstInteractionAt, setFirstInteractionAt] = useState(null);
+  const socialLinks = [
+    { label: "in", href: "https://www.linkedin.com/company/cyvera0/" },
+    { label: "ig", href: "https://www.instagram.com/cyvera0/" },
+    { label: "𝕏", href: "https://x.com/cyvera0" },
+    { label: "fb", href: "https://www.facebook.com/cyvera0/" },
+  ];
 
   const markInteraction = () => {
     if (!firstInteractionAt) {
@@ -133,10 +139,12 @@ function Contact({ theme }) {
                 <div className={styles.socialWrap}>
                   <div className={styles.socialTitle}>Follow Us</div>
                   <div className={styles.socialRow}>
-                    {["in", "ig", "𝕏", "gh"].map(s => (
+                    {socialLinks.map((social) => (
                         <a
-                          key={s}
-                          href="#"
+                          key={social.label}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={styles.socialLink}
                           style={{
                             background: resolvedTheme.accentSoft,
@@ -154,7 +162,7 @@ function Contact({ theme }) {
                             e.currentTarget.style.borderColor = resolvedTheme.accentBorder;
                           }}
                         >
-                          {s}
+                          {social.label}
                         </a>
                     ))}
                   </div>

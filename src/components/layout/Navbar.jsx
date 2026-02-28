@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 
-function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }) {
+function Navbar({ onHome, onSchedule, onSelectService, onFAQ }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -13,11 +13,11 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "#home" },
-    { label: "Services", href: "#services" },
-    { label: "Work", href: "#work" },
-    { label: "Contact", href: "#contact" },
-    { label: "FAQ", href: "#faq", action: "faq" },
+    { label: "Home", href: "/#home" },
+    { label: "Services", href: "/#services" },
+    { label: "Work", href: "/#work" },
+    { label: "Contact", href: "/#contact" },
+    { label: "FAQ", href: "/faq", action: "faq" },
   ];
 
   const serviceLinks = [
@@ -28,10 +28,24 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
     { id: "custom-software", label: "Custom Software" },
   ];
 
-  const handleNavClick = (e, href) => {
-    if (!isDetail) return;
+  const handleHashNavClick = (e, href) => {
+    const hash = href.includes("#") ? href.slice(href.indexOf("#")) : "";
+    if (!hash || !onHome) return;
     e.preventDefault();
-    onHome?.(href);
+    onHome(hash);
+  };
+
+  const handleFaqClick = (e) => {
+    if (!onFAQ) return;
+    e.preventDefault();
+    onFAQ();
+  };
+
+  const handleServiceClick = (e, serviceId) => {
+    setServicesOpen(false);
+    if (!onSelectService) return;
+    e.preventDefault();
+    onSelectService(serviceId);
   };
 
   const openServicesMenu = () => {
@@ -53,7 +67,13 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
   return (
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <nav className={styles.nav}>
-          <a href="#home" onClick={(e) => handleNavClick(e, "#home")} className={styles.logoLink}>
+          <a href="/#home" onClick={(e) => {
+            if (!onHome) return;
+            if (window.location.pathname !== "/") {
+              e.preventDefault();
+              onHome("#home");
+            }
+          }} className={styles.logoLink}>
             <span className={styles.logoMark}>
               <img src="/logo-without-name.png" alt="Cyvera" className={styles.logoImg} />
             </span>
@@ -65,13 +85,13 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
               if (l.label !== "Services") {
                 if (l.action === "faq") {
                   return (
-                      <button key={l.label} type="button" onClick={() => onFAQ?.()} className={`${styles.navLink} ${styles.navButton}`}>
+                      <a key={l.label} href={l.href} onClick={handleFaqClick} className={styles.navLink}>
                         {l.label}
-                      </button>
+                      </a>
                   );
                 }
                 return (
-                    <a key={l.label} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className={styles.navLink}>
+                    <a key={l.label} href={l.href} onClick={(e) => handleHashNavClick(e, l.href)} className={styles.navLink}>
                       {l.label}
                     </a>
                 );
@@ -82,22 +102,20 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
                        onMouseEnter={openServicesMenu}
                        onMouseLeave={closeServicesMenu}
                   >
-                    <a href={l.href} onClick={(e) => handleNavClick(e, l.href)} className={styles.navLink}>Services</a>
+                    <a href={l.href} onClick={(e) => handleHashNavClick(e, l.href)} className={styles.navLink}>Services</a>
                     <div
                       className={`${styles.servicesMenu} ${servicesOpen ? styles.servicesMenuOpen : ""}`}
                       onMouseEnter={openServicesMenu}
                       onMouseLeave={closeServicesMenu}
                     >
                       {serviceLinks.map((service) => (
-                          <button key={service.id} type="button"
-                                  onClick={() => {
-                                    setServicesOpen(false);
-                                    onSelectService?.(service.id);
-                                  }}
-                                  className={styles.serviceItem}
+                          <a key={service.id}
+                             href={`/services/${service.id}`}
+                             onClick={(e) => handleServiceClick(e, service.id)}
+                             className={styles.serviceItem}
                           >
                             {service.label}
-                          </button>
+                          </a>
                       ))}
                     </div>
                   </div>
@@ -113,12 +131,15 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
             <div className={styles.mobileMenu}>
               {navLinks.map(l => (
                   l.action === "faq" ? (
-                      <button key={l.label} type="button"
-                              onClick={() => { setMenuOpen(false); onFAQ?.(); }}
-                              className={styles.mobileLink}
-                      >{l.label}</button>
+                      <a key={l.label} href={l.href}
+                         onClick={(e) => {
+                           setMenuOpen(false);
+                           handleFaqClick(e);
+                         }}
+                         className={styles.mobileLink}
+                      >{l.label}</a>
                   ) : (
-                      <a key={l.label} href={l.href} onClick={(e) => { setMenuOpen(false); handleNavClick(e, l.href); }}
+                      <a key={l.label} href={l.href} onClick={(e) => { setMenuOpen(false); handleHashNavClick(e, l.href); }}
                          className={styles.mobileLink}
                       >{l.label}</a>
                   )
@@ -126,12 +147,16 @@ function Navbar({ isDetail = false, onHome, onSchedule, onSelectService, onFAQ }
               <div className={styles.mobileServices}>
                 <div className={styles.mobileServicesTitle}>Services</div>
                 {serviceLinks.map((service) => (
-                    <button key={service.id} type="button"
-                            onClick={() => { setMenuOpen(false); onSelectService?.(service.id); }}
-                            className={styles.mobileServiceItem}
+                    <a key={service.id}
+                       href={`/services/${service.id}`}
+                       onClick={(e) => {
+                         setMenuOpen(false);
+                         handleServiceClick(e, service.id);
+                       }}
+                       className={styles.mobileServiceItem}
                     >
                       {service.label}
-                    </button>
+                    </a>
                 ))}
               </div>
             </div>

@@ -18,6 +18,7 @@ const getHostname = (value) => {
 const isAllowedHost = (host) => {
   if (!host) return false;
   if (TRUSTED_HOSTS.includes(host)) return true;
+  return false;
 };
 
 export default async function handler(req, res) {
