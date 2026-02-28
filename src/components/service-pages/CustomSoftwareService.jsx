@@ -13,6 +13,11 @@ import {
 import layout from "./ServicePageLayout.module.css";
 
 function CustomSoftwareService({ onBack, onSchedule }) {
+  const hoverCardStyle = {
+    "--hover-shadow": "0 18px 44px rgba(245,158,11,0.18)",
+    "--hover-border": "rgba(245,158,11,0.5)",
+  };
+
   const heroScheme = {
     particleRGB: "245,158,11",
     blobs: [
@@ -56,7 +61,7 @@ function CustomSoftwareService({ onBack, onSchedule }) {
             { title: "Optimization", desc: "Monitoring, iteration, and long-term support." },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
-              <ServiceCard title={item.title} desc={item.desc} />
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.title} desc={item.desc} />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -76,7 +81,13 @@ function CustomSoftwareService({ onBack, onSchedule }) {
             { name: "DevOps & SRE", inc: "CI/CD, infra, monitoring", out: "Stable deployments" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={`Includes: ${item.inc}`} desc={`Outcome: ${item.out}`} />
+              <ServiceCard
+                className={layout.cardInteractive}
+                style={hoverCardStyle}
+                title={item.name}
+                meta={`Includes: ${item.inc}`}
+                desc={`Outcome: ${item.out}`}
+              />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -90,10 +101,10 @@ function CustomSoftwareService({ onBack, onSchedule }) {
           {["Discover", "Design", "Build", "Ship", "Optimize"].map((step, i) => (
             <Reveal key={step} delay={i * 0.08}>
               <ServiceCard
-                className={layout.cardTight}
+                className={`${layout.cardTight} ${layout.cardInteractive}`}
                 title={`0${i + 1}`}
                 desc={step}
-                style={{ "--title-color": "#F59E0B" }}
+                style={{ ...hoverCardStyle, "--title-color": "#F59E0B" }}
               />
             </Reveal>
           ))}
@@ -111,7 +122,7 @@ function CustomSoftwareService({ onBack, onSchedule }) {
             { name: "ShieldNet", focus: "Automation layer", lift: "-45%", metric: "Manual ops" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={item.focus} accent="#F59E0B">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} meta={item.focus} accent="#F59E0B">
                 <div className={layout.cardMetric} style={{ "--accent": "#F59E0B" }}>{item.lift}</div>
                 <div className={layout.cardText}>{item.metric}</div>
               </ServiceCard>
@@ -157,7 +168,7 @@ function CustomSoftwareService({ onBack, onSchedule }) {
             { name: "Scale", price: "Custom", who: "Enterprise buildouts", items: ["Architecture overhaul", "Security reviews", "24/7 support"] },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} accent="#F59E0B">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} accent="#F59E0B">
                 <div className={layout.price} style={{ "--accent": "#F59E0B" }}>{item.price}</div>
                 <div className={layout.cardText} style={{ marginBottom: 12 }}>{item.who}</div>
                 <ul className={layout.list}>

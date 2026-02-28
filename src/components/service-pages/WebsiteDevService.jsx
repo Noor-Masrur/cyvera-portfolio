@@ -13,6 +13,11 @@ import {
 import layout from "./ServicePageLayout.module.css";
 
 function WebsiteDevService({ onBack, onSchedule }) {
+  const hoverCardStyle = {
+    "--hover-shadow": "0 18px 44px rgba(251,146,60,0.18)",
+    "--hover-border": "rgba(251,146,60,0.5)",
+  };
+
   const heroScheme = {
     particleRGB: "251,146,60",
     blobs: [
@@ -56,7 +61,7 @@ function WebsiteDevService({ onBack, onSchedule }) {
             { title: "Performance", desc: "Core Web Vitals, SEO, analytics." },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
-              <ServiceCard title={item.title} desc={item.desc} />
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.title} desc={item.desc} />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -76,7 +81,13 @@ function WebsiteDevService({ onBack, onSchedule }) {
             { name: "Analytics Setup", inc: "GA4, tag manager, dashboards", out: "Measurable growth" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={`Includes: ${item.inc}`} desc={`Outcome: ${item.out}`} />
+              <ServiceCard
+                className={layout.cardInteractive}
+                style={hoverCardStyle}
+                title={item.name}
+                meta={`Includes: ${item.inc}`}
+                desc={`Outcome: ${item.out}`}
+              />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -90,10 +101,10 @@ function WebsiteDevService({ onBack, onSchedule }) {
           {["Discover", "Design", "Build", "Launch", "Optimize"].map((step, i) => (
             <Reveal key={step} delay={i * 0.08}>
               <ServiceCard
-                className={layout.cardTight}
+                className={`${layout.cardTight} ${layout.cardInteractive}`}
                 title={`0${i + 1}`}
                 desc={step}
-                style={{ "--title-color": "#FB923C" }}
+                style={{ ...hoverCardStyle, "--title-color": "#FB923C" }}
               />
             </Reveal>
           ))}
@@ -111,7 +122,7 @@ function WebsiteDevService({ onBack, onSchedule }) {
             { name: "Zenith Digital", focus: "Landing page system", lift: "+42% ROAS", metric: "Paid conversion" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={item.focus} accent="#FB923C">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} meta={item.focus} accent="#FB923C">
                 <div className={layout.cardMetric} style={{ "--accent": "#FB923C" }}>{item.lift}</div>
                 <div className={layout.cardText}>{item.metric}</div>
               </ServiceCard>
@@ -157,7 +168,7 @@ function WebsiteDevService({ onBack, onSchedule }) {
             { name: "Scale", price: "Custom", who: "Enterprise", items: ["Multi-site systems", "Integrations", "Dedicated team"] },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} accent="#FB923C">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} accent="#FB923C">
                 <div className={layout.price} style={{ "--accent": "#FB923C" }}>{item.price}</div>
                 <div className={layout.cardText} style={{ marginBottom: 12 }}>{item.who}</div>
                 <ul className={layout.list}>

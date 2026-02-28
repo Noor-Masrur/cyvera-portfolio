@@ -13,6 +13,11 @@ import {
 import layout from "./ServicePageLayout.module.css";
 
 function SEOService({ onBack, onSchedule }) {
+  const hoverCardStyle = {
+    "--hover-shadow": "0 18px 44px rgba(34,197,94,0.18)",
+    "--hover-border": "rgba(34,197,94,0.5)",
+  };
+
   const heroScheme = {
     particleRGB: "34,197,94",
     blobs: [
@@ -61,7 +66,7 @@ function SEOService({ onBack, onSchedule }) {
             { title: "Local + Global", desc: "Local SEO, international targeting, and multi-region performance." },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
-              <ServiceCard title={item.title} desc={item.desc} />
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.title} desc={item.desc} />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -81,7 +86,13 @@ function SEOService({ onBack, onSchedule }) {
             { name: "Analytics + Reporting", inc: "GA4, GSC, KPI dashboards", out: "Clear growth visibility" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={`Includes: ${item.inc}`} desc={`Outcome: ${item.out}`} />
+              <ServiceCard
+                className={layout.cardInteractive}
+                style={hoverCardStyle}
+                title={item.name}
+                meta={`Includes: ${item.inc}`}
+                desc={`Outcome: ${item.out}`}
+              />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -95,10 +106,10 @@ function SEOService({ onBack, onSchedule }) {
           {["Discover", "Strategize", "Optimize", "Scale", "Report"].map((step, i) => (
             <Reveal key={step} delay={i * 0.08}>
               <ServiceCard
-                className={layout.cardTight}
+                className={`${layout.cardTight} ${layout.cardInteractive}`}
                 title={`0${i + 1}`}
                 desc={step}
-                style={{ "--title-color": "#22C55E" }}
+                style={{ ...hoverCardStyle, "--title-color": "#22C55E" }}
               />
             </Reveal>
           ))}
@@ -116,7 +127,7 @@ function SEOService({ onBack, onSchedule }) {
             { name: "Orion Labs", focus: "Content clusters", lift: "+4.3x pipeline", metric: "Organic revenue" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={item.focus} accent="#22C55E">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} meta={item.focus} accent="#22C55E">
                 <div className={layout.cardMetric} style={{ "--accent": "#22C55E" }}>{item.lift}</div>
                 <div className={layout.cardText}>{item.metric}</div>
               </ServiceCard>
@@ -162,7 +173,7 @@ function SEOService({ onBack, onSchedule }) {
             { name: "Scale", price: "Custom", who: "Enterprise", items: ["International SEO", "Advanced PR", "Dedicated team"] },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} accent="#22C55E">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} accent="#22C55E">
                 <div className={layout.price} style={{ "--accent": "#22C55E" }}>{item.price}</div>
                 <div className={layout.cardText} style={{ marginBottom: 12 }}>{item.who}</div>
                 <ul className={layout.list}>

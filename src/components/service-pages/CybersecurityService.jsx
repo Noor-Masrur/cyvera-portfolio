@@ -13,6 +13,11 @@ import {
 import layout from "./ServicePageLayout.module.css";
 
 function CybersecurityService({ onBack, onSchedule }) {
+  const hoverCardStyle = {
+    "--hover-shadow": "0 18px 44px rgba(45,212,191,0.18)",
+    "--hover-border": "rgba(45,212,191,0.5)",
+  };
+
   const heroScheme = {
     particleRGB: "45,212,191",
     blobs: [
@@ -61,7 +66,12 @@ function CybersecurityService({ onBack, onSchedule }) {
             { title: "Security Awareness & Training", desc: "Role-based training and phishing resilience." },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
-              <ServiceCard className={layout.cardStretch} title={item.title} desc={item.desc} />
+              <ServiceCard
+                className={`${layout.cardStretch} ${layout.cardInteractive}`}
+                style={hoverCardStyle}
+                title={item.title}
+                desc={item.desc}
+              />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -79,7 +89,13 @@ function CybersecurityService({ onBack, onSchedule }) {
             { name: "DevSecOps Architecture", inc: "Security gates and policy-as-code", out: "Faster, safer releases" },
           ].map((item, i) => (
             <Reveal key={item.name} delay={i * 0.08}>
-              <ServiceCard title={item.name} meta={`Includes: ${item.inc}`} desc={`Outcome: ${item.out}`} />
+              <ServiceCard
+                className={layout.cardInteractive}
+                style={hoverCardStyle}
+                title={item.name}
+                meta={`Includes: ${item.inc}`}
+                desc={`Outcome: ${item.out}`}
+              />
             </Reveal>
           ))}
         </ServiceGrid>
@@ -97,10 +113,10 @@ function CybersecurityService({ onBack, onSchedule }) {
           ].map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08}>
               <ServiceCard
-                className={layout.cardTight}
+                className={`${layout.cardTight} ${layout.cardInteractive}`}
                 title={`0${i + 1}`}
                 desc={`${step.title} — ${step.desc}`}
-                style={{ "--title-color": "#2DD4BF" }}
+                style={{ ...hoverCardStyle, "--title-color": "#2DD4BF" }}
               />
             </Reveal>
           ))}
@@ -158,7 +174,7 @@ function CybersecurityService({ onBack, onSchedule }) {
             },
           ].map((item, idx) => (
             <Reveal key={item.name} delay={idx * 0.08}>
-              <ServiceCard title={item.name} accent="#2DD4BF">
+              <ServiceCard className={layout.cardInteractive} style={hoverCardStyle} title={item.name} accent="#2DD4BF">
                 <div className={layout.price} style={{ "--accent": "#2DD4BF", fontSize: 16 }}>{item.price}</div>
                 <div className={layout.cardText} style={{ marginBottom: 12 }}>{item.who}</div>
                 <ul className={layout.list}>
