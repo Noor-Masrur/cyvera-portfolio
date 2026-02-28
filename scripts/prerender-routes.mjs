@@ -7,6 +7,7 @@ const INDEX_PATH = path.join(DIST_DIR, "index.html");
 
 const ROUTES = [
   { routePath: "/faq", viewKey: "faq" },
+  { routePath: "/privacy-policy", viewKey: "privacy-policy" },
   { routePath: "/services/social-media", viewKey: "social-media" },
   { routePath: "/services/seo", viewKey: "seo" },
   { routePath: "/services/cybersecurity", viewKey: "cybersecurity" },
@@ -20,6 +21,15 @@ const STATIC_FALLBACK_CONTENT = {
       <section>
         <h1>Frequently Asked Questions</h1>
         <p>Answers to common questions about Cyvera services, timelines, and delivery approach.</p>
+        <p><a href="/#contact">Contact Cyvera</a></p>
+      </section>
+    </main>
+  `,
+  "privacy-policy": `
+    <main>
+      <section>
+        <h1>Privacy Policy</h1>
+        <p>Read how Cyvera collects, uses, and protects personal information provided through our website and services.</p>
         <p><a href="/#contact">Contact Cyvera</a></p>
       </section>
     </main>
