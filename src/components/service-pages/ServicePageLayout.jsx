@@ -54,8 +54,17 @@ export function ServiceHero({
         {tags.length ? (
           <Reveal delay={0.2}>
             <div className={styles.tagRow}>
-              {tags.map((item) => (
-                <span key={item} className={styles.tag}>{item}</span>
+              {tags.map((item, i) => (
+                <span
+                  key={item}
+                  className={styles.tag}
+                  style={{
+                    animation: `float ${4 + i * 0.5}s ease-in-out infinite`,
+                    animationDelay: `${i * 0.3}s`,
+                  }}
+                >
+                  {item}
+                </span>
               ))}
             </div>
           </Reveal>
