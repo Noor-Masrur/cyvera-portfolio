@@ -147,6 +147,22 @@ function Portfolio() {
                 </article>
               ))}
             </div>
+            <button
+              type="button"
+              aria-label="Previous card"
+              className={`${styles.navButton} ${styles.navPrev}`}
+              onClick={() => nudge(-1)}
+            >
+              &#10094;
+            </button>
+            <button
+              type="button"
+              aria-label="Next card"
+              className={`${styles.navButton} ${styles.navNext}`}
+              onClick={() => nudge(1)}
+            >
+              &#10095;
+            </button>
           </div>
         </Reveal>
       </div>
