@@ -6,6 +6,39 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import styles from "./SchedulerModal.module.css";
 
+const getZonedParts = (date, timeZone) => {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+  const parts = formatter.formatToParts(date).filter((p) => p.type !== "literal");
+  return parts.reduce((acc, p) => {
+    acc[p.type] = p.value;
+    return acc;
+  }, {});
+};
+
+const zonedDateTimeToUtc = ({ year, month, day, hour, minute, timeZone }) => {
+  const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, 0));
+  const parts = getZonedParts(utcDate, timeZone);
+  const asUTC = Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour),
+    Number(parts.minute),
+    Number(parts.second)
+  );
+  const offset = asUTC - utcDate.getTime();
+  return new Date(utcDate.getTime() - offset);
+};
+
 function SchedulerModal({ open, onClose }) {
   const [form, setForm] = useState({
     name: "",
@@ -80,12 +113,25 @@ function SchedulerModal({ open, onClose }) {
     if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = "Valid email required";
     if (!form.dateTime) e.dateTime = "Date and time are required";
     if (form.dateTime instanceof Date && !Number.isNaN(form.dateTime.getTime())) {
-      const asDayjs = dayjs(form.dateTime);
-      const h = asDayjs.hour();
-      const m = asDayjs.minute();
-      const validMinute = m % 15 === 0;
-      const withinWindow = h >= 9 && h <= 23 && (h !== 23 || m === 0);
-      if (!validMinute || !withinWindow) {
+      try {
+        const asDayjs = dayjs(form.dateTime);
+        const utcDate = zonedDateTimeToUtc({
+          year: asDayjs.year(),
+          month: asDayjs.month() + 1,
+          day: asDayjs.date(),
+          hour: asDayjs.hour(),
+          minute: asDayjs.minute(),
+          timeZone: form.timezone || "Australia/Brisbane",
+        });
+        const brisbaneParts = getZonedParts(utcDate, "Australia/Brisbane");
+        const h = Number(brisbaneParts.hour);
+        const m = Number(brisbaneParts.minute);
+        const validMinute = m % 15 === 0;
+        const withinWindow = h >= 9 && h <= 23 && (h !== 23 || m === 0);
+        if (!validMinute || !withinWindow) {
+          e.dateTime = "Select a time between 9:00 AM and 11:00 PM AEST (15-min increments).";
+        }
+      } catch {
         e.dateTime = "Select a time between 9:00 AM and 11:00 PM AEST (15-min increments).";
       }
     }

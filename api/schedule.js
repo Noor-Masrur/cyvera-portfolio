@@ -89,7 +89,7 @@ export default async function handler(req, res) {
   let utcDate;
   try {
     utcDate = zonedTimeToUtc(preferredDate, preferredTime, timezone);
-  } catch (err) {
+  } catch {
     return res.status(400).json({ error: "Invalid timezone" });
   }
 
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
     <div style="font-family: Arial, Helvetica, sans-serif; color: #111827; background: #f9fafb; padding: 24px;">
       <div style="max-width: 640px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
         <div style="padding: 20px 24px; background: #111827; color: #ffffff;">
-          <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8;">Cyvera Portfolio</p>
+          <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8;">Cyvera</p>
           <h2 style="margin: 6px 0 0; font-size: 20px;">New Meeting Request</h2>
         </div>
         <div style="padding: 24px;">
@@ -191,7 +191,7 @@ export default async function handler(req, res) {
       replyTo: email,
     });
     return res.status(200).json({ ok: true });
-  } catch (err) {
+  } catch {
     return res.status(500).json({ error: "Email send failed" });
   }
 }
