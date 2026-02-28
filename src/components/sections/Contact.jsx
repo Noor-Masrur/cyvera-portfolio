@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Reveal from "../common/Reveal";
 import styles from "./Contact.module.css";
 
@@ -20,10 +21,10 @@ function Contact({ theme }) {
   const [submitError, setSubmitError] = useState("");
   const [firstInteractionAt, setFirstInteractionAt] = useState(null);
   const socialLinks = [
-    { label: "in", href: "https://www.linkedin.com/company/cyvera0/" },
-    { label: "ig", href: "https://www.instagram.com/cyvera0/" },
-    { label: "𝕏", href: "https://x.com/cyvera0" },
-    { label: "fb", href: "https://www.facebook.com/cyvera0/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/cyvera0/", Icon: Linkedin },
+    { label: "Instagram", href: "https://www.instagram.com/cyvera0/", Icon: Instagram },
+    { label: "X", href: "https://x.com/cyvera0", Icon: Twitter },
+    { label: "Facebook", href: "https://www.facebook.com/cyvera0/", Icon: Facebook },
   ];
 
   const markInteraction = () => {
@@ -145,6 +146,8 @@ function Contact({ theme }) {
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
+                          aria-label={social.label}
+                          title={social.label}
                           className={styles.socialLink}
                           style={{
                             background: resolvedTheme.accentSoft,
@@ -162,7 +165,7 @@ function Contact({ theme }) {
                             e.currentTarget.style.borderColor = resolvedTheme.accentBorder;
                           }}
                         >
-                          {social.label}
+                          <social.Icon size={16} strokeWidth={2} />
                         </a>
                     ))}
                   </div>
