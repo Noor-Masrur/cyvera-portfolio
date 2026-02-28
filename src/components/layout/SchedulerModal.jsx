@@ -57,6 +57,18 @@ function SchedulerModal({ open, onClose }) {
   const [submitError, setSubmitError] = useState("");
   const [pickerOpen, setPickerOpen] = useState(false);
   const [tempDateTime, setTempDateTime] = useState(null);
+  const [firstInteractionAt, setFirstInteractionAt] = useState(null);
+
+  const markInteraction = () => {
+    if (!firstInteractionAt) {
+      setFirstInteractionAt(Date.now());
+    }
+  };
+
+  const setField = (field, value) => {
+    markInteraction();
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -77,6 +89,7 @@ function SchedulerModal({ open, onClose }) {
       setSent(false);
       setSubmitError("");
       setErrors({});
+      setFirstInteractionAt(null);
     }
   }, [open]);
 
@@ -87,12 +100,14 @@ function SchedulerModal({ open, onClose }) {
   const toTimeString = (dt) => `${pad2(dt.hour())}:${pad2(dt.minute())}`;
 
   const openPicker = () => {
+    markInteraction();
     const next = form.dateTime ? dayjs(form.dateTime) : dayjs().minute(Math.ceil(dayjs().minute() / 15) * 15).second(0);
     setTempDateTime(next);
     setPickerOpen(true);
   };
 
   const applyPicker = () => {
+    markInteraction();
     if (tempDateTime) {
       setForm((prev) => ({ ...prev, dateTime: tempDateTime.toDate() }));
     }
@@ -141,6 +156,11 @@ function SchedulerModal({ open, onClose }) {
 
   const handleSubmit = async (event) => {
     event?.preventDefault();
+    const elapsedSinceFirstInteraction = firstInteractionAt ? Date.now() - firstInteractionAt : 0;
+    if (!firstInteractionAt || elapsedSinceFirstInteraction < 2500) {
+      setSubmitError("Please take a moment before submitting.");
+      return;
+    }
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     setSending(true);
@@ -148,7 +168,10 @@ function SchedulerModal({ open, onClose }) {
     try {
       const res = await fetch("/api/schedule", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-cyvera-form": "1",
+        },
           body: JSON.stringify({
             name: form.name,
             email: form.email,
@@ -200,7 +223,7 @@ function SchedulerModal({ open, onClose }) {
                 <input
                   type="text"
                   value={form.website}
-                  onChange={(e) => setForm({ ...form, website: e.target.value })}
+                  onChange={(e) => setField("website", e.target.value)}
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
@@ -208,19 +231,19 @@ function SchedulerModal({ open, onClose }) {
                 />
                 <div className={styles.grid}>
                   <div>
-                    <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full Name *" className={`${styles.field} ${errors.name ? styles.fieldError : ""}`} aria-label="Full Name" />
+                    <input value={form.name} onChange={e => setField("name", e.target.value)} placeholder="Full Name *" className={`${styles.field} ${errors.name ? styles.fieldError : ""}`} aria-label="Full Name" />
                     {errors.name && <p className={styles.error}>{errors.name}</p>}
                   </div>
                   <div>
-                    <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="Email Address *" className={`${styles.field} ${errors.email ? styles.fieldError : ""}`} aria-label="Email Address" />
+                    <input value={form.email} onChange={e => setField("email", e.target.value)} placeholder="Email Address *" className={`${styles.field} ${errors.email ? styles.fieldError : ""}`} aria-label="Email Address" />
                     {errors.email && <p className={styles.error}>{errors.email}</p>}
                   </div>
                 </div>
                 <div className={styles.fieldWrap}>
-                  <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} placeholder="Company (Optional)" className={styles.field} aria-label="Company" />
+                  <input value={form.company} onChange={e => setField("company", e.target.value)} placeholder="Company (Optional)" className={styles.field} aria-label="Company" />
                 </div>
                 <div className={styles.fieldWrap}>
-                  <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} className={styles.field} aria-label="Service">
+                  <select value={form.service} onChange={e => setField("service", e.target.value)} className={styles.field} aria-label="Service">
                     <option value="">Select a Service...</option>
                     <option>Social Media & Branding</option>
                     <option>Search Engine Optimization</option>
@@ -231,7 +254,7 @@ function SchedulerModal({ open, onClose }) {
                   </select>
                 </div>
                 <div className={styles.fieldWrap}>
-                  <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Contact Number (Optional)" className={styles.field} aria-label="Contact Number" />
+                  <input value={form.phone} onChange={e => setField("phone", e.target.value)} placeholder="Contact Number (Optional)" className={styles.field} aria-label="Contact Number" />
                 </div>
                 <div className={styles.fieldWrap}>
                   <button
@@ -292,7 +315,7 @@ function SchedulerModal({ open, onClose }) {
                 </div>
               )}
                 <div className={styles.fieldWrap}>
-                  <select value={form.timezone} onChange={e => setForm({ ...form, timezone: e.target.value })} className={styles.field} aria-label="Timezone">
+                  <select value={form.timezone} onChange={e => setField("timezone", e.target.value)} className={styles.field} aria-label="Timezone">
                     {[
                       { value: "Australia/Brisbane", label: "Australia/Brisbane (AEST)" },
                       { value: "Australia/Sydney", label: "Australia/Sydney (AEDT/AEST)" },
@@ -306,7 +329,7 @@ function SchedulerModal({ open, onClose }) {
                   </select>
                 </div>
                 <div className={styles.fieldWrap}>
-                  <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Notes (Optional)" rows={4} className={styles.field} aria-label="Notes" style={{ resize: "vertical" }} />
+                  <textarea value={form.message} onChange={e => setField("message", e.target.value)} placeholder="Notes (Optional)" rows={4} className={styles.field} aria-label="Notes" style={{ resize: "vertical" }} />
                 </div>
                 {submitError && (
                   <p className={styles.submitError}>{submitError}</p>

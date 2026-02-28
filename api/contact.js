@@ -5,9 +5,39 @@ const sanitize = (value) =>
     .replace(/[<>]/g, "")
     .trim();
 
+const TRUSTED_HOSTS = ["cyvera.com.au", "www.cyvera.com.au", "localhost", "127.0.0.1", "www.cyvera-portfolio.vercel.app"];
+
+const getHostname = (value) => {
+  try {
+    return new URL(value).hostname.toLowerCase();
+  } catch {
+    return "";
+  }
+};
+
+const isAllowedHost = (host) => {
+  if (!host) return false;
+  if (TRUSTED_HOSTS.includes(host)) return true;
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const contentType = String(req.headers["content-type"] || "").toLowerCase();
+  if (!contentType.includes("application/json")) {
+    return res.status(415).json({ error: "Unsupported content type" });
+  }
+
+  const originHost = getHostname(req.headers.origin);
+  const refererHost = getHostname(req.headers.referer);
+  if (!isAllowedHost(originHost) && !isAllowedHost(refererHost)) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+
+  if (sanitize(req.headers["x-cyvera-form"]) !== "1") {
+    return res.status(403).json({ error: "Forbidden" });
   }
 
   const payload = req.body || {};
