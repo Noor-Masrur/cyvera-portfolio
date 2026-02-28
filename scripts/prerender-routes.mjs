@@ -9,6 +9,7 @@ const ROUTES = [
   { routePath: "/faq", viewKey: "faq" },
   { routePath: "/privacy-policy", viewKey: "privacy-policy" },
   { routePath: "/terms-of-service", viewKey: "terms-of-service" },
+  { routePath: "/cookie-policy", viewKey: "cookie-policy" },
   { routePath: "/services/social-media", viewKey: "social-media" },
   { routePath: "/services/seo", viewKey: "seo" },
   { routePath: "/services/cybersecurity", viewKey: "cybersecurity" },
@@ -40,6 +41,15 @@ const STATIC_FALLBACK_CONTENT = {
       <section>
         <h1>Terms of Service</h1>
         <p>Read the terms governing your use of Cyvera's website and services.</p>
+        <p><a href="/#contact">Contact Cyvera</a></p>
+      </section>
+    </main>
+  `,
+  "cookie-policy": `
+    <main>
+      <section>
+        <h1>Cookie Policy</h1>
+        <p>Read how Cyvera uses cookies and similar technologies on this website.</p>
         <p><a href="/#contact">Contact Cyvera</a></p>
       </section>
     </main>

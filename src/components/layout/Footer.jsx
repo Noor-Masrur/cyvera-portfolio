@@ -17,6 +17,7 @@ function Footer({ onNavigate, onSelectService, onFAQ }) {
   const policyLinks = [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Cookie Policy", href: "/cookie-policy" },
   ];
 
   return (

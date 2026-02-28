@@ -25,6 +25,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://cyvera.com.au/cookie-policy</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://cyvera.com.au/services/social-media</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>

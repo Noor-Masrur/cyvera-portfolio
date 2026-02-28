@@ -123,6 +123,13 @@ export const SEO_CONFIGS = {
     canonical: "https://cyvera.com.au/terms-of-service",
     robots: "index, follow",
   },
+  "cookie-policy": {
+    title: "Cookie Policy | Cyvera",
+    description:
+      "Read how Cyvera uses cookies and similar technologies for website functionality, security, and performance.",
+    canonical: "https://cyvera.com.au/cookie-policy",
+    robots: "index, follow",
+  },
   notfound: {
     title: "Page Not Found | Cyvera",
     description: "The requested page could not be found.",
@@ -133,7 +140,7 @@ export const SEO_CONFIGS = {
 const ORG_ID = "https://cyvera.com.au/#organization";
 const SITE_URL = "https://cyvera.com.au";
 const SERVICE_VIEW_KEYS = ["social-media", "seo", "cybersecurity", "website-dev", "custom-software"];
-const STANDARD_PAGE_VIEW_KEYS = ["privacy-policy", "terms-of-service"];
+const STANDARD_PAGE_VIEW_KEYS = ["privacy-policy", "terms-of-service", "cookie-policy"];
 
 const buildBreadcrumb = (name, url) => ({
   "@type": "BreadcrumbList",
