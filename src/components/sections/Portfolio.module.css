@@ -25,9 +25,9 @@
 
 .headingRow {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
-  margin-bottom: 56px;
+  margin-bottom: 34px;
   flex-wrap: wrap;
   gap: 24px;
 }
@@ -63,170 +63,846 @@
   line-height: 1.1;
 }
 
-.tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.tab {
-  padding: 9px 20px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: "DM Sans", sans-serif;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: transparent;
-  color: #0a2540;
-  border: 1.5px solid rgba(10, 37, 64, 0.12);
-}
-
-.tabActive {
-  background: linear-gradient(90deg, #00b4d8, #0077b6);
-  color: #fff;
-  border: none;
-  box-shadow: 0 0 24px rgba(0, 180, 216, 0.4);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+.portfolioCarouselWrap {
+  margin-top: 8px;
 }
 
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .section {
+    padding: 92px 4% 84px;
   }
 }
 
-.card {
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(10, 37, 64, 0.08);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translateY(0);
-  background: #fff;
-  cursor: pointer;
+.dataCarouselWrap {
+  position: relative;
+  width: min(1140px, 100%);
+  margin: 18px auto 0;
+  height: 440px;
+  perspective: 1500px;
 }
 
-.card:hover {
-  box-shadow: 0 30px 70px rgba(0, 30, 80, 0.18);
-  transform: translateY(-8px);
+.dataCarouselTrack {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.thumb {
-  height: 220px;
+.designCard {
+  width: 1100px;
+  height: 400px;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 16px 44px rgba(20, 24, 32, 0.14);
+  border: 1px solid rgba(36, 36, 36, 0.1);
   position: relative;
   overflow: hidden;
 }
 
-.shine {
+.dataSlideCard {
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.12) 50%, transparent 60%);
-  transform: translateX(0);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  top: 50%;
+  left: 50%;
+  will-change: transform, opacity;
+  transition: transform 100ms linear, opacity 120ms linear;
 }
 
-.card:hover .shine {
-  transform: translateX(400%);
+.c1,
+.c2,
+.c3,
+.c4,
+.c5 {
+  display: flex;
+  padding: 0;
 }
 
-.thumbContent {
-  position: absolute;
-  inset: 0;
+.c1 {
+  background: linear-gradient(140deg, #071a36, #0a2540 55%, #0b3b66);
+  border-color: rgba(72, 202, 228, 0.24);
+}
+
+.c1Left {
+  width: 38%;
+  padding: 28px;
+  border-right: 1px solid rgba(72, 202, 228, 0.18);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px 24px;
 }
 
-.category {
-  align-self: flex-start;
-  padding: 6px 16px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 11px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+.c1ServiceTag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c1Dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #00b4d8;
+  box-shadow: 0 0 12px rgba(0, 180, 216, 0.7);
+  animation: c1Pulse 2s ease-in-out infinite;
+}
+
+.c1TagText,
+.c1Client,
+.c1Desc,
+.c1StatLabel,
+.c1StatSub,
+.c1Chip {
+  font-family: "DM Mono", monospace;
+}
+
+.c1TagText {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #48cae4;
+}
+
+.c1Client {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.52);
   text-transform: uppercase;
 }
 
-.tag {
-  margin-right: 8px;
-  padding: 4px 12px;
-  border-radius: 100px;
-  background: rgba(0, 0, 0, 0.25);
-  color: rgba(255, 255, 255, 0.7);
+.c1Title {
+  margin-top: 8px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 40px;
+  color: #fff;
+  line-height: 0.95;
+}
+
+.c1Title em {
+  color: #48cae4;
+}
+
+.c1Desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.5;
+}
+
+.c1Tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.c1Chip {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(72, 202, 228, 0.95);
+  border: 1px solid rgba(72, 202, 228, 0.35);
+  border-radius: 999px;
+  padding: 4px 9px;
+}
+
+.c1Right {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.c1Stat {
+  padding: 26px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c1Stat:nth-child(2),
+.c1Stat:nth-child(4) {
+  border-right: none;
+}
+
+.c1Stat:nth-child(3),
+.c1Stat:nth-child(4) {
+  border-bottom: none;
+}
+
+.c1StatLabel {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.c1StatValue {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.c1Accent {
+  color: #00b4d8;
+}
+
+.c1StatSub {
   font-size: 10px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.68);
 }
 
-.body {
-  padding: 24px 28px;
+.up {
+  color: #2dd4bf;
 }
 
-.cardTitle {
-  font-size: 18px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 800;
+.c2 {
+  background: linear-gradient(165deg, #f4f9ff 0%, #edf5ff 100%);
   color: #0a2540;
-  margin-bottom: 10px;
 }
 
-.metric {
-  display: inline-flex;
+.c2Left {
+  width: calc(100% - 340px);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c2Overline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.c2ServiceBadge,
+.c2ClientName,
+.c2MetricLabel,
+.c2RankLabel,
+.c2RankContext,
+.c2KwRank,
+.c2KwText {
+  font-family: "DM Mono", monospace;
+}
+
+.c2ServiceBadge {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: #0a2540;
+  color: #fff;
+}
+
+.c2ClientName {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(10, 37, 64, 0.52);
+}
+
+.c2Headline {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 54px;
+  line-height: 0.9;
+  color: #0a2540;
+}
+
+.c2Headline em {
+  color: #22c55e;
+}
+
+.c2MetricsRow {
+  display: flex;
+  gap: 24px;
+}
+
+.c2MetricVal {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.c2MetricLabel {
+  margin-top: 4px;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(10, 37, 64, 0.56);
+}
+
+.c2MetricUnit {
+  font-size: 16px;
+  color: rgba(10, 37, 64, 0.55);
+}
+
+.c2Right {
+  width: 340px;
+  padding: 24px;
+  background: linear-gradient(180deg, #071a36, #0a2540 65%, #0b3b66);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c2RankLabel {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.c2RankNumber {
+  font-family: "Unbounded", "DM Sans", sans-serif;
+  font-size: 92px;
+  line-height: 0.9;
+  color: #48cae4;
+}
+
+.c2RankContext {
+  font-size: 10px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.c2KeywordList {
+  display: grid;
+  gap: 8px;
+}
+
+.c2Keyword {
+  display: grid;
+  grid-template-columns: 20px 1fr 88px;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 180, 216, 0.07);
-  padding: 7px 14px;
-  border-radius: 100px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(0, 180, 216, 0.15);
 }
 
-.metricIcon {
-  color: #00b4d8;
-  font-size: 14px;
+.c2KwRank {
+  font-size: 9px;
+  color: #22c55e;
 }
 
-.metricText {
-  font-size: 13px;
-  font-weight: 700;
+.c2KwTrack {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.c2KwFill {
+  height: 100%;
+  background: linear-gradient(90deg, #48cae4, #22c55e);
+  animation: growBar 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left;
+}
+
+.c2KwText {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: right;
+}
+
+.c3 {
+  background: linear-gradient(160deg, #03045e 0%, #0a2540 50%, #012a4a 100%);
+  border-color: rgba(45, 212, 191, 0.25);
+  position: relative;
+}
+
+.c3GridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(72, 202, 228, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72, 202, 228, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.c3Scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.8), transparent);
+  animation: c3ScanDown 4s ease-in-out infinite;
+}
+
+.c3Inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+}
+
+.c3Left {
+  width: 30%;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c3Service,
+.c3Label,
+.c3ThreatType,
+.c3ThreatNum,
+.c3ClientInfo {
+  font-family: "DM Mono", monospace;
+}
+
+.c3Service {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(72, 202, 228, 0.95);
+  text-transform: uppercase;
+}
+
+.c3Name {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 38px;
+  line-height: 0.96;
+  color: #fff;
+}
+
+.c3Name em {
+  display: block;
+  color: #2dd4bf;
+}
+
+.c3ResultTag {
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.1);
+  color: #8df5df;
+  padding: 10px 12px;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+.c3Mid {
+  flex: 1;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.c3MidTop,
+.c3MidBot {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c3MidTop {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.c3Label {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.c3Big {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 60px;
+  line-height: 1;
+  color: #48cae4;
+}
+
+.c3ThreatBars {
+  display: grid;
+  gap: 8px;
+}
+
+.c3ThreatRow {
+  display: grid;
+  grid-template-columns: 70px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+
+.c3ThreatType,
+.c3ThreatNum {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.c3ThreatTrack {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.c3ThreatFill {
+  height: 100%;
+  animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left;
+}
+
+.fillBlocked {
+  background: #0ea5e9;
+}
+
+.fillDetected {
+  background: #48cae4;
+}
+
+.fillPatched {
+  background: #2dd4bf;
+}
+
+.c3Right {
+  width: 24%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c3RingPct {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 62px;
+  line-height: 1;
+  color: #2dd4bf;
+}
+
+.c3ClientInfo {
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.c3ClientInfo span {
+  display: block;
+}
+
+.c3ClientInfo strong {
+  color: #8fdfff;
+  font-weight: 500;
+}
+
+.c4 {
+  background: linear-gradient(145deg, #03045e, #0a2540 55%, #023e8a);
+  border-color: rgba(251, 146, 60, 0.28);
+}
+
+.c4Left {
+  width: 43%;
+  padding: 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c4Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.c4Badge,
+.c4Year,
+.c4Desc,
+.c4Tech,
+.c4StatTag,
+.c4StatHint,
+.c4Delivery,
+.c4DeliveryBadge {
+  font-family: "DM Mono", monospace;
+}
+
+.c4Badge {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(251, 146, 60, 0.42);
+  color: #fb923c;
+  padding: 5px 8px;
+}
+
+.c4Year {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.c4Title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 40px;
+  line-height: 0.95;
+  color: #fff;
+}
+
+.c4Title em {
+  color: #fb923c;
+}
+
+.c4Desc {
+  font-size: 10px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.c4TechStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.c4Tech {
+  font-size: 9px;
+  color: #9dc8ff;
+  border: 1px solid rgba(157, 200, 255, 0.4);
+  padding: 4px 8px;
+}
+
+.c4Right {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c4StatsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.c4StatCell {
+  background: rgba(3, 4, 94, 0.7);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.c4StatTag {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.c4StatNum {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 42px;
+  color: #fff;
+}
+
+.c4StatHint {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.c4Delivery {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.c4DeliveryBadge {
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.1);
+  padding: 4px 8px;
+}
+
+.c5 {
+  background: linear-gradient(170deg, #f7faff 0%, #ffffff 100%);
+  color: #0a2540;
+}
+
+.c5Left {
+  width: 50%;
+  padding: 24px;
+  border-right: 1px solid rgba(10, 37, 64, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c5Overline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.c5ServiceLabel,
+.c5ClientName,
+.c5ClientType,
+.c5Outcome,
+.c5CellTag,
+.c5CellSub {
+  font-family: "DM Mono", monospace;
+}
+
+.c5ServiceLabel {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(10, 37, 64, 0.65);
+}
+
+.c5ServiceLine {
+  height: 1px;
+  flex: 1;
+  background: rgba(10, 37, 64, 0.18);
+}
+
+.c5Title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 46px;
+  line-height: 0.95;
+}
+
+.c5Title em {
   color: #0077b6;
-  font-family: "DM Sans", sans-serif;
 }
 
-.link {
-  color: rgba(10, 37, 64, 0.35);
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
+.c5ClientRow {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
+  gap: 12px;
 }
 
-.card:hover .link {
-  color: #00b4d8;
+.c5Avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  color: #fff;
+  font-weight: 700;
 }
 
-.linkArrow {
-  display: inline-block;
-  transition: transform 0.2s;
+.c5ClientName {
+  font-size: 11px;
 }
 
-.card:hover .linkArrow {
-  transform: translateX(4px);
+.c5ClientType {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(10, 37, 64, 0.5);
+}
+
+.c5Outcome {
+  font-size: 10px;
+  line-height: 1.55;
+  color: rgba(10, 37, 64, 0.68);
+  background: rgba(0, 180, 216, 0.08);
+  border: 1px solid rgba(0, 180, 216, 0.22);
+  padding: 10px 12px;
+}
+
+.c5Right {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.c5Cell {
+  padding: 20px;
+  border-right: 1px solid rgba(10, 37, 64, 0.1);
+  border-bottom: 1px solid rgba(10, 37, 64, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.c5Cell:nth-child(2),
+.c5Cell:nth-child(4) {
+  border-right: none;
+}
+
+.c5Cell:nth-child(3),
+.c5Cell:nth-child(4) {
+  border-bottom: none;
+}
+
+.c5CellTag {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(10, 37, 64, 0.55);
+}
+
+.c5CellVal {
+  font-family: "Syne", "DM Sans", sans-serif;
+  font-size: 48px;
+  line-height: 1;
+  color: #0a2540;
+}
+
+.c5CellSub {
+  font-size: 10px;
+  color: rgba(10, 37, 64, 0.55);
+}
+
+@keyframes growBar {
+  to { transform: scaleX(1); }
+}
+
+@keyframes c1Pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.65; }
+}
+
+@keyframes c3ScanDown {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .designCard {
+    width: min(96vw, 1100px);
+  }
+}
+
+@media (max-width: 560px) {
+  .designCard {
+    padding: 18px;
+    border-radius: 16px;
+    height: 420px;
+  }
+
+  .c1,
+  .c2,
+  .c3,
+  .c4,
+  .c5 {
+    flex-direction: column;
+  }
+
+  .c1Left,
+  .c2Left,
+  .c3Left,
+  .c4Left,
+  .c5Left,
+  .c2Right,
+  .c3Right {
+    width: 100%;
+    border-right: none;
+  }
+
+  .c1Right,
+  .c5Right {
+    min-height: 180px;
+  }
+
+  .c4StatsGrid {
+    margin-top: 10px;
+  }
+
+  .dataCarouselWrap {
+    height: 460px;
+  }
 }
