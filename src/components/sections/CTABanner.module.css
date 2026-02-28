@@ -61,7 +61,6 @@
 .ctaLink {
   background: #fff;
   color: #0a2540;
-  text-decoration: none;
   padding: 18px 40px;
   border-radius: 12px;
   font-size: 15px;
@@ -69,6 +68,10 @@
   font-family: "DM Sans", sans-serif;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 }
 
 .ctaLink:hover {
