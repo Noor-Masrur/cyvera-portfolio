@@ -98,6 +98,27 @@ function Hero({ onSchedule }) {
           <div className={styles.orbitCore} />
         </div>
 
+        <img
+          src="/smm.png"
+          alt="Marketing megaphone illustration"
+          className={`${styles.floatVisual} ${styles.floatVisualLeft}`}
+        />
+        <img
+          src="/seo.png"
+          alt="Growth bars illustration"
+          className={`${styles.floatVisual} ${styles.floatVisualRight}`}
+        />
+        <img
+          src="/cysec.png"
+          alt="Cybersecurity illustration"
+          className={`${styles.floatVisual} ${styles.floatVisualBottomLeft}`}
+        />
+        <img
+          src="/dev.png"
+          alt="Development illustration"
+          className={`${styles.floatVisual} ${styles.floatVisualBottomRight}`}
+        />
+
         <div className={styles.container}>
           {/* Live badge */}
           <div className={styles.badge}>
