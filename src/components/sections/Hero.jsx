@@ -98,26 +98,41 @@ function Hero({ onSchedule }) {
           <div className={styles.orbitCore} />
         </div>
 
-        <img
-          src="/smm.png"
-          alt="Marketing megaphone illustration"
-          className={`${styles.floatVisual} ${styles.floatVisualLeft}`}
-        />
-        <img
-          src="/seo.png"
-          alt="Growth bars illustration"
-          className={`${styles.floatVisual} ${styles.floatVisualRight}`}
-        />
-        <img
-          src="/cysec.png"
-          alt="Cybersecurity illustration"
-          className={`${styles.floatVisual} ${styles.floatVisualBottomLeft}`}
-        />
-        <img
-          src="/dev.png"
-          alt="Development illustration"
-          className={`${styles.floatVisual} ${styles.floatVisualBottomRight}`}
-        />
+        <div className={`${styles.floatGroup} ${styles.floatGroupLeft}`}>
+          <span className={styles.floatTag}>Social Media Marketing</span>
+          <img
+            src="/smm.png"
+            alt="Marketing megaphone illustration"
+            className={`${styles.floatVisual} ${styles.floatVisualLeft}`}
+          />
+        </div>
+
+        <div className={`${styles.floatGroup} ${styles.floatGroupRight}`}>
+          <span className={styles.floatTag}>Search Engine Optimization</span>
+          <img
+            src="/seo.png"
+            alt="Growth bars illustration"
+            className={`${styles.floatVisual} ${styles.floatVisualRight}`}
+          />
+        </div>
+
+        <div className={`${styles.floatGroup} ${styles.floatGroupBottomLeft}`}>
+          <span className={styles.floatTag}>Cyber Security</span>
+          <img
+            src="/cysec.png"
+            alt="Cybersecurity illustration"
+            className={`${styles.floatVisual} ${styles.floatVisualBottomLeft}`}
+          />
+        </div>
+
+        <div className={`${styles.floatGroup} ${styles.floatGroupBottomRight}`}>
+          <span className={styles.floatTag}>Software Development</span>
+          <img
+            src="/dev.png"
+            alt="Development illustration"
+            className={`${styles.floatVisual} ${styles.floatVisualBottomRight}`}
+          />
+        </div>
 
         <div className={styles.container}>
           {/* Live badge */}
