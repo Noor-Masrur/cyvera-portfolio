@@ -3,6 +3,7 @@ import styles from "./Hero.module.css";
 
 function Hero({ onSchedule }) {
   const canvasRef = useRef(null);
+  const floatRefs = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -11,6 +12,7 @@ function Hero({ onSchedule }) {
     const ctx = canvas.getContext("2d");
     let W = canvas.width = window.innerWidth;
     let H = canvas.height = window.innerHeight;
+    mouseRef.current = { x: W / 2, y: H / 2 };
     const particles = Array.from({ length: 80 }, () => ({
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
@@ -19,7 +21,9 @@ function Hero({ onSchedule }) {
     }));
 
     const handleMouse = (e) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
+    const handleMouseLeave = () => { mouseRef.current = { x: W / 2, y: H / 2 }; };
     window.addEventListener("mousemove", handleMouse);
+    window.addEventListener("mouseleave", handleMouseLeave);
     const handleResize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; };
     window.addEventListener("resize", handleResize);
 
@@ -59,10 +63,31 @@ function Hero({ onSchedule }) {
         }
       }
 
+      // Subtle image/tag parallax companions (small, non-distracting motion).
+      const nx = (mx / W - 0.5) * 2;
+      const ny = (my / H - 0.5) * 2;
+      const parallax = [
+        { x: 8, y: 6, r: -1.4 },
+        { x: -9, y: 7, r: 1.3 },
+        { x: 6, y: -5, r: -1.1 },
+        { x: -7, y: -6, r: 1.2 },
+      ];
+      floatRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const p = parallax[i] || parallax[0];
+        el.style.transform =
+          `translate3d(${(nx * p.x).toFixed(2)}px, ${(ny * p.y).toFixed(2)}px, 0) rotate(${(nx * p.r).toFixed(2)}deg)`;
+      });
+
       raf = requestAnimationFrame(draw);
     };
     draw();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("mousemove", handleMouse); window.removeEventListener("resize", handleResize); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", handleMouse);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -99,39 +124,47 @@ function Hero({ onSchedule }) {
         </div>
 
         <div className={`${styles.floatGroup} ${styles.floatGroupLeft}`}>
-          <span className={styles.floatTag}>Social Media Marketing</span>
-          <img
-            src="/smm.png"
-            alt="Marketing megaphone illustration"
-            className={`${styles.floatVisual} ${styles.floatVisualLeft}`}
-          />
+          <div className={styles.floatInner} ref={(element) => { floatRefs.current[0] = element; }}>
+            <span className={styles.floatTag}>Social Media Marketing</span>
+            <img
+              src="/smm.png"
+              alt="Marketing megaphone illustration"
+              className={`${styles.floatVisual} ${styles.floatVisualLeft} ${styles.floatDepthNear}`}
+            />
+          </div>
         </div>
 
         <div className={`${styles.floatGroup} ${styles.floatGroupRight}`}>
-          <span className={styles.floatTag}>Search Engine Optimization</span>
-          <img
-            src="/seo.png"
-            alt="Growth bars illustration"
-            className={`${styles.floatVisual} ${styles.floatVisualRight}`}
-          />
+          <div className={styles.floatInner} ref={(element) => { floatRefs.current[1] = element; }}>
+            <span className={styles.floatTag}>Search Engine Optimization</span>
+            <img
+              src="/seo.png"
+              alt="Growth bars illustration"
+              className={`${styles.floatVisual} ${styles.floatVisualRight} ${styles.floatDepthFar}`}
+            />
+          </div>
         </div>
 
         <div className={`${styles.floatGroup} ${styles.floatGroupBottomLeft}`}>
-          <span className={styles.floatTag}>Cyber Security</span>
-          <img
-            src="/cysec.png"
-            alt="Cybersecurity illustration"
-            className={`${styles.floatVisual} ${styles.floatVisualBottomLeft}`}
-          />
+          <div className={styles.floatInner} ref={(element) => { floatRefs.current[2] = element; }}>
+            <span className={styles.floatTag}>Cyber Security</span>
+            <img
+              src="/cysec.png"
+              alt="Cybersecurity illustration"
+              className={`${styles.floatVisual} ${styles.floatVisualBottomLeft} ${styles.floatDepthFar}`}
+            />
+          </div>
         </div>
 
         <div className={`${styles.floatGroup} ${styles.floatGroupBottomRight}`}>
-          <span className={styles.floatTag}>Software Development</span>
-          <img
-            src="/dev.png"
-            alt="Development illustration"
-            className={`${styles.floatVisual} ${styles.floatVisualBottomRight}`}
-          />
+          <div className={styles.floatInner} ref={(element) => { floatRefs.current[3] = element; }}>
+            <span className={styles.floatTag}>Software Development</span>
+            <img
+              src="/dev.png"
+              alt="Development illustration"
+              className={`${styles.floatVisual} ${styles.floatVisualBottomRight} ${styles.floatDepthNear}`}
+            />
+          </div>
         </div>
 
         <div className={styles.container}>
