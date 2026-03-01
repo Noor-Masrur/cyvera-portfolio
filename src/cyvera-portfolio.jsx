@@ -16,6 +16,7 @@ import FAQPage from "./components/sections/FAQPage";
 import PrivacyPolicyPage from "./components/sections/PrivacyPolicyPage";
 import TermsOfServicePage from "./components/sections/TermsOfServicePage";
 import CookiePolicyPage from "./components/sections/CookiePolicyPage";
+import PlaygroundPage from "./components/sections/PlaygroundPage";
 import CTABanner from "./components/sections/CTABanner";
 import Contact from "./components/sections/Contact";
 import ServiceDetail from "./components/service-pages/ServiceDetail";
@@ -39,6 +40,8 @@ export default function CyveraPortfolio() {
     let viewKey = "home";
     if (path === "/faq") {
       viewKey = "faq";
+    } else if (path === "/playground") {
+      viewKey = "playground";
     } else if (path === "/privacy-policy") {
       viewKey = "privacy-policy";
     } else if (path === "/terms-of-service") {
@@ -119,6 +122,10 @@ export default function CyveraPortfolio() {
           <Route
             path="/faq"
             element={<FAQPage onBack={() => navigate("/")} onSchedule={openScheduler} />}
+          />
+          <Route
+            path="/playground"
+            element={<PlaygroundPage onBack={() => navigate("/")} />}
           />
           <Route
             path="/privacy-policy"

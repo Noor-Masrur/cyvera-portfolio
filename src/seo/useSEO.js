@@ -109,6 +109,13 @@ export const SEO_CONFIGS = {
     canonical: "https://cyvera.com.au/faq",
     robots: "index, follow",
   },
+  playground: {
+    title: "Design Playground | Cyvera",
+    description:
+      "A sandbox for testing reusable design blocks and visual experiments before they ship.",
+    canonical: "https://cyvera.com.au/playground",
+    robots: "noindex, nofollow",
+  },
   "privacy-policy": {
     title: "Privacy Policy | Cyvera",
     description:
@@ -140,7 +147,7 @@ export const SEO_CONFIGS = {
 const ORG_ID = "https://cyvera.com.au/#organization";
 const SITE_URL = "https://cyvera.com.au";
 const SERVICE_VIEW_KEYS = ["social-media", "seo", "cybersecurity", "website-dev", "custom-software"];
-const STANDARD_PAGE_VIEW_KEYS = ["privacy-policy", "terms-of-service", "cookie-policy"];
+const STANDARD_PAGE_VIEW_KEYS = ["playground", "privacy-policy", "terms-of-service", "cookie-policy"];
 
 const buildBreadcrumb = (name, url) => ({
   "@type": "BreadcrumbList",
